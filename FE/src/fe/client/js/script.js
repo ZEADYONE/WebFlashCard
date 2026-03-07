@@ -20,7 +20,7 @@ const currentPage = window.location.pathname;
 
 document.querySelectorAll(".nav-item").forEach(link => {
 
-    if (link.getAttribute("href") === currentPage) {
+    if ("/src/fe/client/" + link.getAttribute("href") === currentPage) {
         link.classList.add("active");
     }
 
