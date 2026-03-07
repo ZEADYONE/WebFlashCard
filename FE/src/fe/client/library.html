@@ -75,15 +75,13 @@
                 <div class="deck-grid">
                     <div class="deck-card">
                         <div class="card-top">
+                            <img src="image/download (1).jpg">
                             <i class="fas fa-lock status-icon"></i>
                             <span class="card-count">50 cards</span>
-                            <div class="card-icon-bg">
-                                <i class="fas fa-layer-group"></i>
-                            </div>
                         </div>
                         <div class="card-body">
-                            <h3>IELTS Band 8.0 Words</h3>
-                            <p>Advanced vocabulary for high scores.</p>
+                            <h3>Spring</h3>
+                            <p>Advanced vocabulary for Spring</p>
                             <div class="progress-container">
                                 <div class="progress-bar" style="width: 36%;"></div>
                             </div>
@@ -92,19 +90,17 @@
                         <div class="card-footer">
                             <span><i class="far fa-user"></i> You</span>
                             <div class="card-actions">
-                                <i class="fas fa-wrench"></i>
+                                <i class="fas fa-wrench fix_deck"></i>
                                 <i class="fas fa-trash-alt trash"></i>
                             </div>
                         </div>
                     </div>
 
                     <div class="deck-card">
-                        <div class="card-top public">
+                        <div class="card-top">
+                            <img src="image/download (2).jpg">
                             <i class="fas fa-globe status-icon"></i>
                             <span class="card-count">50 cards</span>
-                            <div class="card-icon-bg">
-                                <i class="fas fa-layer-group"></i>
-                            </div>
                         </div>
                         <div class="card-body">
                             <h3>IELTS Band 8.0 Words</h3>
@@ -117,14 +113,95 @@
                         <div class="card-footer">
                             <span><i class="far fa-user"></i> You</span>
                             <div class="card-actions">
-                                <i class="fas fa-wrench"></i>
+                                <i class="fas fa-wrench fix_deck"></i>
                                 <i class="fas fa-trash-alt trash"></i>
                             </div>
                         </div>
                     </div>
-                </div>
+
+                    <div class="deck-card">
+                        <div class="card-top">
+                            <img src="image/download.jpg">
+                            <i class="fas fa-globe status-icon"></i>
+                            <span class="card-count">50 cards</span>
+                        </div>
+                        <div class="card-body">
+                            <h3>IELTS Band 8.0 Words</h3>
+                            <p>Advanced vocabulary for high scores.</p>
+                            <div class="progress-container">
+                                <div class="progress-bar" style="width: 36%;"></div>
+                            </div>
+                            <span class="progress-text">18/50</span>
+                        </div>
+                        <div class="card-footer">
+                            <span><i class="far fa-user"></i> You</span>
+                            <div class="card-actions">
+                                <i class="fas fa-wrench fix_deck"></i>
+                                <i class="fas fa-trash-alt trash"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="deck-card">
+                        <div class="card-top">
+                            <img src="image/thang_may_la_mua_thu_41b77d0267.webp">
+                            <i class="fas fa-lock status-icon"></i>
+                            <span class="card-count">50 cards</span>
+                        </div>
+                        <div class="card-body">
+                            <h3>IELTS Band 8.0 Words</h3>
+                            <p class="description">Advanced vocabulary for high scores.Advanced vocabulary for high
+                                scores.Advanced
+                                vocabulary for high scores.Advanced vocabulary for high scores.Advanced vocabulary for
+                                high scores.Advanced vocabulary for high scores.Advanced vocabulary for high
+                                scores.Advanced vocabulary for high scores.Advanced vocabulary for high scores.Advanced
+                                vocabulary for high scoresaaaaaaaaa.</p>
+                            <div class="progress-container">
+                                <div class="progress-bar" style="width: 36%;"></div>
+                            </div>
+                            <span class="progress-text">18/50</span>
+                        </div>
+                        <div class="card-footer">
+                            <span><i class="far fa-user"></i> You</span>
+                            <div class="card-actions">
+                                <i class="fas fa-wrench fix_deck"></i>
+                                <i class="fas fa-trash-alt trash"></i>
+                            </div>
+                        </div>
+                    </div>
             </section>
         </main>
+    </div>
+    <div id="container-popup" class="container-popup">
+
+        <form class="popup" action="https://www.w3schools.com/action_page.php" method="post">
+            <h3>Edit Deck</h3>
+            <label for="popup-title">Title</label>
+            <input id="popup-title" name="title" placeholder="Title">
+
+            <label for="popup-desc">Description</label>
+            <input id="popup-desc" name="description" placeholder="Description">
+
+            <label>Scope</label>
+            <select id="popup-scope" name="scope">
+                <option value="Public">Public</option>
+                <option value="Private">Private</option>
+            </select>
+
+            <label for="img">Image
+                <div class="popup-image">
+                    <img id="popup-img" src="image/download (1).jpg">
+                </div>
+                <input type="file" name="image" id="img" hidden>
+            </label>
+
+            <div class="popup-buttons">
+                <button id="save">Save change</button>
+                <button id="cancel">Cancel</button>
+            </div>
+        </form>
+
+
     </div>
 
     <script src="js/script.js"></script>

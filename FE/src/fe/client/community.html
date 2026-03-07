@@ -21,6 +21,7 @@
             <div class="profile-circle"></div>
         </div>
     </header>
+
     <div class="app-container">
         <aside class="sidebar">
             <div class="logo-section">
@@ -29,11 +30,11 @@
             <nav class="side-nav">
                 <a href="community.html" class="nav-item">
                     <i class="fas fa-users"></i>
-                    <span>Community <small>Chia sẻ bộ flashcard</small></span>
+                    <span>Community<small>Chia sẻ bộ flashcard</small></span>
                 </a>
                 <a href="library.html" class="nav-item">
                     <i class="fas fa-book-open"></i>
-                    <span>My Library <small>FlashCard của bạn</small></span>
+                    <span>My Library<small>FlashCard của bạn</small></span>
                 </a>
                 <a href="course.html" class="nav-item">
                     <i class="fas fa-graduation-cap"></i>
@@ -46,8 +47,8 @@
             <section class="library-section">
                 <div class="library-header">
                     <div class="title-area">
-                        <h2>Community</h2>
-                        <p>Manage your personal collections and study progress</p>
+                        <h2>Explore Community Decks</h2>
+                        <p>Discover flashcards created by learners worldwide.</p>
                     </div>
                 </div>
 
@@ -71,15 +72,12 @@
                 <div class="deck-grid">
                     <div class="deck-card">
                         <div class="card-top">
-                            <i class="fas fa-lock status-icon"></i>
+                            <img src="image/download (1).jpg">
                             <span class="card-count">50 cards</span>
-                            <div class="card-icon-bg">
-                                <i class="fas fa-layer-group"></i>
-                            </div>
                         </div>
                         <div class="card-body">
-                            <h3>IELTS Band 8.0 Words</h3>
-                            <p>Advanced vocabulary for high scores.</p>
+                            <h3>Spring</h3>
+                            <p>Advanced vocabulary for Spring</p>
                             <div class="progress-container">
                                 <div class="progress-bar" style="width: 36%;"></div>
                             </div>
@@ -87,20 +85,13 @@
                         </div>
                         <div class="card-footer">
                             <span><i class="far fa-user"></i> You</span>
-                            <div class="card-actions">
-                                <i class="fas fa-wrench"></i>
-                                <i class="fas fa-trash-alt trash"></i>
-                            </div>
                         </div>
                     </div>
 
                     <div class="deck-card">
-                        <div class="card-top public">
-                            <i class="fas fa-globe status-icon"></i>
+                        <div class="card-top">
+                            <img src="image/download (2).jpg">
                             <span class="card-count">50 cards</span>
-                            <div class="card-icon-bg">
-                                <i class="fas fa-layer-group"></i>
-                            </div>
                         </div>
                         <div class="card-body">
                             <h3>IELTS Band 8.0 Words</h3>
@@ -111,16 +102,38 @@
                             <span class="progress-text">18/50</span>
                         </div>
                         <div class="card-footer">
-                            <span><i class="far fa-user"></i> You</span>
-                            <div class="card-actions">
-                                <i class="fas fa-wrench"></i>
-                                <i class="fas fa-trash-alt trash"></i>
-                            </div>
+                            <span><i class="far fa-user"></i> Linda</span>
                         </div>
                     </div>
-                </div>
             </section>
         </main>
+    </div>
+    <div id="container-popup" class="container-popup">
+
+        <div class="popup">
+
+            <h3>Edit Deck</h3>
+
+            <input id="popup-title" placeholder="Title">
+
+            <input id="popup-desc" placeholder="Description">
+
+            <select id="popup-scope">
+                <option value="Public">Public</option>
+                <option value="Private">Private</option>
+            </select>
+
+            <div class="popup-image">
+                <img id="popup-img" src="image/download (1).jpg">
+            </div>
+
+            <div class="popup-buttons">
+                <button id="save">Save change</button>
+                <button id="cancel">Cancel</button>
+            </div>
+
+        </div>
+
     </div>
 
     <script src="js/script.js"></script>
