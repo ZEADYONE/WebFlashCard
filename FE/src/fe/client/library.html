@@ -18,8 +18,9 @@
         <div class="nav-links">
             <a href="homepage.html">HOME</a>
             <a href="community.html">FLASHCARD</a>
-            <div class="profile-circle"></div>
+
         </div>
+        <div class="profile-circle"></div>
     </header>
 
     <div class="app-container">
@@ -65,28 +66,36 @@
                             <i class="fas fa-filter"></i>
                         </button>
                         <div class="filter-dropdown" id="filterDropdown">
-                            <label><input type="checkbox" checked> Public</label>
-                            <label><input type="checkbox"> Private</label>
-                            <i class="fas fa-filter dropdown-icon"></i>
+                            <form action="https://www.w3schools.com/action_page.php" method="GET"
+                                style="display:flex; flex-direction: column;">
+                                <label><input type="checkbox" checked name="scope" value="Public"> Public</label>
+                                <label><input type="checkbox" name="scope" value="Private"> Private</label>
+                                <button type="submit">
+                                    <i class="fas fa-filter dropdown-icon"></i>
+                                </button>
+                            </form>
                         </div>
                     </div>
                 </div>
 
                 <div class="deck-grid">
                     <div class="deck-card">
-                        <div class="card-top">
-                            <img src="image/download (1).jpg">
-                            <i class="fas fa-lock status-icon"></i>
-                            <span class="card-count">50 cards</span>
-                        </div>
-                        <div class="card-body">
-                            <h3>Spring</h3>
-                            <p>Advanced vocabulary for Spring</p>
-                            <div class="progress-container">
-                                <div class="progress-bar" style="width: 36%;"></div>
+                        <a href="deck/inner-deck.html">
+                            <div class="card-top">
+                                <img src="image/download (1).jpg">
+                                <i class="fas fa-lock status-icon"></i>
+                                <span class="card-count">50 cards</span>
                             </div>
-                            <span class="progress-text">18/50</span>
-                        </div>
+                            <div class="card-body">
+                                <h3>Spring</h3>
+                                <p>Advanced vocabulary for Spring</p>
+                                <div class="progress-container">
+                                    <div class="progress-bar" style="width: 36%;"></div>
+                                </div>
+                                <span class="progress-text">18/50</span>
+                            </div>
+                        </a>
+
                         <div class="card-footer">
                             <span><i class="far fa-user"></i> You</span>
                             <div class="card-actions">
@@ -175,7 +184,7 @@
     <div id="container-popup" class="container-popup">
 
         <form class="popup" action="https://www.w3schools.com/action_page.php" method="post">
-            <h3>Edit Deck</h3>
+            <h3 id="feature">Edit Deck</h3>
             <label for="popup-title">Title</label>
             <input id="popup-title" name="title" placeholder="Title">
 
@@ -189,15 +198,14 @@
             </select>
 
             <label for="img">Image
-                <div class="popup-image">
-                    <img id="popup-img" src="image/download (1).jpg">
+                <div id="popup-image" class="popup-image">
                 </div>
                 <input type="file" name="image" id="img" hidden>
             </label>
 
             <div class="popup-buttons">
-                <button id="save">Save change</button>
-                <button id="cancel">Cancel</button>
+                <button type="submit" id="save">Save change</button>
+                <button type="button" id="cancel">Cancel</button>
             </div>
         </form>
 

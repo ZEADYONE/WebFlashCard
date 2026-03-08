@@ -16,6 +16,7 @@ filterDropdown.addEventListener('click', (e) => {
     e.stopPropagation();
 });
 
+// Highlight Menu
 const currentPage = window.location.pathname;
 
 document.querySelectorAll(".nav-item").forEach(link => {
@@ -26,42 +27,69 @@ document.querySelectorAll(".nav-item").forEach(link => {
 
 });
 
-
+// Popup
 const fixDeck = document.querySelectorAll(".fix_deck");
-
+const createDeck = document.querySelectorAll(".btn-create");
 const popupContainer = document.getElementById("container-popup");
 
 const popupTitle = document.getElementById("popup-title");
 const popupDesc = document.getElementById("popup-desc");
-const popupImg = document.getElementById("popup-img");
+const popupImg = document.getElementById("popup-image");
+const feature = document.getElementById("feature");
+
 
 const saveBtn = document.getElementById("save");
 const cancelBtn = document.getElementById("cancel");
 
 let currentCard = null;
-
+// POPUP EDIT DECK
 fixDeck.forEach(item => {
 
     item.addEventListener("click", function () {
 
         const card = item.closest(".deck-card");
 
-
         currentCard = card;
 
         const title = card.querySelector("h3").innerText;
         const desc = card.querySelector("p").innerText;
-        const img = card.querySelector("img").src;
+        const img = card.querySelector("img").getAttribute("src");
 
         popupTitle.value = title;
         popupDesc.value = desc;
-        popupImg.src = img;
+        popupImg.style.backgroundImage = `url('${img}')`;
+
+        feature.innerHTML = "Edit Deck";
+
+
         popupContainer.style.display = "flex";
 
     });
 
 });
 
+// POPUP CREATE DECK
+createDeck.forEach(item => {
+    item.addEventListener("click", function () {
+
+        popupTitle.value = "";
+        popupDesc.value = "";
+        feature.innerHTML = "Create Deck";
+
+        popupImg.style.backgroundImage = "";
+        popupImg.innerHTML = ""; // xóa nội dung cũ
+
+        const i = document.createElement("i");
+        i.classList.add("fa-solid", "fa-upload");
+
+        popupImg.appendChild(i); // thêm icon vào div
+
+        popupContainer.style.display = "flex";
+    })
+})
+
+
+// SCOPE POPUP
 const scopeSelect = document.getElementById("popup-scope");
 const icon = document.querySelector(".status-icon");
 
@@ -105,6 +133,7 @@ popupContainer.addEventListener("click", function (e) {
 
 });
 
+// DELETE DECK
 const trash = document.querySelectorAll(".trash");
 
 trash.forEach(item => {
@@ -115,3 +144,25 @@ trash.forEach(item => {
 })
 
 
+const img = document.getElementById("img");
+
+let currentURL = null;
+
+img.addEventListener("change", function () {
+
+    const file = this.files[0];
+    if (!file) return;
+
+    if (currentURL) {
+        URL.revokeObjectURL(currentURL);
+    }
+
+    currentURL = URL.createObjectURL(file);
+    console.log(currentURL);
+    const popupImage = document.querySelector(".popup-image");
+    popupImage.innerHTML = "";
+    popupImage.style.backgroundImage = `url(${currentURL})`;
+    popupImage.style.backgroundSize = "cover";
+    popupImage.style.backgroundPosition = "center";
+
+});

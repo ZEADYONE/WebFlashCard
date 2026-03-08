@@ -20,6 +20,7 @@ body {
 
 a {
     text-decoration: none;
+    color: inherit;
 }
 
 .app-container {
@@ -170,7 +171,6 @@ a {
     display: flex;
     gap: 15px;
     margin-bottom: 30px;
-    position: relative;
 }
 
 .search-box {
@@ -191,25 +191,29 @@ a {
     font-size: 1rem;
 }
 
+.filter-container {
+    position: relative;
+}
+
 .filter-btn {
     background: white;
     border: 1px solid #cbd5e1;
-    padding: 0 15px;
+    padding: 15px;
     border-radius: 10px;
     cursor: pointer;
+    height: 100%;
 }
 
 .filter-dropdown {
     position: absolute;
     right: 0;
-    top: 60px;
+    top: 50px;
     background: white;
     border: 1px solid #cbd5e1;
     border-radius: 10px;
     padding: 15px;
     width: 120px;
     display: none;
-    /* Ẩn mặc định */
     flex-direction: column;
     gap: 10px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -385,6 +389,10 @@ a {
     height: 180px;
     overflow: hidden;
     border-radius: 6px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: #64748b dotted;
 }
 
 .popup-image img {

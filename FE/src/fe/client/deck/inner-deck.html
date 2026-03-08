@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>English Learning Platform</title>
+    <link rel="stylesheet" href="css/inner-deck.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+
+<body>
+
+    <header>
+        <div class="logo">
+            <h1>English Learning Platform</h1>
+            <p>Master English with Interactive Exercises</p>
+        </div>
+        <nav>
+            <a href="../homepage.html">HOME</a>
+            <a href="../community.html">FLASHCARD</a>
+        </nav>
+        <div class="profile-icon"></div>
+    </header>
+
+    <main>
+        <i class="fa-solid fa-arrow-left exit" onclick="history.back()"></i>
+        <section class="title-section">
+            <div>
+                <h2>IELTS Band 8.0 Words</h2>
+                <p>Advanced vocabulary for high scores.</p>
+            </div>
+            <a href="create.html">
+                <button class="btn">Add card</button>
+            </a>
+        </section>
+
+        <section class="action-buttons">
+            <button class="btn">Study</button>
+            <button class="btn">Play Game</button>
+        </section>
+
+        <section class="flashcards-container">
+            <div class="cards-grid" id="cardsGrid">
+            </div>
+
+            <div class="pagination">
+                <span>&lt;</span>
+                <span class="active">1</span>
+                <span>2</span>
+                <span>3</span>
+                <span>4</span>
+                <span>......</span>
+                <span>20</span>
+                <span>21</span>
+                <span>22</span>
+                <span>23</span>
+                <span>&gt;</span>
+            </div>
+        </section>
+    </main>
+
+    <script src="js/inner-deck.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,153 @@
+:root {
+    --header-bg: #0a0a3c;
+    --form-bg: #eef9fd;
+    --btn-purple: #7d84f1;
+    --btn-green: #82d4a6;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    background-color: #f0f0f0;
+}
+
+/* Header (Giống giao diện trước) */
+header {
+    background-color: var(--header-bg);
+    color: white;
+    padding: 15px 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo h1 {
+    font-size: 1.4rem;
+    margin: 0;
+}
+
+.logo p {
+    font-size: 0.8rem;
+    margin: 0;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    margin-left: 20px;
+    font-weight: bold;
+}
+
+.profile-icon {
+    width: 45px;
+    height: 45px;
+    background-color: #d1d1d1;
+    border-radius: 50%;
+}
+
+/* Container & Form */
+.container {
+    background-color: var(--form-bg);
+    max-width: 900px;
+    margin: 30px auto;
+    padding: 30px;
+    border-radius: 10px;
+}
+
+.page-title {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 30px;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 30px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    font-weight: bold;
+    font-size: 1.1rem;
+    margin-bottom: 8px;
+}
+
+input[type="text"],
+textarea {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 1rem;
+    overflow: auto;
+}
+
+/* Bottom Section */
+.bottom-section {
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    gap: 20px;
+    margin-top: 10px;
+}
+
+.image-box {
+    width: 100%;
+    height: 150px;
+    background-color: #dbe4e9;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 2.5rem;
+    color: #555;
+    border: 1px solid #c5d0d6;
+    margin-top: 8px;
+    background-size: cover;
+    background-position: center;
+}
+
+.sound-and-actions {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.sound-and-actions input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 1rem;
+    background: white;
+}
+
+.button-group {
+    display: flex;
+    justify-content: flex-end;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.btn {
+    padding: 12px 40px;
+    border: none;
+    border-radius: 10px;
+    font-size: 1.5rem;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.btn-add {
+    background-color: var(--btn-purple);
+    color: white;
+}
+
+.btn-back {
+    background-color: var(--btn-green);
+    color: #000;
+}
