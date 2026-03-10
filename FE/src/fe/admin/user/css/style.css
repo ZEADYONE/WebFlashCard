@@ -1,0 +1,134 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background-color: #f0f9ff;
+    /* Màu xanh nhạt nền */
+}
+
+/* Header */
+.top-header {
+    background-color: #03042c;
+    /* Navy đậm */
+    padding: 20px 40px;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.brand-info h1 {
+    font-size: 24px;
+    margin-bottom: 4px;
+}
+
+.brand-info p {
+    font-size: 13px;
+    color: #cbd5e1;
+}
+
+.profile-circle {
+    width: 45px;
+    height: 45px;
+    background-color: #d1d5db;
+    border-radius: 50%;
+}
+
+/* Main Layout */
+.content-area {
+    padding: 40px;
+    display: flex;
+    justify-content: center;
+}
+
+.form-container {
+    width: 100%;
+    max-width: 900px;
+}
+
+/* Form Header Section */
+.form-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.form-title {
+    font-size: 32px;
+    color: #000;
+}
+
+.button-group {
+    display: flex;
+    gap: 15px;
+}
+
+.btn-back,
+.btn-create {
+    padding: 10px 30px;
+    border-radius: 8px;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    border: none;
+}
+
+.btn-back {
+    background-color: white;
+    border: 1px solid #cbd5e1;
+    color: #334155;
+}
+
+.btn-create {
+    background-color: #6ee7b7;
+    /* Màu xanh mint */
+    color: #1a1a1a;
+}
+
+/* Grid Form Layout */
+.user-grid-form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    /* Chia 2 cột đều nhau */
+    gap: 20px 40px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group label {
+    font-weight: bold;
+    margin-bottom: 8px;
+    font-size: 16px;
+    color: #1e293b;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select,
+.form-group span {
+    padding: 12px 15px;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    font-size: 16px;
+    background-color: white;
+    outline: none;
+}
+
+/* Bio và cụm bên phải */
+textarea {
+    resize: none;
+}
+
+.right-column-group {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}

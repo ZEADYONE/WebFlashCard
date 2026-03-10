@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Management - English Learning Platform</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="css/user.css">
+    <link rel="stylesheet" href="css/header-slide.css">
+</head>
+
+<body>
+    <header class="top-header">
+        <div class="brand-info">
+            <h1>English Learning Platform</h1>
+            <p>Master English with Interactive Exercises</p>
+        </div>
+        <div class="profile-circle"></div>
+    </header>
+
+    <div class="container">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <i class="fa-solid fa-layer-group logo-icon"></i>
+            </div>
+            <nav class="menu">
+                <a href="dashbroad.html" class="menu-item">
+                    <i class="fa-solid fa-gauge-high"></i> Dashboard
+                </a>
+                <a href="user.html" class="menu-item active">
+                    <i class="fa-solid fa-user-large"></i> User
+                </a>
+                <a href="deck.html" class="menu-item">
+                    <i class="fa-solid fa-book-open"></i> Deck FlashCard
+                </a>
+                <a href="course.html" class="menu-item">
+                    <i class="fa-solid fa-graduation-cap"></i> Course
+                </a>
+                <a href="#" class="menu-item">
+                    <i class="fa-solid fa-cube"></i> Role
+                </a>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            <section class="content-body">
+                <div class="table-wrapper">
+                    <div class="toolbar">
+                        <div class="search-filter-group">
+                            <div class="search-box">
+                                <i class="fa-solid fa-magnifying-glass"></i>
+                                <input type="text" placeholder="Search">
+                            </div>
+
+                            <div class="filter-dropdown-container">
+                                <button class="filter-btn" id="filterBtn">
+                                    <i class="fa-solid fa-filter"></i>
+                                </button>
+                                <form class="filter-dropdown" id="filterMenu">
+                                    <label><input type="checkbox" name="status"> Banner</label>
+                                    <label><input type="checkbox" name="status"> Active</label>
+                                    <button class="filter-btn" id="filterBtn">
+                                        <i class="fa-solid fa-filter"></i>
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                        <a href="user/create.html"><button class="btn-create">Create user</button></a>
+                    </div>
+
+                    <table class="user-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>FullName</th>
+                                <th>Email</th>
+                                <th>Phone Number</th>
+                                <th>Status</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>Do Tri Cuong</td>
+                                <td>cuongdt@gmail.com</td>
+                                <td>0123456789</td>
+                                <td class="status">Banned</td>
+                                <td class="actions">
+                                    <i class="fa-regular fa-eye btn-view"></i>
+                                    <i class="fa-solid fa-wrench btn-edit"></i>
+                                    <i class="fa-solid fa-lock btn-lock"></i>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>Nguyen Van A</td>
+                                <td>nvadt@gmail.com</td>
+                                <td>0000000000</td>
+                                <td class="status">Active</td>
+                                <td class="actions">
+                                    <i class="fa-regular fa-eye btn-view"></i>
+                                    <i class="fa-solid fa-wrench btn-edit"></i>
+                                    <i class="fa-solid fa-lock-open btn-unlock"></i>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </main>
+    </div>
+    <script src="js/style.js"></script>
+    <script src="js/user.js"></script>
+</body>
+
+</html>

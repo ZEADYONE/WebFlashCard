@@ -10,7 +10,7 @@ const cardsGrid = document.getElementById('cardsGrid');
 function renderCards() {
     cardsGrid.innerHTML = wordData.map(word => `
         <div class="card">
-            <a href="view.html">
+            <a href="/src/fe/client/deck/view.html">
                 <div class="card-bg" style="background-image: url('${word.img}')"></div>
 
                 <div class="card-content">
@@ -23,7 +23,7 @@ function renderCards() {
                 <i class="fa-solid fa-volume-high"></i>
             </div>
             <div class="card-action">
-                <a href="update.html" style="display: flex;">
+                <a href="/src/fe/client/deck/update.html" style="display: flex;">
                     <i class="fas fa-wrench fix_deck"></i>
                 </a>
                 <i class="fas fa-trash-alt trash"></i>
@@ -41,3 +41,16 @@ function playAudio(word) {
 
 // Chạy hàm render khi trang web tải xong
 document.addEventListener('DOMContentLoaded', renderCards);
+
+//Delete
+cardsGrid.addEventListener("click", function (e) {
+    console.log(e);
+    if (e.target.classList.contains("trash")) {
+
+        const card = e.target.closest(".card");
+
+        card.remove();
+
+    }
+
+});

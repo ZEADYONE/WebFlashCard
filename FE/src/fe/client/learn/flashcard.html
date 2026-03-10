@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>English Learning Platform</title>
+    <link rel="stylesheet" href="css/flashcard.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+
+<body>
+
+    <header class="header">
+        <div class="logo">
+            <h1>English Learning Platform</h1>
+            <p>Master English with Interactive Exercises</p>
+        </div>
+        <nav class="nav-links">
+            <a href="#">HOME</a>
+            <a href="#">FLASHCARD</a>
+        </nav>
+        <div class="profile-icon"></div>
+    </header>
+
+    <main class="container">
+        <div class="back-nav">
+            <a href="#"><i class="fa-solid fa-chevron-left"></i> Back</a>
+        </div>
+
+        <div class="topic-info">
+            <h2 id="topic-title">Healthy</h2>
+            <p>Learn new words and their meanings</p>
+            <div class="progress" id="progress-text">1/3</div>
+        </div>
+
+        <div class="flashcard-container">
+            <div class="flashcard" id="flashcard">
+                <div class="card-face card-front">
+                    <div class="audio-btn"><i class="fa-solid fa-volume-high"></i></div>
+                    <img id="card-image"
+                        src="https://images.unsplash.com/photo-1521587760476-6c12a4b040da?auto=format&fit=crop&w=500&q=80"
+                        alt="Word Image">
+                    <h3 id="card-word">Library</h3>
+                    <p id="card-phonetic">/ˈlaɪ.brer.i/ </p>
+                </div>
+                <div class="card-face card-back">
+                    <h3>Meaning</h3>
+                    <p id="card-meaning">Thư viện: Nơi chứa sách và các tài liệu để đọc hoặc mượn.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="action-buttons">
+            <button class="btn btn-wrong" onclick="nextQuestion()"><i class="fa-solid fa-xmark"></i> Wrong</button>
+            <button class="btn btn-flip" onclick="flipCard()">Flip Card</button>
+            <button class="btn btn-correct" onclick="nextQuestion()"><i class="fa-solid fa-check"></i> Correct</button>
+        </div>
+    </main>
+
+    <script src="js/flashcard.js"></script>
+</body>
+
+</html>

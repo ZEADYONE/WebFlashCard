@@ -1,0 +1,115 @@
+/* SLIDEBAR */
+.sidebar {
+    width: 260px;
+    background-color: #1a3a8a;
+    /* Xanh đậm */
+    color: white;
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar-header {
+    padding: 30px;
+    text-align: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.logo-icon {
+    font-size: 40px;
+}
+
+.menu {
+    margin-top: 20px;
+    padding: 0 15px;
+}
+
+.menu-item {
+    display: block;
+    padding: 15px 20px;
+    color: #cbd5e1;
+    text-decoration: none;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    transition: 0.3s;
+}
+
+.menu-item i {
+    margin-right: 15px;
+    width: 20px;
+    text-align: center;
+}
+
+.menu-item:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: white;
+}
+
+.menu-item.active {
+    background-color: #2563eb;
+    /* Màu xanh sáng của Dashboard active */
+    color: white;
+}
+
+/* Header */
+.top-header {
+    background-color: #03042c;
+    /* Màu navy đậm */
+    padding: 20px 40px;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.brand-info h1 {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.brand-info p {
+    font-size: 14px;
+    color: #cbd5e1;
+}
+
+.profile-circle {
+    width: 45px;
+    height: 45px;
+    background-color: #d1d5db;
+    border-radius: 50%;
+}
+
+
+/* FILTER */
+.filter-dropdown-container {
+    position: relative;
+}
+
+.filter-dropdown {
+    position: absolute;
+    top: 45px;
+    left: 0px;
+    background: white;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 10px;
+    display: none;
+    flex-direction: column;
+    width: 150px;
+    z-index: 10;
+}
+
+.filter-dropdown label {
+    font-size: 13px;
+    margin: 5px 0;
+    cursor: pointer;
+}
+
+.filter-btn {
+    background: none;
+    border: 1px solid #ccc;
+    height: 100%;
+    padding: 8px 12px;
+    border-radius: 8px;
+    background-color: white;
+    cursor: pointer;
+}
