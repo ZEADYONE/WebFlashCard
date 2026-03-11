@@ -521,3 +521,8 @@ a {
     width: 16px;
     font-size: 14px;
 }
+
+.pagination {
+    width: fit-content;
+    margin: auto;
+}

@@ -156,3 +156,9 @@ body {
 }
 
 /* Mở khóa màu xanh lá */
+.pagination {
+    position: relative;
+    left: 41%;
+    top: 300px;
+    display: inline;
+}

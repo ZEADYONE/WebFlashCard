@@ -189,3 +189,10 @@
     width: 50%;
     font-weight: bold;
 }
+
+.pagination {
+    position: relative;
+    left: 41%;
+    top: 200px;
+    display: inline;
+}
