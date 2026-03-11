@@ -20,7 +20,22 @@
             <a href="community.html">FLASHCARD</a>
 
         </div>
-        <div class="profile-circle"></div>
+        <div class="container-info" id="userDropdownTrigger">
+            <i class="fa-regular fa-user"></i>
+            <span class="user-name">Nguyễn Văn A</span>
+            <i class="fa-solid fa-chevron-down mini-arrow"></i>
+            <div class="info-dropdown" id="infoDropdown">
+                <a href="/src/fe/info/view-info.html">
+                    <div class="dropdown-item"><i class="fa-solid fa-circle-info"></i> Information</div>
+                </a>
+                <a href="/src/fe/admin/dashbroad.html">
+                    <div class="dropdown-item"><i class="fa-regular fa-user"></i> Admin</div>
+                </a>
+                <a href="/src/fe/client/homepage.html">
+                    <div class="dropdown-item"><i class="fa-solid fa-right-from-bracket"></i> Logout</div>
+                </a>
+            </div>
+        </div>
     </header>
 
     <div class="app-container">
@@ -83,8 +98,8 @@
                         <a href="deck/inner-deck.html">
                             <div class="card-top">
                                 <img src="image/download (1).jpg">
-                                <i class="fas fa-lock status-icon"></i>
-                                <span class="card-count">50 cards</span>
+                                <i class="fas fa-globe status-icon"></i>
+                                <span class="card-count">5 cards</span>
                             </div>
                             <div class="card-body">
                                 <h3>Mixed</h3>
@@ -108,7 +123,7 @@
                     <div class="deck-card">
                         <div class="card-top">
                             <img src="image/download (2).jpg">
-                            <i class="fas fa-globe status-icon"></i>
+                            <i class="fas fa-lock status-icon"></i>
                             <span class="card-count">50 cards</span>
                         </div>
                         <div class="card-body">
@@ -131,7 +146,7 @@
                     <div class="deck-card">
                         <div class="card-top">
                             <img src="image/download.jpg">
-                            <i class="fas fa-globe status-icon"></i>
+                            <i class="fas fa-lock status-icon   "></i>
                             <span class="card-count">50 cards</span>
                         </div>
                         <div class="card-body">
@@ -178,6 +193,26 @@
                             </div>
                         </div>
                     </div>
+                    <a href="deck/inner-deck(com).html">
+                        <div class="deck-card">
+                            <div class="card-top">
+                                <img src="image/download (2).jpg">
+                                <i class="fas fa-globe status-icon"></i>
+                                <span class="card-count">5 cards</span>
+                            </div>
+                            <div class="card-body">
+                                <h3>Mixed</h3>
+                                <p>Advanced vocabulary for high scores.</p>
+                                <div class="progress-container">
+                                    <div class="progress-bar" style="width: 20%;"></div>
+                                </div>
+                                <span class="progress-text">1/5</span>
+                            </div>
+                            <div class="card-footer">
+                                <span><i class="far fa-user"></i> Linda</span>
+                            </div>
+                        </div>
+                    </a>
             </section>
         </main>
     </div>

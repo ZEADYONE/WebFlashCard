@@ -19,6 +19,11 @@ body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
 .container {
     max-width: 700px;
     margin: 20px auto;
@@ -267,4 +272,75 @@ body {
     border-radius: 8px;
     cursor: pointer;
     font-weight: bold;
+}
+
+.fa-award {
+    color: #f59e0b;
+    /* Màu vàng đồng */
+}
+
+/* Dropdown Menu */
+/* Quan trọng nhất: Cần có position: relative để dropdown bám vào đây */
+.container-info {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    padding: 5px 10px;
+    border-radius: 8px;
+    transition: 0.3s;
+}
+
+/* Hiệu ứng hover cho đẹp */
+.container-info:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.mini-arrow {
+    font-size: 12px;
+    transition: transform 0.3s;
+}
+
+.info-dropdown {
+    position: absolute;
+    top: calc(100% + 10px);
+    /* Hiển thị phía dưới container */
+    right: 0;
+    background-color: white;
+    min-width: 160px;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    z-index: 1000;
+
+    /* Trạng thái ẩn mặc định */
+    display: none;
+    flex-direction: column;
+}
+
+/* Class này sẽ được JS thêm vào khi click */
+.info-dropdown.show {
+    display: flex;
+}
+
+/* Các mục bên trong menu */
+.dropdown-item {
+    padding: 12px 15px;
+    color: #333;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: 0.2s;
+}
+
+.dropdown-item:hover {
+    background-color: #f1f5f9;
+    color: #0088cc;
+}
+
+.dropdown-item i {
+    width: 16px;
+    font-size: 14px;
 }

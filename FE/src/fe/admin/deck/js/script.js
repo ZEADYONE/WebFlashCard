@@ -1,3 +1,40 @@
+document.addEventListener('DOMContentLoaded', () => {
+    // Logic chuyển trang đơn giản (UI only)
+    const pages = document.querySelectorAll('.pagination span');
+    pages.forEach(page => {
+        page.addEventListener('click', () => {
+            if (!isNaN(page.innerText)) {
+                document.querySelector('.pagination .active').classList.remove('active');
+                page.classList.add('active');
+            }
+        });
+    });
+});
+
+// INFOR
+document.addEventListener('DOMContentLoaded', () => {
+    const trigger = document.getElementById('userDropdownTrigger');
+    const dropdown = document.getElementById('infoDropdown');
+    const arrow = trigger.querySelector('.mini-arrow');
+
+    // Click vào Nguyễn Văn A để bật/tắt menu
+    trigger.addEventListener('click', (e) => {
+        e.stopPropagation(); // Ngăn sự kiện nổi bọt
+        dropdown.classList.toggle('show');
+
+        // Xoay mũi tên nếu có
+        if (arrow) {
+            arrow.style.transform = dropdown.classList.contains('show') ? 'rotate(180deg)' : 'rotate(0deg)';
+        }
+    });
+
+    // Click ra ngoài menu thì tự động đóng lại (UX tốt hơn)
+    document.addEventListener('click', () => {
+        dropdown.classList.remove('show');
+        if (arrow) arrow.style.transform = 'rotate(0deg)';
+    });
+});
+
 const wordData = [
     { eng: "Hello", vie: "Xin chào", img: "https://th.bing.com/th/id/OIP.tV1Yut2akoObzBb9nU_P-AHaD4?w=276&h=180&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3" },
     { eng: "Lion", vie: "Sư tử", img: "https://th.bing.com/th/id/OIP.1v1LyOL7jzgNndpyVfDlGAHaFj?w=234&h=180&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3" },
@@ -69,26 +106,4 @@ cardsGrid.addEventListener("click", function (e) {
 
 });
 
-// INFOR
-document.addEventListener('DOMContentLoaded', () => {
-    const trigger = document.getElementById('userDropdownTrigger');
-    const dropdown = document.getElementById('infoDropdown');
-    const arrow = trigger.querySelector('.mini-arrow');
 
-    // Click vào Nguyễn Văn A để bật/tắt menu
-    trigger.addEventListener('click', (e) => {
-        e.stopPropagation(); // Ngăn sự kiện nổi bọt
-        dropdown.classList.toggle('show');
-
-        // Xoay mũi tên nếu có
-        if (arrow) {
-            arrow.style.transform = dropdown.classList.contains('show') ? 'rotate(180deg)' : 'rotate(0deg)';
-        }
-    });
-
-    // Click ra ngoài menu thì tự động đóng lại (UX tốt hơn)
-    document.addEventListener('click', () => {
-        dropdown.classList.remove('show');
-        if (arrow) arrow.style.transform = 'rotate(0deg)';
-    });
-});
