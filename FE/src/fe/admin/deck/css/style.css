@@ -91,12 +91,13 @@ body {
 /* Top Section */
 .edit-top {
     display: flex;
-    gap: 30px;
+    gap: 25px;
     margin-bottom: 30px;
+    align-items: flex-end;
 }
 
 .form-group {
-    flex: 1;
+    flex: 2;
 }
 
 .input-item {
@@ -123,21 +124,33 @@ select {
 .upload-area {
     flex: 1;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+
+    /* Đây là thuộc tính quan trọng nhất */
+    align-self: stretch;
+    margin-bottom: 15px;
 }
 
+/* Khối màu xanh bên trong */
 .upload-box {
-    width: 200px;
-    height: 150px;
+    width: 100%;
+    height: 100%;
+    /* Kéo dãn để lấp đầy upload-area */
     background-color: #93c5fd;
     border-radius: 12px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    position: relative;
     color: #1e3a8a;
     font-size: 3rem;
+    cursor: pointer;
+    border: 2px dashed #3b82f6;
+    overflow: hidden;
+    background-size: cover;
+    background-position: center;
+    background-image: url("/src/fe/client/image/download\ \(1\).jpg");
+    /* Thêm viền đứt đoạn cho giống vùng upload */
 }
 
 .upload-box .fa-arrow-up {
@@ -165,6 +178,52 @@ select {
     align-items: center;
     justify-content: center;
     gap: 8px;
+}
+
+.all-btn {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+.all-btn a {
+    text-decoration: none;
+    display: block;
+    /* Quan trọng: giúp thẻ <a> chiếm hết chiều rộng */
+    width: 100%;
+}
+
+/* 3. Đảm bảo tất cả nút trong .all-btn đều full width của container cha */
+.all-btn .btn {
+    width: 100%;
+    box-sizing: border-box;
+    /* Đảm bảo padding không làm tràn nút */
+}
+
+/* 4. Nhóm 2 nút bên dưới */
+.button-group {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    /* Chia đôi 50-50 */
+    gap: 10px;
+    /* Khoảng cách giữa Save và Cancel */
+    width: 100%;
+}
+
+/* Điều chỉnh thêm cho nút để trông hiện đại hơn */
+.btn {
+    height: 45px;
+    /* Cố định chiều cao để các hàng nút trông đều nhau */
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    transition: opacity 0.2s;
+}
+
+.btn:hover {
+    opacity: 0.9;
 }
 
 .btn-pink {
@@ -227,6 +286,8 @@ select {
     cursor: pointer;
     align-self: flex-start;
 }
+
+
 
 /* Single Card */
 .card {
@@ -373,4 +434,20 @@ select {
 .dropdown-item i {
     width: 16px;
     font-size: 14px;
+}
+
+.search-box {
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    padding: 8px 15px;
+    display: flex;
+    align-items: center;
+    width: 350px;
+}
+
+.search-box input {
+    border: none;
+    outline: none;
+    margin-left: 10px;
+    width: 100%;
 }

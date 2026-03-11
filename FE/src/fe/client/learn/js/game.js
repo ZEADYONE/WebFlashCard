@@ -3,7 +3,14 @@ const questions = [
     { word: "Hello", phonetic: "/heˈləʊ/", image: "https://th.bing.com/th/id/OIP.tV1Yut2akoObzBb9nU_P-AHaD4?w=276&h=180&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3", hiddenIndices: [1, 2], vie: "Xin chào" },
     { word: "Lion", phonetic: "/ˈlaɪ.ən/", image: "https://th.bing.com/th/id/OIP.1v1LyOL7jzgNndpyVfDlGAHaFj?w=234&h=180&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3", hiddenIndices: [1, 2, 3], vie: "Sư tử" },
     { word: "Tree", phonetic: "/triː/", image: "https://th.bing.com/th/id/OIP.9JdJHb8SjAuBbZErEIEmbQHaFW?w=223&h=180&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3", hiddenIndices: [2, 3], vie: "Cây cối" },
-    { word: "Pollution", phonetic: "/pəˈluː.ʃən/", image: "https://th.bing.com/th/id/OIP.7YBSNMI5DuG5XUqmzuHdiQHaDt?w=349&h=174&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3", hiddenIndices: [1, 2, 5], vie: "Ô nhiễm" }
+    { word: "Pollution", phonetic: "/pəˈluː.ʃən/", image: "https://th.bing.com/th/id/OIP.7YBSNMI5DuG5XUqmzuHdiQHaDt?w=349&h=174&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3", hiddenIndices: [1, 2, 5], vie: "Ô nhiễm" },
+    {
+        word: "Spring",
+        phonetic: "/sprɪŋ/",
+        image: "https://th.bing.com/th/id/R.5b17d0a45f3ebb0f5e45cd0af1463e0d?rik=97RscHNho7ZACA&pid=ImgRaw&r=0",
+        vie: "Mùa xuân",
+        hiddenIndices: [1, 3]
+    }
 ];
 
 // 2. Khai báo biến (QUAN TRỌNG: Thêm biến score ở đây)

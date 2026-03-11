@@ -1,3 +1,4 @@
+
 const wordData = [
     { eng: "Hello", vie: "Xin chào", img: "https://th.bing.com/th/id/OIP.tV1Yut2akoObzBb9nU_P-AHaD4?w=276&h=180&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3" },
     { eng: "Lion", vie: "Sư tử", img: "https://th.bing.com/th/id/OIP.1v1LyOL7jzgNndpyVfDlGAHaFj?w=234&h=180&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3" },
@@ -11,7 +12,7 @@ const cardsGrid = document.getElementById('cardsGrid');
 function renderCards() {
     cardsGrid.innerHTML = wordData.map(word => `
         <div class="card">
-            <a href="/src/fe/client/deck/view.html">
+            <a href="/src/fe/admin/course/view.html">
                 <div class="card-bg" style="background-image: url('${word.img}')"></div>
 
                 <div class="card-content">
@@ -24,7 +25,7 @@ function renderCards() {
                 <i class="fa-solid fa-volume-high"></i>
             </div>
             <div class="card-action">
-                <a href="/src/fe/client/deck/update.html" style="display: flex;">
+                <a href="/src/fe/admin/course/update.html" style="display: flex;">
                     <i class="fas fa-wrench fix_deck"></i>
                 </a>
                 <i class="fas fa-trash-alt trash"></i>
@@ -32,7 +33,6 @@ function renderCards() {
         </div>
     `).join('');
 }
-
 function removeActionCard() {
     const item = document.location.pathname;
     const action = document.querySelectorAll(".card-action");

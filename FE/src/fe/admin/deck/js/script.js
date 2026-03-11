@@ -48,7 +48,7 @@ const cardsGrid = document.getElementById('cardsGrid');
 function renderCards() {
     cardsGrid.innerHTML = wordData.map(word => `
         <div class="card">
-            <a href="/src/fe/client/deck/view.html">
+            <a href="/src/fe/admin/course/view.html">
                 <div class="card-bg" style="background-image: url('${word.img}')"></div>
 
                 <div class="card-content">
@@ -61,7 +61,7 @@ function renderCards() {
                 <i class="fa-solid fa-volume-high"></i>
             </div>
             <div class="card-action">
-                <a href="/src/fe/client/deck/update.html" style="display: flex;">
+                <a href="/src/fe/admin/course/update.html" style="display: flex;">
                     <i class="fas fa-wrench fix_deck"></i>
                 </a>
                 <i class="fas fa-trash-alt trash"></i>
@@ -73,7 +73,7 @@ function removeActionCard() {
     const item = document.location.pathname;
     const action = document.querySelectorAll(".card-action");
 
-    if (item === "/src/fe/client/deck/inner-deck(com).html") {
+    if (item === "/src/fe/admin/deck/view.html") {
         action.forEach(i => {
             i.style.display = "none";
         })
@@ -105,5 +105,29 @@ cardsGrid.addEventListener("click", function (e) {
     }
 
 });
+
+const img = document.getElementById("img");
+
+let currentURL = null;
+if (img) {
+    img.addEventListener("change", function () {
+
+        const file = this.files[0];
+        if (!file) return;
+
+        if (currentURL) {
+            URL.revokeObjectURL(currentURL);
+        }
+
+        currentURL = URL.createObjectURL(file);
+        console.log(currentURL);
+        const popupImage = document.querySelector(".upload-box");
+        popupImage.innerHTML = "";
+        popupImage.style.backgroundImage = `url(${currentURL})`;
+        popupImage.style.backgroundSize = "cover";
+        popupImage.style.backgroundPosition = "center";
+
+    });
+}
 
 

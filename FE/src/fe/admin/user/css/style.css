@@ -216,3 +216,8 @@ textarea {
     width: 16px;
     font-size: 14px;
 }
+
+a {
+    text-decoration: none;
+    color: inherit;
+}

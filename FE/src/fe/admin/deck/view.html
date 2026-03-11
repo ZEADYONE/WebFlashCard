@@ -37,21 +37,21 @@
     </header>
 
     <main class="container">
-        <h2 class="page-title">Edit Deck</h2>
+        <h2 class="page-title">View Deck</h2>
 
         <form class="edit-top" action="https://www.w3schools.com/action_page.php" method="GET">
             <div class="form-group">
                 <div class="input-item">
                     <label>Title</label>
-                    <input type="text" value="Mixed" name="title">
+                    <input type="text" value="Mixed" name="title" disabled>
                 </div>
                 <div class="input-item">
                     <label>Description</label>
-                    <textarea name="description">Advanced vocabulary for high scores.</textarea>
+                    <textarea disabled name="description">Advanced vocabulary for high scores.</textarea>
                 </div>
                 <div class="input-item">
                     <label>Scope</label>
-                    <select id="scopeSelect" name="scope">
+                    <select disabled id="scopeSelect" name="scope">
                         <option value="public">Public</option>
                         <option value="private">Private</option>
                     </select>
@@ -59,31 +59,22 @@
             </div>
 
             <div class="upload-area" onclick="document.getElementById('img').click()">
-                <div class="upload-box" id="uploadBox"></div>
-                <input type="file" id="img" name="img" hidden>
+                <div class="upload-box" id="uploadBox">
+                </div>
+                <input type="file" id="img" name="img" hidden disabled>
             </div>
 
             <div class="all-btn">
                 <div class="search-box">
                     <i class="fa-solid fa-magnifying-glass"></i>
-                    <input type="text" placeholder="Search">
+                    <input stype="text" placeholder="Search">
                 </div>
-                <a href="/src/fe/admin/course/create.html">
-                    <button type="button" class="btn btn-pink">
-                        <i class="fa-solid fa-wand-magic-sparkles"></i> Add card
+
+                <a href="/src/fe/admin/deck.html">
+                    <button type="button" class="btn btn-gray">
+                        <i class="fa-solid fa-xmark"></i> Back
                     </button>
                 </a>
-
-                <div class="button-group">
-                    <button type="submit" class="btn btn-purple">
-                        <i class="fa-solid fa-box-archive"></i> Save
-                    </button>
-                    <a href="/src/fe/admin/deck.html">
-                        <button type="button" class="btn btn-gray">
-                            <i class="fa-solid fa-xmark"></i> Cancel
-                        </button>
-                    </a>
-                </div>
             </div>
 
         </form>
