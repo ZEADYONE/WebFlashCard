@@ -20,6 +20,7 @@
             <a href="/src/fe/client/homepage.html">HOME</a>
             <a href="/src/fe/client/community.html">FLASHCARD</a>
 
+
         </div>
         <div class="profile-circle"></div>
     </header>
@@ -82,7 +83,7 @@
                 <h3>Play history</h3>
                 <div class="history-list">
                     <div class="history-item">
-                        <span id="date">10/10/2025</span>
+                        <span id="date"></span>
                         <span id="txt-correct" class="txt-correct"></span> | <span id="txt-wrong"
                             class="txt-wrong"></span>
                     </div>
@@ -95,7 +96,7 @@
         </div>
 
         <div class="result-footer">
-            <button class="btn-outline" onclick="history.go(-1)">Quay lại</button>
+            <button class="btn-outline" onclick="history.back()">Quay lại</button>
             <button class="btn-primary" onclick="restartGame()">Chơi lại</button>
         </div>
     </main>

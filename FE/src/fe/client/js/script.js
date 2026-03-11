@@ -2,30 +2,34 @@
 const filterBtn = document.getElementById('filterBtn');
 const filterDropdown = document.getElementById('filterDropdown');
 
-filterBtn.addEventListener('click', (e) => {
-    filterDropdown.classList.toggle('show');
-    e.stopPropagation();
-});
+if (filterBtn && filterDropdown) {
 
-// Đóng dropdown khi nhấn ra ngoài
-window.addEventListener('click', () => {
-    filterDropdown.classList.remove('show');
-});
+    filterBtn.addEventListener('click', (e) => {
+        filterDropdown.classList.toggle('show');
+        e.stopPropagation();
+    });
 
-filterDropdown.addEventListener('click', (e) => {
-    e.stopPropagation();
-});
+    window.addEventListener('click', () => {
+        filterDropdown.classList.remove('show');
+    });
+
+    filterDropdown.addEventListener('click', (e) => {
+        e.stopPropagation();
+    });
+
+}
 
 // Highlight Menu
 const currentPage = window.location.pathname;
 
 document.querySelectorAll(".nav-item").forEach(link => {
-
     if ("/src/fe/client/" + link.getAttribute("href") === currentPage) {
         link.classList.add("active");
     }
-
 });
+
+
+
 
 // Popup
 const fixDeck = document.querySelectorAll(".fix_deck");

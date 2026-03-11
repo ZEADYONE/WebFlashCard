@@ -1,22 +1,31 @@
-// Dữ liệu mẫu
+// 
 const questions = [
     {
-        word: "Library",
-        phonetic: "/ˈlaɪ.brer.i/",
-        image: "https://images.unsplash.com/photo-1521587760476-6c12a4b040da?auto=format&fit=crop&w=500&q=80",
-        meaning: "Thư viện: Nơi chứa sách và các tài liệu để đọc hoặc mượn."
+        word: "Hello",
+        phonetic: "/heˈləʊ/",
+        image: "https://th.bing.com/th/id/OIP.tV1Yut2akoObzBb9nU_P-AHaD4?w=276&h=180&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3",
+        meaning: "Xin chào",
+        definition: "Hello là một thán từ trong tiếng Anh dùng để chào hỏi hoặc bắt đầu cuộc trò chuyện, thường được sử dụng khi gặp ai đó, khi bắt đầu nói chuyện hoặc khi nghe điện thoại, với ý nghĩa tương đương “xin chào” trong tiếng Việt",
+        example: "Hello, this is John speaking",
     },
     {
-        word: "Hospital",
-        phonetic: "/ˈhɒs.pɪ.təl/",
-        image: "https://images.unsplash.com/photo-1586773860418-d37222d8fce2?auto=format&fit=crop&w=500&q=80",
-        meaning: "Bệnh viện: Nơi chăm sóc và điều trị người bệnh."
+        word: "Lion",
+        phonetic: "/ˈlaɪ.ən/",
+        image: "https://th.bing.com/th/id/OIP.1v1LyOL7jzgNndpyVfDlGAHaFj?w=234&h=180&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3",
+        meaning: "Sư tử",
+        definition: ""
     },
     {
-        word: "School",
-        phonetic: "/skuːl/",
-        image: "https://images.unsplash.com/photo-1546410531-bb4caa6b424d?auto=format&fit=crop&w=500&q=80",
-        meaning: "Trường học: Nơi học sinh đến để học tập."
+        word: "Tree",
+        phonetic: "/triː/",
+        image: "https://th.bing.com/th/id/OIP.9JdJHb8SjAuBbZErEIEmbQHaFW?w=223&h=180&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3",
+        meaning: "Cây cối"
+    },
+    {
+        word: "Pollution",
+        phonetic: "/pəˈluː.ʃən/",
+        image: "https://th.bing.com/th/id/OIP.7YBSNMI5DuG5XUqmzuHdiQHaDt?w=349&h=174&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3",
+        meaning: "Ô nhiễm"
     }
 ];
 

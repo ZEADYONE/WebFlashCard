@@ -3,6 +3,7 @@
     --accent-purple: #7c4dff;
     --light-blue: #e3f2fd;
     --text-dark: #333;
+    --header-bg: #0a0e27;
 }
 
 body {
@@ -11,51 +12,56 @@ body {
     background-color: #f5f7fb;
 }
 
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
 /* Header */
-header {
-    background-color: var(--primary-bg);
+.top-nav {
+    background-color: var(--header-bg);
     color: white;
-    padding: 1rem 5%;
+    padding: 15px 40px;
     display: flex;
     justify-content: space-between;
     align-items: center;
+}
+
+.brand h1 {
+    font-size: 1.4rem;
+}
+
+.brand p {
+    font-size: 0.8rem;
+    color: #94a3b8;
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+.profile-circle {
+    width: 45px;
+    height: 45px;
+    background-color: #d1d5db;
+    border-radius: 50%;
 }
 
 a {
     text-decoration: none;
     color: inherit;
 }
-
-.logo h1 {
-    margin: 0;
-    font-size: 1.5rem;
-}
-
-.logo p {
-    margin: 0;
-    font-size: 0.8rem;
-    opacity: 0.8;
-}
-
-nav a {
-    color: white;
-    text-decoration: none;
-    margin-left: 20px;
-    font-weight: bold;
-    font-size: 0.9rem;
-}
-
-.profile-icon {
-    width: 40px;
-    height: 40px;
-    background-color: #ccc;
-    border-radius: 50%;
-}
-
-/* a {
-    text-decoration: none;
-    color: inherit;
-} */
 
 /* Main Content */
 main {

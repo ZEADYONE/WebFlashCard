@@ -6,42 +6,52 @@
 }
 
 body {
-    font-family: Arial, sans-serif;
-    margin: 0;
     background-color: #f0f0f0;
 }
 
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
 /* Header (Giống giao diện trước) */
-header {
+.top-nav {
     background-color: var(--header-bg);
     color: white;
-    padding: 15px 5%;
+    padding: 15px 40px;
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-.logo h1 {
+.brand h1 {
     font-size: 1.4rem;
-    margin: 0;
 }
 
-.logo p {
+.brand p {
     font-size: 0.8rem;
-    margin: 0;
+    color: #94a3b8;
 }
 
-nav a {
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+.nav-links a {
     color: white;
     text-decoration: none;
-    margin-left: 20px;
-    font-weight: bold;
+    font-weight: 600;
+    font-size: 0.9rem;
 }
 
-.profile-icon {
+.profile-circle {
     width: 45px;
     height: 45px;
-    background-color: #d1d1d1;
+    background-color: #d1d5db;
     border-radius: 50%;
 }
 

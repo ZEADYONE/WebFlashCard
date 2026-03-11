@@ -5,47 +5,57 @@
     --btn-wrong: #ff4d4d;
     --btn-correct: #4ade80;
     --btn-flip: #d1d5db;
+    --header-bg: #0a0e27;
 }
 
 body {
-    font-family: Arial, sans-serif;
     margin: 0;
     background-color: var(--app-bg);
 }
 
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
 /* Header */
-.header {
-    background-color: var(--primary-bg);
+.top-nav {
+    background-color: var(--header-bg);
     color: white;
-    padding: 15px 50px;
+    padding: 15px 40px;
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-.logo h1 {
-    font-size: 24px;
-    margin: 0;
+.brand h1 {
+    font-size: 1.4rem;
 }
 
-.logo p {
-    font-size: 12px;
-    margin: 0;
-    opacity: 0.8;
+.brand p {
+    font-size: 0.8rem;
+    color: #94a3b8;
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 30px;
 }
 
 .nav-links a {
     color: white;
     text-decoration: none;
-    margin-left: 20px;
-    font-weight: bold;
-    font-size: 14px;
+    font-weight: 600;
+    font-size: 0.9rem;
 }
 
-.profile-icon {
-    width: 40px;
-    height: 40px;
-    background: #ccc;
+.profile-circle {
+    width: 45px;
+    height: 45px;
+    background-color: #d1d5db;
     border-radius: 50%;
 }
 
@@ -81,8 +91,8 @@ body {
 .flashcard-container {
     perspective: 1000px;
     width: 100%;
-    max-width: 500px;
-    height: 300px;
+    max-width: 700px;
+    height: 400px;
     margin: 20px auto;
 }
 
@@ -116,7 +126,7 @@ body {
 
 .card-front img {
     width: 60%;
-    height: 120px;
+    height: 230px;
     object-fit: cover;
     border-radius: 10px;
 }

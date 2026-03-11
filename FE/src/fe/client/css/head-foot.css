@@ -1,45 +1,22 @@
+:root {
+    --header-bg: #0a0e27;
+}
+
 body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin: 0;
+    background-color: #f5f7fb;
+}
+
+* {
+    margin: 0;
+    padding: 0;
     box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 a {
     text-decoration: none;
-}
-
-.header {
-    position: sticky;
-    top: 0;
-    left: 0;
-
-    height: 100px;
-
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-
-    background: linear-gradient(#0B033C);
-    z-index: 999;
-}
-
-.menu-header {
-    display: flex;
-    list-style: none;
-    font-size: 20px;
-    gap: 30px;
-}
-
-.menu-header li a {
-    color: aliceblue;
-}
-
-.menu-header li a:hover {
-    color: aquamarine;
-}
-
-.logo {
-    font-size: 35px;
-    color: aliceblue;
 }
 
 .login a {
@@ -51,6 +28,45 @@ a {
     color: aquamarine;
 }
 
+.top-nav {
+    background-color: #0B033C;
+    color: white;
+    padding: 15px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.brand h1 {
+    font-size: 1.4rem;
+}
+
+.brand p {
+    font-size: 0.8rem;
+    color: #94a3b8;
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+.profile-circle {
+    width: 45px;
+    height: 45px;
+    background-color: #d1d5db;
+    border-radius: 50%;
+}
+
+/* --------------------- */
 .main {
     background-color: #0B033C;
     color: aliceblue;
