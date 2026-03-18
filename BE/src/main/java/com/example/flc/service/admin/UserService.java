@@ -1,4 +1,4 @@
-package com.example.flc.service;
+package com.example.flc.service.admin;
 
 import java.util.List;
 
@@ -61,5 +61,17 @@ public class UserService {
         user.setEmail(signup.getEmail());
         user.setUserName(signup.getUserName());
         return user;
+    }
+
+    public User getUserByEmail(String email) {
+        return this.userRepository.findByEmail(email);
+    }
+
+    public boolean checkEmailExits(String email) {
+        return this.userRepository.existsByEmail(email);
+    }
+
+    public boolean checkUserNameExits(String userName) {
+        return this.userRepository.existsByUserName(userName);
     }
 }

@@ -9,6 +9,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 public class Deck {
@@ -18,8 +19,11 @@ public class Deck {
 
     private long quantity;
     private String image;
+
     private String title;
+
     private String des;
+
     private String scope;
     private String status;
 

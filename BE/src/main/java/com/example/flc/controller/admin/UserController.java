@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.example.flc.domain.User;
-import com.example.flc.service.UserService;
+import com.example.flc.service.admin.UserService;
 
 import jakarta.validation.Valid;
 
@@ -41,7 +41,6 @@ public class UserController {
     @GetMapping("/admin/user/view/{id}")
     public String viewUser(@PathVariable("id") long id, Model model) {
         User user = userService.getUserDetail(id);
-
         model.addAttribute("user", user);
 
         return "admin/user/view";
@@ -68,7 +67,7 @@ public class UserController {
         }
 
         if (bindingResult.hasErrors()) {
-            return "/admin/user/create";
+            return "admin/user/create";
         }
 
         // HASH CODE
@@ -76,7 +75,7 @@ public class UserController {
         newUser.setPassWord(hassPassWord);
 
         newUser.setRole(this.userService.getRoleByName(newUser.getRole().getName()));
-
+        newUser.setStatus("Active");
         this.userService.handelSaveUser(newUser);
         return "redirect:/admin/user";
     }

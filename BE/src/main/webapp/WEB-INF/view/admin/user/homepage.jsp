@@ -126,6 +126,10 @@
 
                                                     <form action="/admin/user/status/${user.id}" method="POST"
                                                         style="display:inline;">
+                                                        <div style="display: none;">
+                                                            <input type="hidden" name="${_csrf.parameterName}"
+                                                                value="${_csrf.token}" />
+                                                        </div>
                                                         <button type="submit"
                                                             style="background: none; border: none; padding: 0; cursor: pointer;">
                                                             <c:choose>

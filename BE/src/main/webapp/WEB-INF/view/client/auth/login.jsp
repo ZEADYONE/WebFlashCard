@@ -28,23 +28,29 @@
                         <div class="title">Login</div>
 
                         <!-- Spring Form -->
-                        <form:form method="POST" action="/login" modelAttribute="loginUser">
-
+                        <form method="POST" action="/login">
+                            <c:if test="${param.error != null}">
+                                <div class="my-2" style="color: red;">Sai email hoặc password.</div>
+                            </c:if>
                             <div class="field">
                                 <label>Email</label>
-                                <form:input path="email" type="email" placeholder="abc@gmail.com" cssClass="input" />
+                                <input name="username" type="email" placeholder="abc@gmail.com" class="input" />
                             </div>
 
                             <div class="field">
                                 <label>Password</label>
-                                <form:password path="passWord" placeholder="1234.." cssClass="input" />
+                                <input name="password" type="password" placeholder="1234.." class="input" />
+                            </div>
+
+                            <div>
+                                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
                             </div>
 
                             <button type="submit" class="submit">
                                 Login
                             </button>
 
-                        </form:form>
+                        </form>
 
                         <div class="new_user">
                             New user? <a href="/client/sign_up">Sign up</a>

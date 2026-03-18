@@ -46,7 +46,6 @@
                                 <div class="form-group">
                                     <label>Email</label>
                                     <form:input type="email" path="email" required="required" readonly="true" />
-                                    <small>(Email cannot be changed)</small>
                                 </div>
 
                                 <div class="form-group">
@@ -60,6 +59,11 @@
                                 </div>
 
                                 <div class="form-group">
+                                    <label>Location</label>
+                                    <form:input type="text" path="location" />
+                                </div>
+
+                                <div class="form-group" style="display: none;">
                                     <label>Password</label>
                                     <form:input path="passWord" type="password" placeholder="Password" required="true"
                                         readonly="true" />
@@ -80,6 +84,11 @@
                                     <form:textarea path="bio" rows="6" />
                                 </div>
 
+                                <div class="form-group" style="display: none;">
+                                    <label>Status</label>
+                                    <form:input path="status" />
+                                </div>
+
                                 <div class="right-column-group">
                                     <div class="form-group">
                                         <label>Role</label>
@@ -87,11 +96,6 @@
                                             <form:option value="ADMIN">Admin</form:option>
                                             <form:option value="USER">User</form:option>
                                         </form:select>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label>Location</label>
-                                        <form:input type="text" path="location" />
                                     </div>
                                 </div>
                             </form:form>

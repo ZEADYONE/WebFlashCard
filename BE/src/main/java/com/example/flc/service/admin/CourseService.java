@@ -1,4 +1,4 @@
-package com.example.flc.service;
+package com.example.flc.service.admin;
 
 import org.springframework.stereotype.Service;
 

@@ -63,8 +63,8 @@
                             </div>
 
                             <div class="form-group">
-                                <label>Password</label>
-                                <form:password path="passWord" showPassword="true" readonly="true" />
+                                <label>Location</label>
+                                <form:input path="location" type="text" readonly="true" />
                             </div>
 
                             <div class="form-group">
@@ -86,10 +86,6 @@
                                 <div class="form-group">
                                     <label>Role</label>
                                     <form:input path="role.name" readonly="true" />
-                                </div>
-                                <div class="form-group">
-                                    <label>Location</label>
-                                    <form:input path="location" type="text" readonly="true" />
                                 </div>
                             </div>
                         </form:form>

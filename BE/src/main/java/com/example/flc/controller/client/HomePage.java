@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import com.example.flc.domain.User;
 import com.example.flc.domain.DTO.Login;
 import com.example.flc.domain.DTO.SignUp;
-import com.example.flc.service.UserService;
+import com.example.flc.service.admin.UserService;
 
 import jakarta.validation.Valid;
 
@@ -29,17 +29,16 @@ public class HomePage {
         this.passwordEncoder = passwordEncoder;
     }
 
+    @GetMapping("/")
+    public String getHome() {
+        return "client/homepage";
+    }
+
     // LOGIN
-    @GetMapping("/client/login")
+    @GetMapping("/login")
     public String getLoginPage(Model model) {
         model.addAttribute("loginUser", new Login());
         return "client/auth/login";
-    }
-
-    @PostMapping("/client/login")
-    public String setLoginPage(@ModelAttribute("loginUser") Login login) {
-
-        return "client/homepage";
     }
 
     @GetMapping("/client/homepage")
@@ -62,17 +61,22 @@ public class HomePage {
         // error.getDefaultMessage());
         // }
         if (bindingResult.hasErrors()) {
-            return "/client/auth/sign_up";
+            return "client/auth/sign_up";
         }
 
         User user = this.userService.signUpDtoToUser(newUser);
 
         String hassPassWord = this.passwordEncoder.encode(user.getPassWord());
         user.setPassWord(hassPassWord);
-        user.setRole(this.userService.getRoleByName("USER"));
+        // user.setRole(this.userService.getRoleByName("USER"));
         user.setStatus("Active");
         this.userService.handelSaveUser(user);
         return "redirect:/client/login";
+    }
+
+    @GetMapping("/access-deny")
+    public String getDenyPage() {
+        return "client/auth/access-deny";
     }
 
 }

@@ -2,6 +2,8 @@ package com.example.flc.domain;
 
 import java.util.List;
 
+import com.example.flc.service.validator.RegisterCheck;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -14,6 +16,7 @@ import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
+// @RegisterCheck
 @Entity
 // @Table(name = "user")
 public class User {
