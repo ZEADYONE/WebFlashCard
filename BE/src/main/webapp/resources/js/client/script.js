@@ -46,6 +46,9 @@ const feature = document.getElementById("feature");
 const saveBtn = document.getElementById("save");
 const cancelBtn = document.getElementById("cancel");
 
+const form = document.getElementById("form-popup")
+const deckIdInput = document.getElementById("deck-id");
+
 let currentCard = null;
 // POPUP EDIT DECK
 fixDeck.forEach(item => {
@@ -53,12 +56,15 @@ fixDeck.forEach(item => {
     item.addEventListener("click", function () {
 
         const card = item.closest(".deck-card");
-
         currentCard = card;
 
+        const id = card.getAttribute("data-id");
         const title = card.querySelector("h3").innerText;
         const desc = card.querySelector("p").innerText;
         const img = card.querySelector("img").getAttribute("src");
+
+        deckIdInput.value = id;
+        deckIdInput.setAttribute("name", "id");
 
         popupTitle.value = title;
         popupDesc.value = desc;
@@ -66,9 +72,9 @@ fixDeck.forEach(item => {
 
         feature.innerHTML = "Edit Deck";
 
+        form.action = "/client/deck/update";
 
         popupContainer.style.display = "flex";
-
     });
 
 });
@@ -77,51 +83,29 @@ fixDeck.forEach(item => {
 createDeck.forEach(item => {
     item.addEventListener("click", function () {
 
+        deckIdInput.removeAttribute("name");
+
         popupTitle.value = "";
         popupDesc.value = "";
         feature.innerHTML = "Create Deck";
 
         popupImg.style.backgroundImage = "";
-        popupImg.innerHTML = ""; // xóa nội dung cũ
+        popupImg.innerHTML = "";
 
         const i = document.createElement("i");
         i.classList.add("fa-solid", "fa-upload");
 
-        popupImg.appendChild(i); // thêm icon vào div
+        popupImg.appendChild(i);
 
+        form.action = "/client/deck/create";
         popupContainer.style.display = "flex";
     })
 })
 
-
-// SCOPE POPUP
-const scopeSelect = document.getElementById("popup-scope");
-const icon = document.querySelector(".status-icon");
-
-scopeSelect.addEventListener("change", function () {
-
-    if (scopeSelect.value === "Private") {
-        icon.classList.remove("fa-globe");
-        icon.classList.add("fa-lock");
-    } else {
-        icon.classList.remove("fa-lock");
-        icon.classList.add("fa-globe");
-    }
-
-});
-
-// SAVE CHANGE
-saveBtn.addEventListener("click", function () {
-
-    if (!currentCard) return;
-
-    currentCard.querySelector("h3").innerText = popupTitle.value;
-    currentCard.querySelector("p").innerText = popupDesc.value;
-
+// Đóng popup
+cancelBtn.addEventListener("click", () => {
     popupContainer.style.display = "none";
-
 });
-
 
 // CANCEL
 cancelBtn.addEventListener("click", function () {
@@ -138,62 +122,31 @@ popupContainer.addEventListener("click", function (e) {
 
 });
 
-// DELETE DECK
-const trash = document.querySelectorAll(".trash");
-
-trash.forEach(item => {
-    item.addEventListener("click", function () {
-        const deck = item.closest(".deck-card");
-        deck.style.display = "none";
-    })
-})
-
-
 const img = document.getElementById("img");
 
 let currentURL = null;
+
 if (img) {
     img.addEventListener("change", function () {
 
         const file = this.files[0];
         if (!file) return;
 
+        // Xóa URL cũ tránh memory leak
         if (currentURL) {
             URL.revokeObjectURL(currentURL);
         }
 
         currentURL = URL.createObjectURL(file);
-        console.log(currentURL);
+
         const popupImage = document.querySelector(".popup-image");
+
         popupImage.innerHTML = "";
-        popupImage.style.backgroundImage = `url(${currentURL})`;
+        popupImage.style.backgroundImage = `url('${currentURL}')`;
         popupImage.style.backgroundSize = "cover";
         popupImage.style.backgroundPosition = "center";
-
+        popupImage.style.backgroundRepeat = "no-repeat";
     });
 }
 
 
-// INFOR
-document.addEventListener('DOMContentLoaded', () => {
-    const trigger = document.getElementById('userDropdownTrigger');
-    const dropdown = document.getElementById('infoDropdown');
-    const arrow = trigger.querySelector('.mini-arrow');
-
-    // Click vào Nguyễn Văn A để bật/tắt menu
-    trigger.addEventListener('click', (e) => {
-        e.stopPropagation(); // Ngăn sự kiện nổi bọt
-        dropdown.classList.toggle('show');
-
-        // Xoay mũi tên nếu có
-        if (arrow) {
-            arrow.style.transform = dropdown.classList.contains('show') ? 'rotate(180deg)' : 'rotate(0deg)';
-        }
-    });
-
-    // Click ra ngoài menu thì tự động đóng lại (UX tốt hơn)
-    document.addEventListener('click', () => {
-        dropdown.classList.remove('show');
-        if (arrow) arrow.style.transform = 'rotate(0deg)';
-    });
-});

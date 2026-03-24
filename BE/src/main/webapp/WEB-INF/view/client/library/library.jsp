@@ -19,9 +19,8 @@
                         <p>Master English with Interactive Exercises</p>
                     </div>
                     <div class="nav-links">
-                        <a href="homepage.html">HOME</a>
-                        <a href="community.html">FLASHCARD</a>
-
+                        <a href="/client/homepage">HOME</a>
+                        <a href="/client/library">FLASHCARD</a>
                     </div>
                     <div class="container-info" id="userDropdownTrigger">
                         <i class="fa-regular fa-user"></i>
@@ -115,20 +114,16 @@
                                     </div>
                                 </div>
                             </div>
-
                             <div class="deck-grid">
-                                <c:forEach var="deck" items="${decks}">
+                                <c:forEach var="deck" items="${listDeck}">
+                                    <div class="deck-card" data-id="${deck.id}">
 
-                                    <div class="deck-card">
-
-                                        <!-- CLICK vào deck -->
                                         <a href="/client/deck/${deck.id}">
                                             <div class="card-top">
-                                                <img src="${deck.imageUrl}" />
+                                                <img src="/images/client/${deck.image}" />
 
-                                                <!-- Scope icon -->
                                                 <c:choose>
-                                                    <c:when test="${deck.scope == 'PUBLIC'}">
+                                                    <c:when test="${deck.scope == 'Public'}">
                                                         <i class="fas fa-globe status-icon"></i>
                                                     </c:when>
                                                     <c:otherwise>
@@ -136,61 +131,75 @@
                                                     </c:otherwise>
                                                 </c:choose>
 
-                                                <span class="card-count">${deck.totalCards} cards</span>
+                                                <span class="card-count">${deck.totalCards}
+                                                    cards</span>
                                             </div>
 
                                             <div class="card-body">
                                                 <h3>${deck.title}</h3>
-                                                <p>${deck.description}</p>
+                                                <p>${deck.des}</p>
 
-                                                <!-- <div class="progress-container">
-                                                    <div class="progress-bar" style="width: ${deck.progressPercent}%;">
+                                                <div class="progress-container">
+                                                    <div class="progress-bar"
+                                                        style="--p: ${deck.progressPercent}%; width: var(--p);">
                                                     </div>
-                                                </div> -->
+                                                </div>
 
                                                 <span class="progress-text">
-                                                    ${deck.learnedCards}/${deck.totalCards}
+                                                    ${deck.correctCards}/${deck.totalCards}
                                                 </span>
+
                                             </div>
+
+
                                         </a>
 
-                                        <!-- Footer -->
                                         <div class="card-footer">
                                             <span>
                                                 <i class="far fa-user"></i>
-                                                ${deck.ownerName}
+                                                ${deck.userName}
                                             </span>
+                                            <c:if test="${currentUser == deck.userId}">
+                                                <div class="card-actions"
+                                                    style="display: flex; align-items: center; gap: 15px;">
+                                                    <i class="fas fa-wrench fix_deck" style="cursor: pointer;"
+                                                        data-id="${deck.id}" data-title="${deck.title}"
+                                                        data-des="${deck.des}" data-scope="${deck.scope}"></i>
 
-                                            <div class="card-actions">
+                                                    <form action="/client/deck/delete/${deck.id}" method="post"
+                                                        style="margin: 0; display: flex;">
+                                                        <input type="hidden" name="${_csrf.parameterName}"
+                                                            value="${_csrf.token}" />
+                                                        <button type="submit"
+                                                            style="background: none; border: none; padding: 0; cursor: pointer; color: inherit;">
+                                                            <i class="fas fa-trash-alt trash"></i>
+                                                        </button>
+                                                    </form>
+                                                </div>
+                                            </c:if>
 
-                                                <!-- CHỈ cho phép sửa nếu là owner -->
-                                                <c:if test="${deck.ownerId == sessionScope.userId}">
-                                                    <i class="fas fa-wrench fix_deck"></i>
-                                                    <i class="fas fa-trash-alt trash"></i>
-                                                </c:if>
-
-                                            </div>
                                         </div>
-
                                     </div>
-
                                 </c:forEach>
                             </div>
                         </section>
                     </main>
                 </div>
                 <div id="container-popup" class="container-popup">
-                    <form class="popup" action="/client/deck/create" method="post" enctype="multipart/form-data">
+                    <form:form class="popup" id="form-popup" modelAttribute="deck" action="/client/deck/create"
+                        method="post" enctype="multipart/form-data">
                         <div>
                             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
                         </div>
 
+                        <input type="hidden" name="id" id="deck-id">
+
                         <h3 id="feature">Edit Deck</h3>
                         <label for="popup-title">Title</label>
-                        <input id="popup-title" name="title" placeholder="Title">
+                        <input id="popup-title" name="title" placeholder="Title" required>
 
                         <label for="popup-desc">Description</label>
-                        <input id="popup-desc" name="des" placeholder="Description">
+                        <input id="popup-desc" name="des" placeholder="Description" required>
 
                         <label>Scope</label>
                         <select id="popup-scope" name="scope">
@@ -208,12 +217,13 @@
                             <button type="submit" id="save">Save change</button>
                             <button type="button" id="cancel">Cancel</button>
                         </div>
-                    </form>
+                    </form:form>
 
 
                 </div>
 
                 <script src="/js/client/script.js"></script>
+                <script src="/js/client/head-foot.js"></script>
             </body>
 
             </html>

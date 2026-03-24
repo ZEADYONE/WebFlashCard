@@ -334,11 +334,17 @@ a {
     display: flex;
     gap: 15px;
     font-size: 1rem;
+    align-items: center;
 }
 
 .card-actions .trash {
     color: #ef4444;
     cursor: pointer;
+}
+
+.card-actions form {
+    margin: 0;
+    display: flex;
 }
 
 .description {
@@ -395,6 +401,10 @@ a {
     justify-content: center;
     align-items: center;
     border: #64748b dotted;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
 }
 
 .popup-image img {

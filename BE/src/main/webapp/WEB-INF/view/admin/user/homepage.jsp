@@ -28,7 +28,7 @@
                             <a href="/admin/profile">
                                 <div class="dropdown-item"><i class="fa-solid fa-circle-info"></i> Information</div>
                             </a>
-                            <a href="/home">
+                            <a href="/">
                                 <div class="dropdown-item"><i class="fa-regular fa-user"></i> Client</div>
                             </a>
                             <form action="/logout" method="post" style="display: inline;">
@@ -50,16 +50,16 @@
                             <a href="/admin/dashboard" class="menu-item">
                                 <i class="fa-solid fa-gauge-high"></i> Dashboard
                             </a>
-                            <a href="/admin/users" class="menu-item active">
+                            <a href="/admin/user" class="menu-item active">
                                 <i class="fa-solid fa-user-large"></i> User
                             </a>
-                            <a href="/admin/decks" class="menu-item">
+                            <a href="/admin/deck" class="menu-item">
                                 <i class="fa-solid fa-book-open"></i> Deck FlashCard
                             </a>
-                            <a href="/admin/courses" class="menu-item">
+                            <a href="/admin/course" class="menu-item">
                                 <i class="fa-solid fa-graduation-cap"></i> Course
                             </a>
-                            <a href="/admin/roles" class="menu-item">
+                            <a href="/admin/role" class="menu-item">
                                 <i class="fa-solid fa-cube"></i> Role
                             </a>
                         </nav>
@@ -133,7 +133,7 @@
                                                         <button type="submit"
                                                             style="background: none; border: none; padding: 0; cursor: pointer;">
                                                             <c:choose>
-                                                                <c:when test="${user.status == 'Active'}">
+                                                                <c:when test="${user.status == true}">
                                                                     <i class="fa-solid fa-lock-open btn-unlock"></i>
                                                                 </c:when>
                                                                 <c:otherwise>

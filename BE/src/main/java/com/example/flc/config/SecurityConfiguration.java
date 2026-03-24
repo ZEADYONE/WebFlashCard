@@ -14,7 +14,7 @@ import org.springframework.security.web.authentication.AuthenticationSuccessHand
 import org.springframework.session.security.web.authentication.SpringSessionRememberMeServices;
 
 import com.example.flc.service.CustomUserDetailsService;
-import com.example.flc.service.admin.UserService;
+import com.example.flc.service.UserService;
 
 import jakarta.servlet.DispatcherType;
 

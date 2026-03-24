@@ -210,6 +210,7 @@
                 </div>
 
                 <script src="/js/client/script.js"></script>
+                <script src="/js/client/head-foot.js"></script>
             </body>
 
             </html>

@@ -50,7 +50,7 @@
 
                                 <div class="form-group">
                                     <label>User name</label>
-                                    <form:input type="text" path="userName" required="required" readonly="true" />
+                                    <form:input type="text" path="userName" required="required" />
                                 </div>
 
                                 <div class="form-group">

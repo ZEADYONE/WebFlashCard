@@ -14,7 +14,7 @@ import org.springframework.security.web.WebAttributes;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
 import com.example.flc.domain.User;
-import com.example.flc.service.admin.UserService;
+import com.example.flc.service.UserService;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;

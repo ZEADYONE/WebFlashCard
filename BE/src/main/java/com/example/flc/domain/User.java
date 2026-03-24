@@ -42,7 +42,7 @@ public class User {
     private String dateOfBirth;
     private String bio;
     private String location;
-    private String status;
+    private boolean status;
 
     @OneToMany(mappedBy = "user")
     private List<Deck> decks;
@@ -139,11 +139,11 @@ public class User {
         this.location = location;
     }
 
-    public String getStatus() {
+    public boolean getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(boolean status) {
         this.status = status;
     }
 

@@ -106,40 +106,25 @@
                             </div>
 
                             <div class="deck-grid">
-                                <c:forEach var="deck" items="${decks}">
+                                <c:forEach var="deck" items="${listDeck}">
 
                                     <div class="deck-card">
 
                                         <!-- CLICK vào deck -->
                                         <a href="/client/deck/${deck.id}">
                                             <div class="card-top">
-                                                <img src="${deck.imageUrl}" />
+                                                <img src="/images/client/${deck.image}" />
 
                                                 <!-- Scope icon -->
-                                                <c:choose>
-                                                    <c:when test="${deck.scope == 'PUBLIC'}">
-                                                        <i class="fas fa-globe status-icon"></i>
-                                                    </c:when>
-                                                    <c:otherwise>
-                                                        <i class="fas fa-lock status-icon"></i>
-                                                    </c:otherwise>
-                                                </c:choose>
 
-                                                <span class="card-count">${deck.totalCards} cards</span>
+
                                             </div>
 
                                             <div class="card-body">
                                                 <h3>${deck.title}</h3>
-                                                <p>${deck.description}</p>
+                                                <p>${deck.des}</p>
 
-                                                <!-- <div class="progress-container">
-                                                    <div class="progress-bar" style="width: ${deck.progressPercent}%;">
-                                                    </div>
-                                                </div> -->
 
-                                                <span class="progress-text">
-                                                    ${deck.learnedCards}/${deck.totalCards}
-                                                </span>
                                             </div>
                                         </a>
 
@@ -147,17 +132,10 @@
                                         <div class="card-footer">
                                             <span>
                                                 <i class="far fa-user"></i>
-                                                ${deck.ownerName}
+                                                ${deck.user.userName}
                                             </span>
 
                                             <div class="card-actions">
-
-                                                <!-- CHỈ cho phép sửa nếu là owner -->
-                                                <c:if test="${deck.ownerId == sessionScope.userId}">
-                                                    <i class="fas fa-wrench fix_deck"></i>
-                                                    <i class="fas fa-trash-alt trash"></i>
-                                                </c:if>
-
                                             </div>
                                         </div>
 
@@ -167,50 +145,10 @@
                             </div>
 
                         </section>
-                        <div class="pagination">
-                            <span>&lt;</span>
-                            <span class="active">1</span>
-                            <span>2</span>
-                            <span>3</span>
-                            <span>4</span>
-                            <span>......</span>
-                            <span>20</span>
-                            <span>21</span>
-                            <span>22</span>
-                            <span>23</span>
-                            <span>&gt;</span>
-                        </div>
                     </main>
                 </div>
-                <div id="container-popup" class="container-popup">
-
-                    <div class="popup">
-
-                        <h3>Edit Deck</h3>
-
-                        <input id="popup-title" placeholder="Title">
-
-                        <input id="popup-desc" placeholder="Description">
-
-                        <select id="popup-scope">
-                            <option value="Public">Public</option>
-                            <option value="Private">Private</option>
-                        </select>
-
-                        <div class="popup-image">
-                            <img id="popup-img" src="image/download (1).jpg">
-                        </div>
-
-                        <div class="popup-buttons">
-                            <button id="save">Save change</button>
-                            <button id="cancel">Cancel</button>
-                        </div>
-
-                    </div>
-
-                </div>
-
                 <script src="/js/client/script.js"></script>
+                <script src="/js/client/head-foot.js"></script>
             </body>
 
             </html>

@@ -3,7 +3,7 @@ package com.example.flc.service.validator;
 import org.springframework.stereotype.Service;
 
 import com.example.flc.domain.DTO.SignUp;
-import com.example.flc.service.admin.UserService;
+import com.example.flc.service.UserService;
 
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;

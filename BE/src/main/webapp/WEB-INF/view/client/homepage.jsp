@@ -70,11 +70,6 @@
                         </div>
                     </c:if>
 
-
-
-
-
-
                 </header>
 
                 <section class="hero">
@@ -160,7 +155,6 @@
                 </footer>
 
                 <script src="/js/client/head-foot.js"></script>
-                <script src="/js/admin/script.js"></script>
             </body>
 
             </html>

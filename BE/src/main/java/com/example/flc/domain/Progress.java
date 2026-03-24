@@ -1,5 +1,7 @@
 package com.example.flc.domain;
 
+import java.time.LocalDateTime;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -14,8 +16,9 @@ public class Progress {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    private long isCorrect;
-    private String updateAt;
+    private boolean isCorrect; // ✅ đúng / sai
+
+    private LocalDateTime updatedAt; // ✅
 
     @ManyToOne
     @JoinColumn(name = "user_id")
@@ -33,20 +36,20 @@ public class Progress {
         this.id = id;
     }
 
-    public long getIsCorrect() {
+    public boolean getIsCorrect() {
         return isCorrect;
     }
 
-    public void setIsCorrect(long isCorrect) {
+    public void setIsCorrect(boolean isCorrect) {
         this.isCorrect = isCorrect;
     }
 
-    public String getUpdateAt() {
-        return updateAt;
+    public LocalDateTime getUpdateAt() {
+        return updatedAt;
     }
 
-    public void setUpdateAt(String updateAt) {
-        this.updateAt = updateAt;
+    public void setUpdateAt(LocalDateTime updatedAt) {
+        this.updatedAt = updatedAt;
     }
 
     public User getUser() {
@@ -67,7 +70,7 @@ public class Progress {
 
     @Override
     public String toString() {
-        return "Progress [id=" + id + ", isCorrect=" + isCorrect + ", updateAt=" + updateAt + ", user=" + user
+        return "Progress [id=" + id + ", isCorrect=" + isCorrect + ", updateAt=" + updatedAt + ", user=" + user
                 + ", card=" + card + "]";
     }
 

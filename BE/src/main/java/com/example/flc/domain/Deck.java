@@ -25,7 +25,7 @@ public class Deck {
     private String des;
 
     private String scope;
-    private String status;
+    private boolean status;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
@@ -98,11 +98,11 @@ public class Deck {
         this.scope = scope;
     }
 
-    public String getStatus() {
+    public boolean getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(boolean status) {
         this.status = status;
     }
 
