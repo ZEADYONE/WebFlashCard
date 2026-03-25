@@ -32,21 +32,27 @@ public class LCCController {
     }
 
     @GetMapping("/library")
-    public String getLibraryPage(Model model, Principal principal,
-            @RequestParam(value = "page", defaultValue = "1") int page) {
-        // Nếu người dùng truyền page=1, Spring cần hiểu là offset 0
+    public String viewLibrary(Model model, Principal principal,
+            @RequestParam(value = "page", defaultValue = "1") int page,
+            @RequestParam(required = false) String keyword,
+            @RequestParam(required = false) List<String> filters) {
+
+        // 1. Lấy thông tin user hiện tại
+        User user = userRepository.findByEmail(principal.getName());
+
+        model.addAttribute("currentUser", user.getId());
+        // 2. Cấu hình phân trang (6 item mỗi trang)
         Pageable pageable = PageRequest.of(page - 1, 6);
 
-        String username = principal.getName();
-        User user = userRepository.findByEmail(username);
-        Long currentUserId = user.getId();
+        // 3. Gọi Service
+        Page<DeckProgress> deckPage = deckService.getLibraryDecks(keyword, filters, user.getId(), pageable);
 
-        // Gọi service với pageable
-        Page<DeckProgress> pageDeck = deckService.getDecksWithProgress(currentUserId, pageable);
-        model.addAttribute("listDeck", pageDeck.getContent()); // Danh sách deck cho trang hiện tại
+        // 4. Đẩy dữ liệu ra giao diện
+        model.addAttribute("listDeck", deckPage.getContent());
         model.addAttribute("currentPage", page);
-        model.addAttribute("totalPages", pageDeck.getTotalPages());
-        model.addAttribute("currentUser", currentUserId);
+        model.addAttribute("totalPages", deckPage.getTotalPages());
+        model.addAttribute("keyword", keyword);
+        model.addAttribute("selectedFilters", filters); // Quan trọng để giữ trạng thái Checkbox
 
         return "client/library/library";
     }
@@ -54,15 +60,18 @@ public class LCCController {
     // COMMUNITY
     @GetMapping("/community")
     public String getCommunityPage(Model model,
-            @RequestParam(value = "page", defaultValue = "1") int page) {
+            @RequestParam(value = "page", defaultValue = "1") int page,
+            @RequestParam(value = "keyword", required = false) String keyword) {
 
         Pageable pageable = PageRequest.of(page - 1, 6);
 
-        Page<Deck> pageDeck = this.deckService.getDeckCommunity(pageable);
+        Page<Deck> pageDeck = this.deckService.getDeckCommunity(keyword, pageable);
 
         model.addAttribute("listDeck", pageDeck.getContent()); // Dữ liệu của trang hiện tại
         model.addAttribute("currentPage", page); // Trang hiện tại
         model.addAttribute("totalPages", pageDeck.getTotalPages()); // Tổng số trang
+
+        model.addAttribute("keyword", keyword);
 
         return "client/community/community";
     }
@@ -70,14 +79,17 @@ public class LCCController {
     // COURSE
     @GetMapping("/course")
     public String getCoursePage(Model model,
-            @RequestParam(value = "page", defaultValue = "1") int page) {
+            @RequestParam(value = "page", defaultValue = "1") int page,
+            @RequestParam(value = "keyword", required = false) String keyword) {
 
         Pageable pageable = PageRequest.of(page - 1, 6);
-        Page<Deck> pageDeck = this.deckService.getDeckCourse(pageable);
+        Page<Deck> pageDeck = this.deckService.getDeckCourse(keyword, pageable);
 
         model.addAttribute("decks", pageDeck.getContent()); // Dữ liệu của trang hiện tại
         model.addAttribute("currentPage", page); // Trang hiện tại
-        model.addAttribute("totalPages", pageDeck.getTotalPages()); // Tổng số trang
+        model.addAttribute("totalPages", pageDeck.getTotalPages()); // Tổng số
+
+        model.addAttribute("keyword", keyword);
 
         return "client/course/course";
     }

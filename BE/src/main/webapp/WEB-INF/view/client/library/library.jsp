@@ -20,8 +20,8 @@
                         <p>Master English with Interactive Exercises</p>
                     </div>
                     <div class="nav-links">
-                        <a href="/client/homepage">HOME</a>
-                        <a href="/client/library">FLASHCARD</a>
+                        <a href="/">HOME</a>
+                        <a href=" /client/library">FLASHCARD</a>
                     </div>
                     <div class="container-info" id="userDropdownTrigger">
                         <i class="fa-regular fa-user"></i>
@@ -32,7 +32,7 @@
 
                         <div class="info-dropdown" id="infoDropdown">
 
-                            <a href="#" class="dropdown-item">
+                            <a href="/profile" class="dropdown-item">
                                 <i class="fa-solid fa-circle-info"></i>
                                 <span>Information</span>
                             </a>
@@ -91,25 +91,57 @@
                             </div>
 
                             <div class="toolbar">
-                                <div class="search-box">
-                                    <i class="fas fa-search"></i>
-                                    <input type="text" placeholder="Search library ...">
-                                </div>
+                                <form action="/client/library" method="GET" style="margin: 0; flex-grow: 1;">
+                                    <div class="search-box">
+                                        <i class="fas fa-search"></i>
+                                        <input type="text" name="keyword" value="${keyword}"
+                                            placeholder="Search library ...">
+                                        <c:forEach items="${selectedFilters}" var="filter">
+                                            <input type="hidden" name="filters" value="${filter}">
+                                        </c:forEach>
+                                    </div>
+                                </form>
+
                                 <div class="filter-container">
                                     <button class="filter-btn" id="filterBtn">
                                         <i class="fas fa-filter"></i>
                                     </button>
                                     <div class="filter-dropdown" id="filterDropdown">
-                                        <form action="https://www.w3schools.com/action_page.php" method="GET"
+                                        <form action="/client/library" method="GET"
                                             style="display:flex; flex-direction: column;">
-                                            <!-- checked -->
-                                            <label><input type="checkbox" name="scope" value="Public"> Public</label>
-                                            <label><input type="checkbox" name="scope" value="Private"> Private</label>
-                                            <label><input type="checkbox" name="scope" value="Public"> You</label>
-                                            <label><input type="checkbox" name="scope" value="Private"> Admin</label>
-                                            <label><input type="checkbox" name="scope" value="Private"> Other</label>
-                                            <button type="submit">
-                                                <i class="fas fa-filter dropdown-icon"></i>
+                                            <input type="hidden" name="keyword" value="${keyword}">
+
+                                            <label style="font-weight: bold; margin-top: 5px;">Hiển thị:</label>
+                                            <label>
+                                                <input type="checkbox" name="filters" value="Public" ${selectedFilters
+                                                    !=null && selectedFilters.contains('Public') ? 'checked' : '' }>
+                                                Public
+                                            </label>
+                                            <label>
+                                                <input type="checkbox" name="filters" value="Private" ${selectedFilters
+                                                    !=null && selectedFilters.contains('Private') ? 'checked' : '' }>
+                                                Private
+                                            </label>
+
+                                            <label style="font-weight: bold; margin-top: 10px;">Người tạo:</label>
+                                            <label>
+                                                <input type="checkbox" name="filters" value="Mine" ${selectedFilters
+                                                    !=null && selectedFilters.contains('Mine') ? 'checked' : '' }> You
+                                            </label>
+                                            <label>
+                                                <input type="checkbox" name="filters" value="Admin" ${selectedFilters
+                                                    !=null && selectedFilters.contains('Admin') ? 'checked' : '' }>
+                                                Admin
+                                            </label>
+                                            <label>
+                                                <input type="checkbox" name="filters" value="Other" ${selectedFilters
+                                                    !=null && selectedFilters.contains('Other') ? 'checked' : '' }>
+                                                Other
+                                            </label>
+
+                                            <button type="submit"
+                                                style="margin-top: 10px; padding: 5px; cursor: pointer;">
+                                                Apply <i class="fas fa-filter dropdown-icon"></i>
                                             </button>
                                         </form>
                                     </div>
@@ -184,23 +216,37 @@
                                 </c:forEach>
                             </div>
                             <c:if test="${totalPages > 1}">
+                                <c:url value="/client/library" var="baseUrl">
+                                    <c:if test="${not empty keyword}">
+                                        <c:param name="keyword" value="${keyword}" />
+                                    </c:if>
+                                    <c:forEach items="${selectedFilters}" var="f">
+                                        <c:param name="filters" value="${f}" />
+                                    </c:forEach>
+                                </c:url>
+
                                 <nav aria-label="Page navigation" style="margin-top: 20px;">
                                     <ul class="custom-pagination">
 
                                         <li class="page-item ${currentPage == 1 ? 'disabled' : ''}">
-                                            <a class="page-link" href="?page=${currentPage - 1}" aria-label="Previous">
+                                            <a class="page-link"
+                                                href="${baseUrl}${baseUrl.contains('?') ? '&' : '?'}page=${currentPage - 1}"
+                                                aria-label="Previous">
                                                 <span aria-hidden="true">&laquo;</span>
                                             </a>
                                         </li>
 
                                         <c:forEach begin="1" end="${totalPages}" var="i">
                                             <li class="page-item ${currentPage == i ? 'active' : ''}">
-                                                <a class="page-link" href="?page=${i}">${i}</a>
+                                                <a class="page-link"
+                                                    href="${baseUrl}${baseUrl.contains('?') ? '&' : '?'}page=${i}">${i}</a>
                                             </li>
                                         </c:forEach>
 
                                         <li class="page-item ${currentPage == totalPages ? 'disabled' : ''}">
-                                            <a class="page-link" href="?page=${currentPage + 1}" aria-label="Next">
+                                            <a class="page-link"
+                                                href="${baseUrl}${baseUrl.contains('?') ? '&' : '?'}page=${currentPage + 1}"
+                                                aria-label="Next">
                                                 <span aria-hidden="true">&raquo;</span>
                                             </a>
                                         </li>

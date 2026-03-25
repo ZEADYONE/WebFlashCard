@@ -27,7 +27,7 @@
                         <i class="fa-solid fa-chevron-down mini-arrow"></i>
 
                         <div class="info-dropdown" id="infoDropdown">
-                            <a href="#" class="dropdown-item">
+                            <a href="/profile" class="dropdown-item">
                                 <i class="fa-solid fa-circle-info"></i>
                                 <span>Information</span>
                             </a>
@@ -83,17 +83,31 @@
                             </div>
 
                             <div class="toolbar">
-                                <div class="search-box">
+                                <form class="search-box" id="searchForm">
                                     <i class="fas fa-search"></i>
-                                    <input type="text" placeholder="Search library ...">
-                                </div>
+                                    <input type="text" name="keyword" value="${param.keyword}"
+                                        placeholder="Search library ...">
+                                </form>
+
                                 <div class="filter-dropdown-container">
-                                    <button class="filter-btn" id="filterBtn">
+                                    <button class="filter-btn" id="filterBtn" type="button">
                                         <i class="fa-solid fa-filter"></i>
                                     </button>
                                     <form class="filter-dropdown" id="filterMenu" style="right: 0px; left: auto;">
-                                        <label><input type="checkbox" name="scope" value="Public">Public</label>
-                                        <label><input type="checkbox" name="scope" value="Private">Private</label>
+                                        <input type="hidden" name="keyword" value="${keyword}">
+
+                                        <label>
+                                            <input type="checkbox" name="scope" value="Public" ${selectedScope !=null &&
+                                                selectedScope.contains('Public') ? 'checked' : '' }>
+                                            Public
+                                        </label>
+
+                                        <label>
+                                            <input type="checkbox" name="scope" value="Private" ${selectedScope !=null
+                                                && selectedScope.contains('Private') ? 'checked' : '' }>
+                                            Private
+                                        </label>
+
                                         <button type="submit" class="filter-btn-submit">Apply</button>
                                     </form>
                                 </div>
@@ -139,25 +153,21 @@
                             <c:if test="${totalPages > 1}">
                                 <nav aria-label="Page navigation" style="margin-top: 20px;">
                                     <ul class="custom-pagination">
-
                                         <li class="page-item ${currentPage == 1 ? 'disabled' : ''}">
-                                            <a class="page-link" href="?page=${currentPage - 1}" aria-label="Previous">
-                                                <span aria-hidden="true">&laquo;</span>
-                                            </a>
+                                            <button class="page-link page-node"
+                                                data-page="${currentPage - 1}">&laquo;</button>
                                         </li>
 
                                         <c:forEach begin="1" end="${totalPages}" var="i">
                                             <li class="page-item ${currentPage == i ? 'active' : ''}">
-                                                <a class="page-link" href="?page=${i}">${i}</a>
+                                                <button class="page-link page-node" data-page="${i}">${i}</button>
                                             </li>
                                         </c:forEach>
 
                                         <li class="page-item ${currentPage == totalPages ? 'disabled' : ''}">
-                                            <a class="page-link" href="?page=${currentPage + 1}" aria-label="Next">
-                                                <span aria-hidden="true">&raquo;</span>
-                                            </a>
+                                            <button class="page-link page-node"
+                                                data-page="${currentPage + 1}">&raquo;</button>
                                         </li>
-
                                     </ul>
                                 </nav>
                             </c:if>
@@ -203,6 +213,42 @@
 
                 <script src="/js/admin/style.js"></script>
                 <script src="/js/admin/course.js"></script>
+                <script>
+                    // Hàm dùng chung để chuyển hướng kèm theo tất cả params (search + filter + page)
+                    function submitFilter(pageNumber) {
+                        const searchInput = document.querySelector('input[name="keyword"]');
+                        const filterForm = document.getElementById('filterMenu');
+
+                        // Tạo URLSearchParams từ form filter
+                        const params = new URLSearchParams(new FormData(filterForm));
+
+                        // Cập nhật/Ghi đè giá trị keyword và page
+                        params.set('keyword', searchInput.value.trim());
+                        params.set('page', pageNumber);
+
+                        window.location.href = window.location.pathname + "?" + params.toString();
+                    }
+
+                    // Xử lý Click phân trang
+                    document.querySelectorAll('.page-node').forEach(button => {
+                        button.addEventListener('click', function () {
+                            const page = this.getAttribute('data-page');
+                            if (page > 0) submitFilter(page);
+                        });
+                    });
+
+                    // Xử lý khi nhấn Enter ở ô Search
+                    document.getElementById('searchForm').addEventListener('submit', function (e) {
+                        e.preventDefault();
+                        submitFilter(1); // Search mới thì về trang 1
+                    });
+
+                    // Xử lý khi nhấn nút Apply trong Filter
+                    document.getElementById('filterMenu').addEventListener('submit', function (e) {
+                        e.preventDefault();
+                        submitFilter(1); // Filter mới thì về trang 1
+                    });
+                </script>
             </body>
 
             </html>

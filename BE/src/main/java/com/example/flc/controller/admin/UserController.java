@@ -1,5 +1,6 @@
 package com.example.flc.controller.admin;
 
+import java.security.Principal;
 import java.util.List;
 
 import org.springframework.data.domain.Page;
@@ -40,18 +41,25 @@ public class UserController {
 
     }
 
-    @RequestMapping("/admin/user")
-    public String getHomePage(Model model, @RequestParam(value = "page", defaultValue = "1") int page) {
-        List<User> users = this.userService.getAllUsers();
+    @GetMapping("/admin/user")
+    public String getHomePage(Model model,
+            @RequestParam(value = "page", defaultValue = "1") int page,
+            @RequestParam(value = "keyword", required = false) String keyword,
+            @RequestParam(value = "status", required = false) List<Boolean> status,
+            @RequestParam(value = "roleIds", required = false) List<Long> roleIds) {
 
         Pageable pageable = PageRequest.of(page - 1, 3);
+        Page<User> pageUser = this.userService.getUsersWithFilter(keyword, status, roleIds, pageable);
 
-        Page<User> pageUser = this.userService.getAllUsers(pageable);
-
-        model.addAttribute("currentPage", page); // Trang hiện tại
-        model.addAttribute("totalPages", pageUser.getTotalPages()); // Tổng số trang
+        model.addAttribute("currentPage", page);
+        model.addAttribute("totalPages", pageUser.getTotalPages());
         model.addAttribute("listUser", pageUser.getContent());
         model.addAttribute("roles", this.roleService.getAll());
+
+        // Gửi lại dữ liệu để giữ trạng thái trên UI
+        model.addAttribute("keyword", keyword);
+        model.addAttribute("selectedStatus", status);
+        model.addAttribute("selectedRoles", roleIds);
 
         return "admin/user/homepage";
     }
@@ -126,4 +134,37 @@ public class UserController {
         return "redirect:/admin/user";
     }
 
+    // INFOR
+    @GetMapping("/profile")
+    public String getInfo(Model model, Principal principal) {
+
+        User user = this.userService.getUserByEmail(principal.getName());
+        model.addAttribute("user", user);
+        return "admin/user/infor";
+    }
+
+    @GetMapping("/profile/edit")
+    public String getupdateInfo(Model model, Principal principal) {
+
+        User user = this.userService.getUserByEmail(principal.getName());
+        model.addAttribute("user", user);
+        return "admin/user/update_infor";
+    }
+
+    @PostMapping("/profile/edit")
+    public String updateInfo(@ModelAttribute("user") User user, Principal principal) {
+
+        User oldUser = this.userService.getUserByEmail(principal.getName());
+
+        // chỉ update field cần thiết
+        oldUser.setFullName(user.getFullName());
+        oldUser.setPhoneNumber(user.getPhoneNumber());
+        oldUser.setDateOfBirth(user.getDateOfBirth());
+        oldUser.setLocation(user.getLocation());
+        oldUser.setBio(user.getBio());
+
+        this.userService.handelSaveUser(oldUser);
+
+        return "redirect:/profile";
+    }
 }

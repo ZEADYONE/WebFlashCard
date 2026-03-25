@@ -30,7 +30,7 @@
 
                     <div class="info-dropdown" id="infoDropdown">
 
-                        <a href="#" class="dropdown-item">
+                        <a href="/profile" class="dropdown-item">
                             <i class="fa-solid fa-circle-info"></i>
                             <span>Information</span>
                         </a>
@@ -67,10 +67,10 @@
                         <p>${deck.des}</p>
                     </div>
 
-                    <div class="search-box">
+                    <form class="search-box" id="searchForm" action="" method="get">
                         <i class="fas fa-search"></i>
-                        <input type="text" placeholder="Search flashcard ...">
-                    </div>
+                        <input type="text" name="keyword" value="${keyword}" placeholder="Search flashcard ...">
+                    </form>
 
                     <c:choose>
                         <c:when test="${currentUser == deck.user.id}">
@@ -133,13 +133,25 @@
                     </div>
 
                     <!-- PAGINATION (có thể làm động sau) -->
-                    <div class="pagination">
-                        <span>&lt;</span>
-                        <span class="active">1</span>
-                        <span>2</span>
-                        <span>3</span>
-                        <span>&gt;</span>
-                    </div>
+                    <c:if test="${totalPages > 1}">
+                        <nav aria-label="Page navigation" style="margin-top: 20px;">
+                            <ul class="custom-pagination">
+                                <li class="page-item ${currentPage == 1 ? 'disabled' : ''}">
+                                    <button class="page-link page-node" data-page="${currentPage - 1}">&laquo;</button>
+                                </li>
+
+                                <c:forEach begin="1" end="${totalPages}" var="i">
+                                    <li class="page-item ${currentPage == i ? 'active' : ''}">
+                                        <button class="page-link page-node" data-page="${i}">${i}</button>
+                                    </li>
+                                </c:forEach>
+
+                                <li class="page-item ${currentPage == totalPages ? 'disabled' : ''}">
+                                    <button class="page-link page-node" data-page="${currentPage + 1}">&raquo;</button>
+                                </li>
+                            </ul>
+                        </nav>
+                    </c:if>
 
                 </section>
 

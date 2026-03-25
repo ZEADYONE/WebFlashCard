@@ -19,8 +19,8 @@
                         <p>Master English with Interactive Exercises</p>
                     </div>
                     <div class="nav-links">
-                        <a href="homepage.html">HOME</a>
-                        <a href="community.html">FLASHCARD</a>
+                        <a href="/">HOME</a>
+                        <a href="library">FLASHCARD</a>
 
                     </div>
                     <div class="container-info" id="userDropdownTrigger">
@@ -32,7 +32,7 @@
 
                         <div class="info-dropdown" id="infoDropdown">
 
-                            <a href="#" class="dropdown-item">
+                            <a href="/profile" class="dropdown-item">
                                 <i class="fa-solid fa-circle-info"></i>
                                 <span>Information</span>
                             </a>
@@ -88,9 +88,16 @@
                                 </div>
                             </div>
                             <div class="toolbar">
-                                <div class="search-box">
+                                <form class="search-box" id="searchForm">
                                     <i class="fas fa-search"></i>
-                                    <input type="text" placeholder="Search library ...">
+                                    <input type="text" name="keyword" value="${param.keyword}"
+                                        placeholder="Search library ...">
+                                </form>
+
+                                <div class="filter-dropdown-container">
+                                    <form class="filter-dropdown" id="filterMenu" style="right: 0px; left: auto;">
+                                        <input type="hidden" name="keyword" value="${keyword}">
+                                    </form>
                                 </div>
                                 <!-- <div class="filter-container">
                         <button class="filter-btn" id="filterBtn">

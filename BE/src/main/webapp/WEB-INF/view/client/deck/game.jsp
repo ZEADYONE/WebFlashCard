@@ -18,8 +18,8 @@
                     <p>Master English with Interactive Exercises</p>
                 </div>
                 <div class="nav-links">
-                    <a href="/client/homepage">HOME</a>
-                    <a href="/client/library">FLASHCARD</a>
+                    <a href="/">HOME</a>
+                    <a href=" /client/library">FLASHCARD</a>
                 </div>
                 <div class="container-info" id="userDropdownTrigger">
                     <i class="fa-regular fa-user"></i>

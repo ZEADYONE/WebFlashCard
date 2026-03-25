@@ -1,5 +1,6 @@
 package com.example.flc.service;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -25,12 +26,14 @@ public class DeckService {
         return this.deckRepository.findByUserId(id);
     }
 
-    public Page<Deck> getDeckCommunity(Pageable pageable) {
-        return this.deckRepository.findPublicActiveDeck(pageable);
+    public Page<Deck> getDeckCommunity(String keyword, Pageable pageable) {
+        String searchWord = (keyword != null && !keyword.isEmpty()) ? keyword : null;
+        return this.deckRepository.findPublicActiveDeck(searchWord, pageable);
     }
 
-    public Page<Deck> getDeckCourse(Pageable pageable) {
-        return this.deckRepository.findDeckCourse(pageable);
+    public Page<Deck> getDeckCourse(String keyword, Pageable pageable) {
+        String searchWord = (keyword != null && !keyword.isEmpty()) ? keyword : null;
+        return this.deckRepository.findDeckCourse(searchWord, pageable);
     }
 
     public void handelSaveDeck(Deck deck) {
@@ -42,23 +45,31 @@ public class DeckService {
         return this.deckRepository.findById(id).orElseThrow(() -> new RuntimeException(" Khong tim thay deck"));
     }
 
-    public Page<DeckProgress> getDecksWithProgress(Long userId, Pageable pageable) {
-        Page<Object[]> results = deckRepository.findDeckProgressRaw(userId, pageable);
+    public Page<DeckProgress> getLibraryDecks(String keyword, List<String> filters, Long userId, Pageable pageable) {
+        // Tránh lỗi SQL khi List rỗng
+        List<String> activeFilters = (filters == null || filters.isEmpty()) ? Arrays.asList("ALL") : filters;
 
-        return results.map(result -> new DeckProgress(
-                ((Number) result[0]).longValue(),
-                (String) result[1],
-                (String) result[2],
-                (String) result[3],
-                (String) result[4],
-                (String) result[5],
-                ((Number) result[6]).longValue(),
-                ((Number) result[7]).longValue(),
-                ((Number) result[8]).longValue()));
+        // Tương tự với keyword
+        String searchKeyword = (keyword != null && !keyword.isEmpty()) ? keyword : null;
+
+        Page<Object[]> rawResults = deckRepository.findAdvancedDecks(searchKeyword, activeFilters, userId, pageable);
+
+        return rawResults.map(row -> new DeckProgress(
+                ((Number) row[0]).longValue(),
+                (String) row[1],
+                (String) row[2],
+                (String) row[3],
+                (String) row[4],
+                (String) row[5],
+                ((Number) row[6]).longValue(),
+                ((Number) row[7]).longValue(),
+                ((Number) row[8]).longValue()));
     }
 
-    public Page<Deck> getAllDeck(Pageable pageable) {
-        return this.deckRepository.findAll(pageable);
+    public Page<Deck> getAllDeckWithFilter(String keyword, List<Boolean> status, Pageable pageable) {
+        String searchKeyword = (keyword != null && !keyword.isEmpty()) ? keyword : null;
+        List<Boolean> statusFilter = (status != null && !status.isEmpty()) ? status : null;
+        return this.deckRepository.findAllWithFilter(searchKeyword, statusFilter, pageable);
     }
 
     public void setDeckStatus(long id) {

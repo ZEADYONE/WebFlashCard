@@ -30,7 +30,7 @@
 
                         <div class="info-dropdown" id="infoDropdown">
 
-                            <a href="#" class="dropdown-item">
+                            <a href="/profile" class="dropdown-item">
                                 <i class="fa-solid fa-circle-info"></i>
                                 <span>Information</span>
                             </a>
@@ -86,8 +86,16 @@
 
                                 <!-- Toolbar -->
                                 <div class="toolbar">
-                                    <div class="search-box">
-                                        <input type="text" placeholder="Search role...">
+                                    <form class="search-box" id="searchForm">
+                                        <i class="fas fa-search"></i>
+                                        <input type="text" name="keyword" value="${param.keyword}"
+                                            placeholder="Search library ...">
+                                    </form>
+
+                                    <div class="filter-dropdown-container">
+                                        <form class="filter-dropdown" id="filterMenu" style="right: 0px; left: auto;">
+                                            <input type="hidden" name="keyword" value="${keyword}">
+                                        </form>
                                     </div>
 
                                     <!-- ONLY CREATE -->
@@ -113,6 +121,27 @@
                                 </table>
 
                             </div>
+                            <c:if test="${totalPages > 1}">
+                                <nav aria-label="Page navigation" style="margin-top: 20px;">
+                                    <ul class="custom-pagination">
+                                        <li class="page-item ${currentPage == 1 ? 'disabled' : ''}">
+                                            <button class="page-link page-node"
+                                                data-page="${currentPage - 1}">&laquo;</button>
+                                        </li>
+
+                                        <c:forEach begin="1" end="${totalPages}" var="i">
+                                            <li class="page-item ${currentPage == i ? 'active' : ''}">
+                                                <button class="page-link page-node" data-page="${i}">${i}</button>
+                                            </li>
+                                        </c:forEach>
+
+                                        <li class="page-item ${currentPage == totalPages ? 'disabled' : ''}">
+                                            <button class="page-link page-node"
+                                                data-page="${currentPage + 1}">&raquo;</button>
+                                        </li>
+                                    </ul>
+                                </nav>
+                            </c:if>
 
                         </section>
                     </main>
@@ -144,7 +173,7 @@
                         document.getElementById("container-popup").style.display = "none";
                     }
                 </script>
-
+                <script src="/js/admin/script.js"></script>
             </body>
 
             </html>

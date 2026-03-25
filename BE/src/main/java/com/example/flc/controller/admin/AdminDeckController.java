@@ -1,6 +1,7 @@
 package com.example.flc.controller.admin;
 
 import java.security.Principal;
+import java.util.List;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -42,14 +43,20 @@ public class AdminDeckController {
 
     // HOME
     @GetMapping("/deck")
-    public String getHomePage(Model model, @RequestParam(value = "page", defaultValue = "1") int page) {
+    public String getHomePage(Model model, @RequestParam(value = "page", defaultValue = "1") int page,
+            @RequestParam(value = "keyword", required = false) String keyword,
+            @RequestParam(value = "status", required = false) List<Boolean> status) {
 
         Pageable pageable = PageRequest.of(page - 1, 3);
-        Page<Deck> pageDeck = this.deckService.getAllDeck(pageable);
+        Page<Deck> pageDeck = this.deckService.getAllDeckWithFilter(keyword, status, pageable);
 
         model.addAttribute("listDeck", pageDeck.getContent());
         model.addAttribute("currentPage", page);
         model.addAttribute("totalPages", pageDeck.getTotalPages());
+
+        model.addAttribute("keyword", keyword);
+        model.addAttribute("selectedStatus", status);
+
         return "admin/deck/homepage";
     }
 
@@ -64,17 +71,20 @@ public class AdminDeckController {
 
     @GetMapping("/deck/view/{id}")
     public String getViewDeck(@PathVariable("id") long id, Model model,
-            @RequestParam(value = "page", defaultValue = "1") int page) {
+            @RequestParam(value = "page", defaultValue = "1") int page,
+            @RequestParam(value = "keyword", required = false) String keyword) {
 
         Deck deck = this.deckService.getDeckById(id);
         model.addAttribute("deck", deck);
 
         Pageable pageable = PageRequest.of(page - 1, 4);
 
-        Page<Card> pageCard = this.cardService.getAllCardByDeck(deck, pageable);
+        Page<Card> pageCard = this.cardService.getAllCardByDeckFilter(keyword, deck, pageable);
         model.addAttribute("listCard", pageCard.getContent());
         model.addAttribute("currentPage", page);
         model.addAttribute("totalPages", pageCard.getTotalPages());
+        model.addAttribute("keyword", keyword);
+
         return "admin/deck/view";
     }
 
@@ -82,18 +92,20 @@ public class AdminDeckController {
 
     @GetMapping("/deck/update/{id}")
     public String getUpdateDeck(@PathVariable("id") long id, Model model,
-            @RequestParam(value = "page", defaultValue = "1") int page) {
+            @RequestParam(value = "page", defaultValue = "1") int page,
+            @RequestParam(value = "keyword", required = false) String keyword) {
 
         Deck deck = this.deckService.getDeckById(id);
         System.out.println(deck);
 
         Pageable pageable = PageRequest.of(page - 1, 4);
 
-        Page<Card> pageCard = this.cardService.getAllCardByDeck(deck, pageable);
+        Page<Card> pageCard = this.cardService.getAllCardByDeckFilter(keyword, deck, pageable);
         model.addAttribute("deck", deck);
         model.addAttribute("listCard", pageCard.getContent());
         model.addAttribute("currentPage", page);
         model.addAttribute("totalPages", pageCard.getTotalPages());
+        model.addAttribute("keyword", keyword);
         return "admin/deck/update";
     }
 

@@ -31,7 +31,7 @@
 
                         <div class="info-dropdown" id="infoDropdown">
 
-                            <a href="#" class="dropdown-item">
+                            <a href="/profile" class="dropdown-item">
                                 <i class="fa-solid fa-circle-info"></i>
                                 <span>Information</span>
                             </a>
@@ -94,11 +94,13 @@
                         </div>
 
                         <div class="all-btn">
-                            <div class="search-box">
-                                <i class="fa-solid fa-magnifying-glass"></i>
-                                <input type="text" placeholder="Search flashcard ..." name="keyword"
-                                    value="${param.keyword}">
-                            </div>
+                            <form method="get" action="">
+                                <div class="search-box">
+                                    <i class="fa-solid fa-magnifying-glass"></i>
+                                    <input type="text" name="keyword" value="${keyword}"
+                                        placeholder="Search flashcard...">
+                                </div>
+                            </form>
 
                             <a href="<c:url value='/client/card/create/${deck.id}'/>">
                                 <button type="button" class="btn btn-pink">
@@ -169,7 +171,7 @@
 
                                     <c:forEach begin="1" end="${totalPages}" var="i">
                                         <li class="page-item ${currentPage == i ? 'active' : ''}">
-                                            <a class="page-link" href="?page=${i}">${i}</a>
+                                            <button class="page-link page-node" data-page="${i}">${i}</button>
                                         </li>
                                     </c:forEach>
 

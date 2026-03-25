@@ -31,6 +31,11 @@ public class CardService {
         return this.cardRepository.findByDeck(deck, pageable);
     }
 
+    public Page<Card> getAllCardByDeckFilter(String keyword, Deck deck, Pageable pageable) {
+        String searchKeyword = (keyword != null && !keyword.isEmpty()) ? keyword : null;
+        return this.cardRepository.findByDeck(searchKeyword, deck, pageable);
+    }
+
     public List<Card> getListCardByDeck(Deck deck) {
         return this.cardRepository.findByDeck(deck);
     }

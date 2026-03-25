@@ -69,7 +69,8 @@ public class DeckController {
     // VIEW
     @GetMapping("/client/deck/{id}")
     public String getHomeDeck(@PathVariable("id") long id, Model model, Principal principal,
-            @RequestParam(value = "page", defaultValue = "1") int page) {
+            @RequestParam(value = "page", defaultValue = "1") int page,
+            @RequestParam(value = "keyword", required = false) String keyword) {
 
         Deck deck = this.deckService.getDeckById(id);
 
@@ -78,13 +79,15 @@ public class DeckController {
         Long currentUserId = user.getId();
 
         Pageable pageable = PageRequest.of(page - 1, 4);
-        Page<Card> pageCard = this.cardService.getAllCardByDeck(deck, pageable);
+        Page<Card> pageCard = this.cardService.getAllCardByDeckFilter(keyword, deck, pageable);
 
         model.addAttribute("currentUser", currentUserId);
         model.addAttribute("deck", deck);
         model.addAttribute("listCard", pageCard.getContent());
         model.addAttribute("currentPage", page);
         model.addAttribute("totalPages", pageCard.getTotalPages());
+
+        model.addAttribute("keyword", keyword);
         return "client/deck/homepage";
     }
 
@@ -126,7 +129,8 @@ public class DeckController {
     // VIEW
     @GetMapping("/admin/course/{id}")
     public String getHomeCourse(@PathVariable("id") long id, Model model, Principal principal,
-            @RequestParam(value = "page", defaultValue = "1") int page) {
+            @RequestParam(value = "page", defaultValue = "1") int page,
+            @RequestParam(value = "keyword", required = false) String keyword) {
         Deck deck = this.deckService.getDeckById(id);
 
         String username = principal.getName();
@@ -135,13 +139,15 @@ public class DeckController {
 
         Pageable pageable = PageRequest.of(page - 1, 4);
 
-        Page<Card> pageCard = this.cardService.getAllCardByDeck(deck, pageable);
+        Page<Card> pageCard = this.cardService.getAllCardByDeckFilter(keyword, deck, pageable);
 
         model.addAttribute("currentUser", currentUserId);
         model.addAttribute("deck", deck);
         model.addAttribute("listCard", pageCard.getContent());
         model.addAttribute("currentPage", page);
         model.addAttribute("totalPages", pageCard.getTotalPages());
+
+        model.addAttribute("keyword", keyword);
         return "admin/course/course";
     }
 

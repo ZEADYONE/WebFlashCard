@@ -80,4 +80,12 @@ public class UserService {
     public User getUserById(long id) {
         return this.userRepository.findById(id).orElseThrow(() -> new RuntimeException());
     }
+
+    public Page<User> getUsersWithFilter(String keyword, List<Boolean> status, List<Long> roleIds, Pageable pageable) {
+        String searchKeyword = (keyword != null && !keyword.isEmpty()) ? keyword : null;
+        List<Boolean> statusFilter = (status != null && !status.isEmpty()) ? status : null;
+        List<Long> roleFilter = (roleIds != null && !roleIds.isEmpty()) ? roleIds : null;
+
+        return userRepository.findWithFilter(searchKeyword, statusFilter, roleFilter, pageable);
+    }
 }

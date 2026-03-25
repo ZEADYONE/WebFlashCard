@@ -18,8 +18,10 @@ public class CourseService {
         this.courseRepository = courseRepository;
     }
 
-    public Page<Deck> getAllDeck(Pageable pageable) {
-        return this.courseRepository.findAllDecksByAdmin(pageable);
+    public Page<Deck> getAllDeckWithFilter(String keyword, List<String> scope, Pageable pageable) {
+        String searchKeyword = (keyword != null && !keyword.isEmpty()) ? keyword : null;
+        List<String> scopeFilter = (scope != null && !scope.isEmpty()) ? scope : null;
+        return this.courseRepository.findAllDecksByAdmin(searchKeyword, scopeFilter, pageable);
     }
 
 }

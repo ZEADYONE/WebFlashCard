@@ -40,14 +40,21 @@ public class CourseController {
 
     // VIEW
     @GetMapping("/admin/course")
-    public String getCoursePage(Model model, @RequestParam(value = "page", defaultValue = "1") int page) {
+    public String getCoursePage(Model model,
+            @RequestParam(value = "page", defaultValue = "1") int page,
+            @RequestParam(value = "keyword", required = false) String keyword,
+            @RequestParam(value = "scope", required = false) List<String> scope) { // Nhận List String
 
         Pageable pageable = PageRequest.of(page - 1, 3);
-        Page<Deck> pageDeck = this.courseService.getAllDeck(pageable);
+        // Truyền tham số scope vào service
+        Page<Deck> pageDeck = this.courseService.getAllDeckWithFilter(keyword, scope, pageable);
 
         model.addAttribute("listCourse", pageDeck.getContent());
         model.addAttribute("currentPage", page);
         model.addAttribute("totalPages", pageDeck.getTotalPages());
+
+        model.addAttribute("keyword", keyword);
+        model.addAttribute("selectedScope", scope); // Đổi tên attribute để dễ phân biệt
         return "admin/course/homepage";
     }
 
@@ -61,6 +68,29 @@ public class CourseController {
     // UPDATE
     @PostMapping("/admin/course/update")
     public String updateDeck(@ModelAttribute("deck") Deck deck, @RequestParam("images") MultipartFile file,
+            Principal principal) {
+
+        String pathImg = this.uploadService.handleSaveUploadImg(file, "client");
+
+        if (pathImg.isEmpty()) {
+            deck.setImage(this.deckService.getDeckById(deck.getId()).getImage());
+        } else {
+
+            deck.setImage(pathImg);
+        }
+
+        String username = principal.getName();
+        User user = this.userService.getUserByEmail(username);
+        deck.setUser(user);
+        deck.setStatus(true);
+
+        this.deckService.handelSaveDeck(deck);
+
+        return "redirect:/admin/course";
+    }
+
+    @PostMapping("/admin/course/create")
+    public String createDeck(@ModelAttribute("deck") Deck deck, @RequestParam("images") MultipartFile file,
             Principal principal) {
 
         String pathImg = this.uploadService.handleSaveUploadImg(file, "client");

@@ -21,8 +21,8 @@
                         <p>Master English with Interactive Exercises</p>
                     </div>
                     <div class="nav-links">
-                        <a href="/client/homepage">HOME</a>
-                        <a href="/client/library">FLASHCARD</a>
+                        <a href="/">HOME</a>
+                        <a href=" /client/library">FLASHCARD</a>
                     </div>
 
                     <c:if test="${empty pageContext.request.userPrincipal}">
@@ -45,7 +45,7 @@
 
                             <div class="info-dropdown" id="infoDropdown">
 
-                                <a href="#" class="dropdown-item">
+                                <a href="/profile" class="dropdown-item">
                                     <i class="fa-solid fa-circle-info"></i>
                                     <span>Information</span>
                                 </a>

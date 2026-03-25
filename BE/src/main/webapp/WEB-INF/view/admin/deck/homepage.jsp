@@ -28,7 +28,7 @@
 
                         <div class="info-dropdown" id="infoDropdown">
 
-                            <a href="#" class="dropdown-item">
+                            <a href="/profile" class="dropdown-item">
                                 <i class="fa-solid fa-circle-info"></i>
                                 <span>Information</span>
                             </a>
@@ -92,12 +92,14 @@
                                             <button class="filter-btn" id="filterBtn">
                                                 <i class="fa-solid fa-filter"></i>
                                             </button>
-                                            <form class="filter-dropdown" id="filterMenu" action="/admin/decks/filter"
+                                            <form class="filter-dropdown" id="filterMenu" action="/admin/deck"
                                                 method="get">
-                                                <label><input type="checkbox" name="status" value="BANNED">
-                                                    Banned</label>
-                                                <label><input type="checkbox" name="status" value="ACTIVE">
-                                                    Active</label>
+                                                <label><input type="checkbox" name="status" value="false"
+                                                        ${selectedStatus !=null && selectedStatus.contains(false)
+                                                        ? 'checked' : '' }> Banned</label>
+                                                <label><input type="checkbox" name="status" value="true"
+                                                        ${selectedStatus !=null && selectedStatus.contains(true)
+                                                        ? 'checked' : '' }> Active</label>
                                                 <button type="submit" class="filter-btn-submit">Apply</button>
                                             </form>
                                         </div>
@@ -178,7 +180,7 @@
 
                                             <c:forEach begin="1" end="${totalPages}" var="i">
                                                 <li class="page-item ${currentPage == i ? 'active' : ''}">
-                                                    <a class="page-link" href="?page=${i}">${i}</a>
+                                                    <button class="page-link page-node" data-page="${i}">${i}</button>
                                                 </li>
                                             </c:forEach>
 
@@ -198,6 +200,40 @@
 
                 <script src="/js/admin/style.js"></script>
                 <script src="/js/admin/deck.js"></script>
+                <script>
+                    document.querySelectorAll('.page-node').forEach(button => {
+                        button.addEventListener('click', function (e) {
+                            e.preventDefault();
+                            const page = this.getAttribute('data-page');
+
+                            // Lấy keyword từ ô search
+                            const keyword = document.querySelector('input[name="keyword"]').value;
+
+                            // Lấy dữ liệu từ form filter
+                            const filterForm = document.getElementById('filterMenu');
+                            const formData = new FormData(filterForm);
+                            const params = new URLSearchParams(formData);
+
+                            // Đưa thêm page và keyword vào URL
+                            params.set('page', page);
+                            if (keyword) params.set('keyword', keyword);
+
+                            // Chuyển hướng
+                            window.location.href = "/admin/deck?" + params.toString();
+                        });
+                    });
+
+                    // Sửa lại form search để khi enter nó cũng giữ lại filter
+                    document.querySelector('.search-box').addEventListener('submit', function (e) {
+                        e.preventDefault();
+                        const keyword = this.querySelector('input').value;
+                        const filterForm = document.getElementById('filterMenu');
+                        const params = new URLSearchParams(new FormData(filterForm));
+                        params.set('keyword', keyword);
+                        params.set('page', 1); // Reset về trang 1 khi search mới
+                        window.location.href = "/admin/deck?" + params.toString();
+                    });
+                </script>
             </body>
 
             </html>

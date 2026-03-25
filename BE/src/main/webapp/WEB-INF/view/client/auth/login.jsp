@@ -17,8 +17,9 @@
             <body>
 
                 <div class="Sologan">
-                    <a href="/client/homepage">
-                        <div class="title">English Learning Platform</div>
+                    <a href="/">
+                        <div class=" title">English Learning Platform
+                        </div>
                     </a>
                 </div>
 

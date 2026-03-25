@@ -22,8 +22,8 @@
                     <p>Master English with Interactive Exercises</p>
                 </div>
                 <div class="nav-links">
-                    <a href="/client/homepage">HOME</a>
-                    <a href="/client/library">FLASHCARD</a>
+                    <a href="/">HOME</a>
+                    <a href=" /client/library">FLASHCARD</a>
                 </div>
                 <div class="container-info" id="userDropdownTrigger">
                     <i class="fa-regular fa-user"></i>
@@ -34,7 +34,7 @@
 
                     <div class="info-dropdown" id="infoDropdown">
 
-                        <a href="#" class="dropdown-item">
+                        <a href="/profile" class="dropdown-item">
                             <i class="fa-solid fa-circle-info"></i>
                             <span>Information</span>
                         </a>
@@ -71,10 +71,10 @@
                         <p>${deck.des}</p>
                     </div>
 
-                    <div class="search-box">
+                    <form class="search-box" id="searchForm" action="" method="get">
                         <i class="fas fa-search"></i>
-                        <input type="text" placeholder="Search flashcard ...">
-                    </div>
+                        <input type="text" name="keyword" value="${keyword}" placeholder="Search flashcard ...">
+                    </form>
 
                     <c:choose>
                         <c:when test="${currentUser == deck.user.id}">
@@ -165,7 +165,7 @@
 
                                 <c:forEach begin="1" end="${totalPages}" var="i">
                                     <li class="page-item ${currentPage == i ? 'active' : ''}">
-                                        <a class="page-link" href="?page=${i}">${i}</a>
+                                        <button class="page-link page-node" data-page="${i}">${i}</button>
                                     </li>
                                 </c:forEach>
 
