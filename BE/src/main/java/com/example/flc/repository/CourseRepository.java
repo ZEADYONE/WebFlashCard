@@ -2,6 +2,8 @@ package com.example.flc.repository;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -13,5 +15,5 @@ import com.example.flc.domain.Deck;
 public interface CourseRepository extends JpaRepository<Deck, Long> {
 
     @Query("SELECT d FROM Deck d WHERE d.user.role.name = 'ADMIN'")
-    List<Deck> findAllDecksByAdmin();
+    Page<Deck> findAllDecksByAdmin(Pageable pageable);
 }

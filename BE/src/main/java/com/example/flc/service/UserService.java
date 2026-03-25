@@ -2,6 +2,8 @@ package com.example.flc.service;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.example.flc.domain.Role;
@@ -25,8 +27,8 @@ public class UserService {
         return this.userRepository.findAll();
     }
 
-    public List<User> getAllUsers(String Email) {
-        return this.userRepository.findAll();
+    public Page<User> getAllUsers(Pageable pageable) {
+        return this.userRepository.findAll(pageable);
     }
 
     public User handelSaveUser(User user) {

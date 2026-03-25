@@ -8,6 +8,9 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.security.Principal;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,6 +21,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.example.flc.domain.Card;
 import com.example.flc.domain.Deck;
 import com.example.flc.domain.User;
 import com.example.flc.service.CardService;
@@ -25,7 +29,6 @@ import com.example.flc.service.DeckService;
 import com.example.flc.service.UploadService;
 
 @Controller
-@RequestMapping("/client")
 public class DeckController {
 
     private final DeckRepository deckRepository;
@@ -44,7 +47,7 @@ public class DeckController {
     }
 
     // CREATE
-    @PostMapping("/deck/create")
+    @PostMapping("/client/deck/create")
     public String createDeck(
             @ModelAttribute("deck") Deck deck,
             @RequestParam("images") MultipartFile file,
@@ -64,21 +67,29 @@ public class DeckController {
     }
 
     // VIEW
-    @GetMapping("/deck/{id}")
-    public String getHomeDeck(@PathVariable("id") long id, Model model, Principal principal) {
+    @GetMapping("/client/deck/{id}")
+    public String getHomeDeck(@PathVariable("id") long id, Model model, Principal principal,
+            @RequestParam(value = "page", defaultValue = "1") int page) {
+
         Deck deck = this.deckService.getDeckById(id);
+
         String username = principal.getName();
         User user = userRepository.findByEmail(username);
         Long currentUserId = user.getId();
 
+        Pageable pageable = PageRequest.of(page - 1, 4);
+        Page<Card> pageCard = this.cardService.getAllCardByDeck(deck, pageable);
+
         model.addAttribute("currentUser", currentUserId);
         model.addAttribute("deck", deck);
-        model.addAttribute("listCard", this.cardService.getAllCardByDeck(deck));
+        model.addAttribute("listCard", pageCard.getContent());
+        model.addAttribute("currentPage", page);
+        model.addAttribute("totalPages", pageCard.getTotalPages());
         return "client/deck/homepage";
     }
 
     // UPDATE
-    @PostMapping("/deck/update")
+    @PostMapping("/client/deck/update")
     public String updateDeck(@ModelAttribute("deck") Deck deck, @RequestParam("images") MultipartFile file,
             Principal principal) {
 
@@ -103,10 +114,35 @@ public class DeckController {
     }
 
     // DELETE
-    @PostMapping("/deck/delete/{id}")
+    @PostMapping("/client/deck/delete/{id}")
     public String deleteDeck(@PathVariable("id") long id) {
         Deck deck = this.deckService.getDeckById(id);
         deck.setStatus(false);
         return "redirect:/client/library";
     }
+
+    // =======================ADMIN====================
+
+    // VIEW
+    @GetMapping("/admin/course/{id}")
+    public String getHomeCourse(@PathVariable("id") long id, Model model, Principal principal,
+            @RequestParam(value = "page", defaultValue = "1") int page) {
+        Deck deck = this.deckService.getDeckById(id);
+
+        String username = principal.getName();
+        User user = userRepository.findByEmail(username);
+        Long currentUserId = user.getId();
+
+        Pageable pageable = PageRequest.of(page - 1, 4);
+
+        Page<Card> pageCard = this.cardService.getAllCardByDeck(deck, pageable);
+
+        model.addAttribute("currentUser", currentUserId);
+        model.addAttribute("deck", deck);
+        model.addAttribute("listCard", pageCard.getContent());
+        model.addAttribute("currentPage", page);
+        model.addAttribute("totalPages", pageCard.getTotalPages());
+        return "admin/course/course";
+    }
+
 }

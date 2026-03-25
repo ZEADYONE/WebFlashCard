@@ -25,7 +25,7 @@ public class StudyController {
     @GetMapping("/client/study/{id}")
     public String getStudyPage(@PathVariable("id") long deckId, Model model) {
         // 1. Lấy danh sách Card dựa trên deckId
-        List<Card> listCard = this.cardService.getAllCardByDeck(this.deckService.getDeckById(deckId));
+        List<Card> listCard = this.cardService.getListCardByDeck(this.deckService.getDeckById(deckId));
         model.addAttribute("deck", this.deckService.getDeckById(deckId));
         // 2. Đẩy dữ liệu vào Model để JSP có thể nhận được ${listCard}
         model.addAttribute("listCard", listCard);
@@ -37,7 +37,7 @@ public class StudyController {
     @GetMapping("/client/game/{id}")
     public String getGamePage(@PathVariable("id") long deckId, Model model) {
         // 1. Lấy danh sách Card dựa trên deckId
-        List<Card> listCard = this.cardService.getAllCardByDeck(this.deckService.getDeckById(deckId));
+        List<Card> listCard = this.cardService.getListCardByDeck(this.deckService.getDeckById(deckId));
         model.addAttribute("deck", this.deckService.getDeckById(deckId));
         // 2. Đẩy dữ liệu vào Model để JSP có thể nhận được ${listCard}
         model.addAttribute("listCard", listCard);

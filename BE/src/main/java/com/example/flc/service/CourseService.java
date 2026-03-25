@@ -2,6 +2,8 @@ package com.example.flc.service;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.example.flc.domain.Deck;
@@ -16,8 +18,8 @@ public class CourseService {
         this.courseRepository = courseRepository;
     }
 
-    public List<Deck> getAllDeck() {
-        return this.courseRepository.findAllDecksByAdmin();
+    public Page<Deck> getAllDeck(Pageable pageable) {
+        return this.courseRepository.findAllDecksByAdmin(pageable);
     }
 
 }

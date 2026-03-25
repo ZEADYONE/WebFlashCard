@@ -48,4 +48,9 @@ public class ProgressService {
 
         progressRepository.save(progress);
     }
+
+    public void deleteCardById(long id) {
+        this.progressRepository.deleteByCardId(id);
+        return;
+    }
 }

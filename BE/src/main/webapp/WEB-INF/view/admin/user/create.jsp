@@ -147,10 +147,11 @@
 
                                     <div class="form-group">
                                         <label>Role</label>
-                                        <form:select path="role.name">
-                                            <form:option value="USER">User</form:option>
-                                            <form:option value="ADMIN">Admin</form:option>
+
+                                        <form:select path="role.id">
+                                            <form:options items="${roles}" itemValue="id" itemLabel="name" />
                                         </form:select>
+
                                     </div>
 
                                     <div class="form-group">

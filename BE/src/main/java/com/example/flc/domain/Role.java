@@ -14,7 +14,6 @@ public class Role {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String name;
-    private String status;
 
     @OneToMany(mappedBy = "role")
     private List<User> user;
@@ -35,17 +34,9 @@ public class Role {
         this.name = name;
     }
 
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
     @Override
     public String toString() {
-        return "GameRes [id=" + id + ", name=" + name + ", status=" + status + "]";
+        return "GameRes [id=" + id + ", name=" + name + "]";
     }
 
     public List<User> getUser() {

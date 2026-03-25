@@ -112,33 +112,15 @@
                                         <!-- CLICK vào deck -->
                                         <a href="/client/deck/${deck.id}">
                                             <div class="card-top">
-                                                <img src="${deck.imageUrl}" />
+                                                <img src="/images/client/${deck.image}" />
 
                                                 <!-- Scope icon -->
-                                                <c:choose>
-                                                    <c:when test="${deck.scope == 'PUBLIC'}">
-                                                        <i class="fas fa-globe status-icon"></i>
-                                                    </c:when>
-                                                    <c:otherwise>
-                                                        <i class="fas fa-lock status-icon"></i>
-                                                    </c:otherwise>
-                                                </c:choose>
-
-                                                <span class="card-count">${deck.totalCards} cards</span>
+                                                <span class="card-count">${deck.card.size()} cards</span>
                                             </div>
 
                                             <div class="card-body">
                                                 <h3>${deck.title}</h3>
-                                                <p>${deck.description}</p>
-
-                                                <!-- <div class="progress-container">
-                                                    <div class="progress-bar" style="width: ${deck.progressPercent}%;">
-                                                    </div>
-                                                </div> -->
-
-                                                <span class="progress-text">
-                                                    ${deck.learnedCards}/${deck.totalCards}
-                                                </span>
+                                                <p>${deck.des}</p>
                                             </div>
                                         </a>
 
@@ -146,18 +128,8 @@
                                         <div class="card-footer">
                                             <span>
                                                 <i class="far fa-user"></i>
-                                                ${deck.ownerName}
+                                                ${deck.user.userName}
                                             </span>
-
-                                            <div class="card-actions">
-
-                                                <!-- CHỈ cho phép sửa nếu là owner -->
-                                                <c:if test="${deck.ownerId == sessionScope.userId}">
-                                                    <i class="fas fa-wrench fix_deck"></i>
-                                                    <i class="fas fa-trash-alt trash"></i>
-                                                </c:if>
-
-                                            </div>
                                         </div>
 
                                     </div>
@@ -166,19 +138,31 @@
                             </div>
 
                         </section>
-                        <div class="pagination">
-                            <span>&lt;</span>
-                            <span class="active">1</span>
-                            <span>2</span>
-                            <span>3</span>
-                            <span>4</span>
-                            <span>......</span>
-                            <span>20</span>
-                            <span>21</span>
-                            <span>22</span>
-                            <span>23</span>
-                            <span>&gt;</span>
-                        </div>
+                        <c:if test="${totalPages > 1}">
+                            <nav aria-label="Page navigation" style="margin-top: 20px;">
+                                <ul class="custom-pagination">
+
+                                    <li class="page-item ${currentPage == 1 ? 'disabled' : ''}">
+                                        <a class="page-link" href="?page=${currentPage - 1}" aria-label="Previous">
+                                            <span aria-hidden="true">&laquo;</span>
+                                        </a>
+                                    </li>
+
+                                    <c:forEach begin="1" end="${totalPages}" var="i">
+                                        <li class="page-item ${currentPage == i ? 'active' : ''}">
+                                            <a class="page-link" href="?page=${i}">${i}</a>
+                                        </li>
+                                    </c:forEach>
+
+                                    <li class="page-item ${currentPage == totalPages ? 'disabled' : ''}">
+                                        <a class="page-link" href="?page=${currentPage + 1}" aria-label="Next">
+                                            <span aria-hidden="true">&raquo;</span>
+                                        </a>
+                                    </li>
+
+                                </ul>
+                            </nav>
+                        </c:if>
                     </main>
                 </div>
                 <div id="container-popup" class="container-popup">

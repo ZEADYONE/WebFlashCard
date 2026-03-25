@@ -2,6 +2,9 @@ package com.example.flc.controller.admin;
 
 import java.security.Principal;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.example.flc.domain.Card;
 import com.example.flc.domain.Deck;
 import com.example.flc.domain.User;
 import com.example.flc.service.CardService;
@@ -38,8 +42,14 @@ public class AdminDeckController {
 
     // HOME
     @GetMapping("/deck")
-    public String getHomePage(Model model) {
-        model.addAttribute("listDeck", this.deckService.getAllDeck());
+    public String getHomePage(Model model, @RequestParam(value = "page", defaultValue = "1") int page) {
+
+        Pageable pageable = PageRequest.of(page - 1, 3);
+        Page<Deck> pageDeck = this.deckService.getAllDeck(pageable);
+
+        model.addAttribute("listDeck", pageDeck.getContent());
+        model.addAttribute("currentPage", page);
+        model.addAttribute("totalPages", pageDeck.getTotalPages());
         return "admin/deck/homepage";
     }
 
@@ -53,23 +63,37 @@ public class AdminDeckController {
     // VIEW
 
     @GetMapping("/deck/view/{id}")
-    public String getViewDeck(@PathVariable("id") long id, Model model) {
+    public String getViewDeck(@PathVariable("id") long id, Model model,
+            @RequestParam(value = "page", defaultValue = "1") int page) {
 
         Deck deck = this.deckService.getDeckById(id);
         model.addAttribute("deck", deck);
-        model.addAttribute("listCard", this.cardService.getAllCardByDeck(deck));
+
+        Pageable pageable = PageRequest.of(page - 1, 4);
+
+        Page<Card> pageCard = this.cardService.getAllCardByDeck(deck, pageable);
+        model.addAttribute("listCard", pageCard.getContent());
+        model.addAttribute("currentPage", page);
+        model.addAttribute("totalPages", pageCard.getTotalPages());
         return "admin/deck/view";
     }
 
     // UPDATE
 
     @GetMapping("/deck/update/{id}")
-    public String getUpdateDeck(@PathVariable("id") long id, Model model) {
+    public String getUpdateDeck(@PathVariable("id") long id, Model model,
+            @RequestParam(value = "page", defaultValue = "1") int page) {
 
         Deck deck = this.deckService.getDeckById(id);
         System.out.println(deck);
+
+        Pageable pageable = PageRequest.of(page - 1, 4);
+
+        Page<Card> pageCard = this.cardService.getAllCardByDeck(deck, pageable);
         model.addAttribute("deck", deck);
-        model.addAttribute("listCard", this.cardService.getAllCardByDeck(deck));
+        model.addAttribute("listCard", pageCard.getContent());
+        model.addAttribute("currentPage", page);
+        model.addAttribute("totalPages", pageCard.getTotalPages());
         return "admin/deck/update";
     }
 

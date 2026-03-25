@@ -18,7 +18,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 body {
@@ -55,7 +55,7 @@ a {
 
 .brand h1 {
     font-size: 1.4rem;
-    letter-spacing: 0.5px;
+    /* letter-spacing: 0.5px; */
 }
 
 .brand p {
@@ -368,50 +368,53 @@ a {
 }
 
 .popup {
-    background: white;
-    border-radius: 12px;
-    width: 450px;
-    padding: 30px;
+    background: #E9F4FA;
+    border-radius: 10px;
+    width: 400px;
+    color: #48798A;
+
+    font-weight: bold;
+    padding: 20px;
+
     display: flex;
     flex-direction: column;
-    gap: 15px;
-}
+    gap: 12px;
 
-.popup h3 {
-    font-size: 1.5rem;
-    color: var(--header-bg);
-    margin-bottom: 10px;
-}
-
-.popup label {
-    font-weight: 600;
-    font-size: 0.9rem;
-    color: #475569;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
 }
 
 .popup input,
 .popup select {
-    padding: 12px;
-    border: 1px solid var(--border-color);
-    border-radius: 8px;
-    font-size: 1rem;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
 }
 
 .popup-image {
-    height: 150px;
-    border: 2px dashed var(--border-color);
-    border-radius: 8px;
+    height: 180px;
+    overflow: hidden;
+    border-radius: 6px;
     display: flex;
     justify-content: center;
     align-items: center;
-    overflow: hidden;
-    background: #f8fafc;
+    border: #64748b dotted;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+}
+
+.popup-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
 .popup-buttons {
     display: flex;
-    gap: 15px;
-    margin-top: 15px;
+    justify-content: center;
+    gap: 10px;
+
 }
 
 #save {

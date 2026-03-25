@@ -98,8 +98,12 @@
                                                     Banned</label>
                                                 <label><input type="checkbox" name="status" value="ACTIVE">
                                                     Active</label>
-                                                <label><input type="checkbox" name="role" value="ADMIN"> Admin</label>
-                                                <label><input type="checkbox" name="role" value="USER"> User</label>
+                                                <c:forEach var="r" items="${roles}">
+                                                    <label>
+                                                        <input type="checkbox" name="roleIds" value="${r.id}">
+                                                        ${r.name}
+                                                    </label>
+                                                </c:forEach>
                                                 <button type="submit" class="filter-btn-submit">Apply</button>
                                             </form>
                                         </div>
@@ -166,12 +170,32 @@
                                         </c:forEach>
                                     </tbody>
                                 </table>
-                                <div class="pagination">
-                                    <c:forEach begin="1" end="${totalPages}" var="i">
-                                        <a href="/admin/users?page=${i}"
-                                            class="${currentPage == i ? 'active' : ''}">${i}</a>
-                                    </c:forEach>
-                                </div>
+                                <c:if test="${totalPages > 1}">
+                                    <nav aria-label="Page navigation" style="margin-top: 20px;">
+                                        <ul class="custom-pagination">
+
+                                            <li class="page-item ${currentPage == 1 ? 'disabled' : ''}">
+                                                <a class="page-link" href="?page=${currentPage - 1}"
+                                                    aria-label="Previous">
+                                                    <span aria-hidden="true">&laquo;</span>
+                                                </a>
+                                            </li>
+
+                                            <c:forEach begin="1" end="${totalPages}" var="i">
+                                                <li class="page-item ${currentPage == i ? 'active' : ''}">
+                                                    <a class="page-link" href="?page=${i}">${i}</a>
+                                                </li>
+                                            </c:forEach>
+
+                                            <li class="page-item ${currentPage == totalPages ? 'disabled' : ''}">
+                                                <a class="page-link" href="?page=${currentPage + 1}" aria-label="Next">
+                                                    <span aria-hidden="true">&raquo;</span>
+                                                </a>
+                                            </li>
+
+                                        </ul>
+                                    </nav>
+                                </c:if>
                             </div>
                         </section>
                     </main>

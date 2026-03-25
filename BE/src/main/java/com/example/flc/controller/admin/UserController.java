@@ -2,6 +2,9 @@ package com.example.flc.controller.admin;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,8 +16,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import com.example.flc.domain.Deck;
+import com.example.flc.domain.Role;
 import com.example.flc.domain.User;
+import com.example.flc.service.RoleService;
 import com.example.flc.service.UserService;
 
 import jakarta.validation.Valid;
@@ -24,16 +31,28 @@ public class UserController {
 
     private final UserService userService;
     private final PasswordEncoder passwordEncoder;
+    private final RoleService roleService;
 
-    public UserController(UserService userService, PasswordEncoder passwordEncoder) {
+    public UserController(UserService userService, PasswordEncoder passwordEncoder, RoleService roleService) {
         this.userService = userService;
         this.passwordEncoder = passwordEncoder;
+        this.roleService = roleService;
+
     }
 
     @RequestMapping("/admin/user")
-    public String getHomePage(Model model) {
+    public String getHomePage(Model model, @RequestParam(value = "page", defaultValue = "1") int page) {
         List<User> users = this.userService.getAllUsers();
-        model.addAttribute("listUser", users);
+
+        Pageable pageable = PageRequest.of(page - 1, 3);
+
+        Page<User> pageUser = this.userService.getAllUsers(pageable);
+
+        model.addAttribute("currentPage", page); // Trang hiện tại
+        model.addAttribute("totalPages", pageUser.getTotalPages()); // Tổng số trang
+        model.addAttribute("listUser", pageUser.getContent());
+        model.addAttribute("roles", this.roleService.getAll());
+
         return "admin/user/homepage";
     }
 
@@ -42,7 +61,6 @@ public class UserController {
     public String viewUser(@PathVariable("id") long id, Model model) {
         User user = userService.getUserDetail(id);
         model.addAttribute("user", user);
-
         return "admin/user/view";
     }
 
@@ -50,6 +68,8 @@ public class UserController {
     @RequestMapping("admin/user/create")
     public String getUserPage(Model model) {
         model.addAttribute("newUser", new User());
+        // model.addAttribute("roles", this.roleService.getAll());
+        model.addAttribute("roles", this.roleService.getAll());
         // List<Role> roles = roleService.getAllRoles();
         // model.addAttribute("roles", roles);
         // Ben homepage
@@ -74,7 +94,8 @@ public class UserController {
         String hassPassWord = this.passwordEncoder.encode(newUser.getPassWord());
         newUser.setPassWord(hassPassWord);
 
-        newUser.setRole(this.userService.getRoleByName(newUser.getRole().getName()));
+        Role role = roleService.getById(newUser.getRole().getId());
+        newUser.setRole(role);
         newUser.setStatus(true);
         this.userService.handelSaveUser(newUser);
         return "redirect:/admin/user";
@@ -85,14 +106,15 @@ public class UserController {
     @GetMapping("/admin/user/update/{id}")
     public String getUserUpdate(@PathVariable("id") long id, Model model) {
         User user = userService.getUserDetail(id);
-
+        model.addAttribute("roles", this.roleService.getAll());
         model.addAttribute("newUser", user);
         return "admin/user/update";
     }
 
     @PostMapping("/admin/user/update")
     public String postUpdateUser(@ModelAttribute("newUser") User user) {
-        user.setRole(this.userService.getRoleByName(user.getRole().getName()));
+
+        user.setRole(roleService.getById(user.getRole().getId()));
         this.userService.handelSaveUser(user);
         return "redirect:/admin/user";
     }

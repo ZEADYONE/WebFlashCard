@@ -3,6 +3,8 @@ package com.example.flc.service;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.example.flc.domain.Deck;
@@ -23,8 +25,12 @@ public class DeckService {
         return this.deckRepository.findByUserId(id);
     }
 
-    public List<Deck> getDeckCommunity() {
-        return this.deckRepository.findPublicActiveDeck();
+    public Page<Deck> getDeckCommunity(Pageable pageable) {
+        return this.deckRepository.findPublicActiveDeck(pageable);
+    }
+
+    public Page<Deck> getDeckCourse(Pageable pageable) {
+        return this.deckRepository.findDeckCourse(pageable);
     }
 
     public void handelSaveDeck(Deck deck) {
@@ -36,24 +42,23 @@ public class DeckService {
         return this.deckRepository.findById(id).orElseThrow(() -> new RuntimeException(" Khong tim thay deck"));
     }
 
-    public List<DeckProgress> getDecksWithProgress(Long userId) {
-        List<Object[]> results = deckRepository.findDeckProgressRaw(userId);
+    public Page<DeckProgress> getDecksWithProgress(Long userId, Pageable pageable) {
+        Page<Object[]> results = deckRepository.findDeckProgressRaw(userId, pageable);
 
-        return results.stream().map(result -> new DeckProgress(
-                ((Number) result[0]).longValue(), // id (vị trí 0)
-                (String) result[1], // title (vị trí 1)
-                (String) result[2], // image (vị trí 2)
-                (String) result[3], // des (vị trí 3)
-                (String) result[4], // scope (vị trí 4)
-                (String) result[5], // userName (vị trí 5)
-                ((Number) result[6]).longValue(), // totalCards (vị trí 6)
+        return results.map(result -> new DeckProgress(
+                ((Number) result[0]).longValue(),
+                (String) result[1],
+                (String) result[2],
+                (String) result[3],
+                (String) result[4],
+                (String) result[5],
+                ((Number) result[6]).longValue(),
                 ((Number) result[7]).longValue(),
-                ((Number) result[8]).longValue()// correctCards (vị trí 7)
-        )).collect(Collectors.toList());
+                ((Number) result[8]).longValue()));
     }
 
-    public List<Deck> getAllDeck() {
-        return this.deckRepository.findAll();
+    public Page<Deck> getAllDeck(Pageable pageable) {
+        return this.deckRepository.findAll(pageable);
     }
 
     public void setDeckStatus(long id) {

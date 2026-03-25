@@ -120,9 +120,9 @@
                                 <div class="right-column-group">
                                     <div class="form-group">
                                         <label>Role</label>
-                                        <form:select path="role.name" class="form-select">
-                                            <form:option value="ADMIN">Admin</form:option>
-                                            <form:option value="USER">User</form:option>
+
+                                        <form:select path="role.id">
+                                            <form:options items="${roles}" itemValue="id" itemLabel="name" />
                                         </form:select>
                                     </div>
                                 </div>
