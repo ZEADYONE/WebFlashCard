@@ -1,4 +1,4 @@
-package com.example.flc.controller;
+package com.example.flc.controller.client;
 
 import com.example.flc.domain.Card;
 import com.example.flc.service.CardService; // Giả sử bạn có CardService

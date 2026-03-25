@@ -21,3 +21,39 @@ document.addEventListener('DOMContentLoaded', () => {
         if (arrow) arrow.style.transform = 'rotate(0deg)';
     });
 });
+
+// 2. Logic Audio
+function playAudio(sound) {
+
+
+    const audio = new Audio("/sound/client/" + sound);
+    audio.play();
+}
+
+const fileInput = document.getElementById('fileInput');
+const uploadBox = document.getElementById('uploadBox'); // Khớp với ID trong HTML
+let currentURL = null;
+
+if (fileInput) {
+    fileInput.addEventListener("change", function () {
+        const file = this.files[0];
+        if (!file) return;
+
+        // Giải phóng bộ nhớ nếu có URL cũ
+        if (currentURL) {
+            URL.revokeObjectURL(currentURL);
+        }
+
+        // Tạo URL tạm thời cho file mới chọn
+        currentURL = URL.createObjectURL(file);
+
+        // Cập nhật background cho uploadBox
+        uploadBox.style.backgroundImage = `url('${currentURL}')`;
+        uploadBox.style.backgroundSize = "cover";
+        uploadBox.style.backgroundPosition = "center";
+
+        // Xóa nội dung bên trong (ví dụ các icon hoặc text "Click to upload")
+        uploadBox.innerHTML = "";
+    });
+
+}

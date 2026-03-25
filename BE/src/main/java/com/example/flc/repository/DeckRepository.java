@@ -26,7 +26,7 @@ public interface DeckRepository extends JpaRepository<Deck, Long> {
             "JOIN User u ON d.user_id = u.id " +
             "LEFT JOIN Card c ON c.deck_id = d.id " +
             "LEFT JOIN Progress p ON p.card_id = c.id AND p.user_id = :userId " +
-            "WHERE (d.user_id = :userId ) OR ( d.scope = 'Public' AND d.user_id != :userId) " +
+            "WHERE ((d.user_id = :userId) OR ( d.scope = 'Public' AND d.user_id != :userId))  AND d.status = true  " +
             "GROUP BY d.id, d.title, d.image, d.des, d.scope, u.user_name, d.user_id", nativeQuery = true)
     List<Object[]> findDeckProgressRaw(@Param("userId") Long userId);
 }

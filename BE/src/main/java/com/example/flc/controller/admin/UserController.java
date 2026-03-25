@@ -1,4 +1,4 @@
-package com.example.flc.controller;
+package com.example.flc.controller.admin;
 
 import java.util.List;
 

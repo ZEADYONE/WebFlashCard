@@ -1,4 +1,4 @@
-package com.example.flc.controller;
+package com.example.flc.controller.client;
 
 import java.security.Principal;
 import java.time.LocalDateTime;

@@ -6,8 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>English Learning Platform - Admin Dashboard</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-    <link rel="stylesheet" href="css/course.css">
-    <link rel="stylesheet" href="css/header-slide.css">
+    <link rel="stylesheet" href="/css/client/course.css">
+    <link rel="stylesheet" href="/css/admin/header-slide.css">
 </head>
 
 <body>
@@ -62,10 +62,10 @@
         <main class="main-content">
             <section class="library-section">
                 <div class="library-header">
-                    <!-- <div class="title-area">
+                    <div class="title-area">
                         <h2>My library</h2>
                         <p>Manage your personal collections and study progress</p>
-                    </div> -->
+                    </div>
                     <div class="btn-create">
                         <span>Create deck</span>
                     </div>
@@ -76,129 +76,110 @@
                         <i class="fas fa-search"></i>
                         <input type="text" placeholder="Search library ...">
                     </div>
-                    <div class="filter-dropdown-container">
+                    <div class="filter-container">
                         <button class="filter-btn" id="filterBtn">
-                            <i class="fa-solid fa-filter"></i>
+                            <i class="fas fa-filter"></i>
                         </button>
-                        <form class="filter-dropdown" id="filterMenu" style="right: 0px; left: auto;">
-                            <label><input type="checkbox" name="scope">Public</label>
-                            <label><input type="checkbox" name="scope">Private</label>
-                            <button class="filter-btn" id="filterBtn">
-                                <i class="fa-solid fa-filter"></i>
-                            </button>
-                        </form>
+                        <div class="filter-dropdown" id="filterDropdown">
+                            <form action="https://www.w3schools.com/action_page.php" method="GET"
+                                style="display:flex; flex-direction: column;">
+                                <!-- checked -->
+                                <label><input type="checkbox" name="scope" value="Public"> Public</label>
+                                <label><input type="checkbox" name="scope" value="Private"> Private</label>
+                                <label><input type="checkbox" name="scope" value="Public"> You</label>
+                                <label><input type="checkbox" name="scope" value="Private"> Admin</label>
+                                <label><input type="checkbox" name="scope" value="Private"> Other</label>
+                                <button type="submit">
+                                    <i class="fas fa-filter dropdown-icon"></i>
+                                </button>
+                            </form>
+                        </div>
                     </div>
                 </div>
-
                 <div class="deck-grid">
-                    <div class="deck-card">
-                        <a href="course/inner-deck.html">
-                            <div class="card-top">
-                                <img src="/src/fe/client/image/download (1).jpg">
-                                <i class="fas fa-lock status-icon"></i>
-                                <span class="card-count">50 cards</span>
-                            </div>
-                            <div class="card-body">
-                                <h3>Mixed</h3>
-                                <p>Advanced vocabulary</p>
-                            </div>
-                        </a>
+                    <c:forEach var="deck" items="${listDeck}">
+                        <div class="deck-card" data-id="${deck.id}">
 
-                        <div class="card-footer">
-                            <span><i class="far fa-user"></i> You</span>
-                            <div class="card-actions">
-                                <i class="fas fa-wrench fix_deck"></i>
-                                <i class="fas fa-trash-alt trash"></i>
-                            </div>
-                        </div>
-                    </div>
+                            <a href="/client/deck/${deck.id}">
+                                <div class="card-top">
+                                    <img src="/images/client/${deck.image}" />
 
-                    <div class="deck-card">
-                        <div class="card-top">
-                            <img src="/src/fe/client/image/download (2).jpg">
-                            <i class="fas fa-globe status-icon"></i>
-                            <span class="card-count">50 cards</span>
-                        </div>
-                        <div class="card-body">
-                            <h3>IELTS Band 8.0 Words</h3>
-                            <p>Advanced vocabulary for high scores.</p>
-                        </div>
-                        <div class="card-footer">
-                            <span><i class="far fa-user"></i> You</span>
-                            <div class="card-actions">
-                                <i class="fas fa-wrench fix_deck"></i>
-                                <i class="fas fa-trash-alt trash"></i>
-                            </div>
-                        </div>
-                    </div>
+                                    <c:choose>
+                                        <c:when test="${deck.scope == 'Public'}">
+                                            <i class="fas fa-globe status-icon"></i>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <i class="fas fa-lock status-icon"></i>
+                                        </c:otherwise>
+                                    </c:choose>
 
-                    <!-- <div class="deck-card">
-                        <div class="card-top">
-                            <img src="/src/fe/client/image/download.jpg">
-                            <i class="fas fa-globe status-icon"></i>
-                            <span class="card-count">50 cards</span>
-                        </div>
-                        <div class="card-body">
-                            <h3>IELTS Band 8.0 Words</h3>
-                            <p>Advanced vocabulary for high scores.</p>
-                        </div>
-                        <div class="card-footer">
-                            <span><i class="far fa-user"></i> You</span>
-                            <div class="card-actions">
-                                <i class="fas fa-wrench fix_deck"></i>
-                                <i class="fas fa-trash-alt trash"></i>
-                            </div>
-                        </div>
-                    </div>
+                                    <span class="card-count">${deck.totalCards}
+                                        cards</span>
+                                </div>
 
-                    <div class="deck-card">
-                        <div class="card-top">
-                            <img src="/src/fe/client/image/thang_may_la_mua_thu_41b77d0267.webp">
-                            <i class="fas fa-lock status-icon"></i>
-                            <span class="card-count">50 cards</span>
-                        </div>
-                        <div class="card-body">
-                            <h3>IELTS Band 8.0 Words</h3>
-                            <p class="description">Advanced vocabulary for high scores.Advanced vocabulary for high
-                                scores.Advanced
-                                vocabulary for high scores.Advanced vocabulary for high scores.Advanced vocabulary for
-                                high scores.Advanced vocabulary for high scores.Advanced vocabulary for high
-                                scores.Advanced vocabulary for high scores.Advanced vocabulary for high scores.Advanced
-                                vocabulary for high scoresaaaaaaaaa.</p>
-                        </div>
-                        <div class="card-footer">
-                            <span><i class="far fa-user"></i> You</span>
-                            <div class="card-actions">
-                                <i class="fas fa-wrench fix_deck"></i>
-                                <i class="fas fa-trash-alt trash"></i>
+                                <div class="card-body">
+                                    <h3>${deck.title}</h3>
+                                    <p>${deck.des}</p>
+
+                                    <div class="progress-container">
+                                        <div class="progress-bar"
+                                            style="--p: ${deck.progressPercent}%; width: var(--p);">
+                                        </div>
+                                    </div>
+
+                                    <span class="progress-text">
+                                        ${deck.correctCards}/${deck.totalCards}
+                                    </span>
+
+                                </div>
+
+
+                            </a>
+
+                            <div class="card-footer">
+                                <span>
+                                    <i class="far fa-user"></i>
+                                    ${deck.userName}
+                                </span>
+                                <c:if test="${currentUser == deck.userId}">
+                                    <div class="card-actions" style="display: flex; align-items: center; gap: 15px;">
+                                        <i class="fas fa-wrench fix_deck" style="cursor: pointer;" data-id="${deck.id}"
+                                            data-title="${deck.title}" data-des="${deck.des}"
+                                            data-scope="${deck.scope}"></i>
+
+                                        <form action="/client/deck/delete/${deck.id}" method="post"
+                                            style="margin: 0; display: flex;">
+                                            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+                                            <button type="submit"
+                                                style="background: none; border: none; padding: 0; cursor: pointer; color: inherit;">
+                                                <i class="fas fa-trash-alt trash"></i>
+                                            </button>
+                                        </form>
+                                    </div>
+                                </c:if>
+
                             </div>
                         </div>
-                    </div> -->
+                    </c:forEach>
+                </div>
             </section>
-            <div class="pagination">
-                <span>&lt;</span>
-                <span class="active">1</span>
-                <span>2</span>
-                <span>3</span>
-                <span>4</span>
-                <span>......</span>
-                <span>20</span>
-                <span>21</span>
-                <span>22</span>
-                <span>23</span>
-                <span>&gt;</span>
-            </div>
         </main>
     </div>
     <div id="container-popup" class="container-popup">
+        <form:form class="popup" id="form-popup" modelAttribute="deck" action="/client/deck/create" method="post"
+            enctype="multipart/form-data">
+            <div>
+                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+            </div>
 
-        <form class="popup" action="https://www.w3schools.com/action_page.php" method="post">
+            <input type="hidden" name="id" id="deck-id">
+
             <h3 id="feature">Edit Deck</h3>
             <label for="popup-title">Title</label>
-            <input id="popup-title" name="title" placeholder="Title">
+            <input id="popup-title" name="title" placeholder="Title" required>
 
             <label for="popup-desc">Description</label>
-            <input id="popup-desc" name="description" placeholder="Description">
+            <input id="popup-desc" name="des" placeholder="Description" required>
 
             <label>Scope</label>
             <select id="popup-scope" name="scope">
@@ -209,18 +190,20 @@
             <label for="img">Image
                 <div id="popup-image" class="popup-image">
                 </div>
-                <input type="file" name="image" id="img" hidden>
+                <input type="file" name="images" id="img" accept=".png, .jpg, .jpeg" hidden>
             </label>
 
             <div class="popup-buttons">
                 <button type="submit" id="save">Save change</button>
                 <button type="button" id="cancel">Cancel</button>
             </div>
-        </form>
+        </form:form>
+
+
     </div>
 
 
-    <script src="js/course.js"></script>
+    <script src="/js/admin/course.js"></script>
     <script src="js/style.js"></script>
 
 </body>

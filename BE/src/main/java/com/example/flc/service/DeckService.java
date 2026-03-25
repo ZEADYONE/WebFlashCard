@@ -51,4 +51,19 @@ public class DeckService {
                 ((Number) result[8]).longValue()// correctCards (vị trí 7)
         )).collect(Collectors.toList());
     }
+
+    public List<Deck> getAllDeck() {
+        return this.deckRepository.findAll();
+    }
+
+    public void setDeckStatus(long id) {
+        Deck deck = this.deckRepository.findById(id).orElseThrow(() -> new RuntimeException());
+        if (deck.getStatus()) {
+            deck.setStatus(false);
+        } else {
+            deck.setStatus(true);
+        }
+        handelSaveDeck(deck);
+        return;
+    }
 }

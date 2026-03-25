@@ -21,22 +21,34 @@
                     </div>
                     <div class="container-info" id="userDropdownTrigger">
                         <i class="fa-regular fa-user"></i>
-                        <span class="user-name">${currentUser.fullName != null ? currentUser.fullName : 'Admin'}</span>
+                        <span class="user-name">
+                            <c:out value="${sessionScope.fullName}" />
+                        </span>
                         <i class="fa-solid fa-chevron-down mini-arrow"></i>
 
                         <div class="info-dropdown" id="infoDropdown">
-                            <a href="/admin/profile">
-                                <div class="dropdown-item"><i class="fa-solid fa-circle-info"></i> Information</div>
+
+                            <a href="#" class="dropdown-item">
+                                <i class="fa-solid fa-circle-info"></i>
+                                <span>Information</span>
                             </a>
-                            <a href="/">
-                                <div class="dropdown-item"><i class="fa-regular fa-user"></i> Client</div>
-                            </a>
-                            <form action="/logout" method="post" style="display: inline;">
+                            <c:if test="${sessionScope.role == 'ADMIN'}">
+                                <a href="/" class="dropdown-item">
+                                    <i class="fa-regular fa-user"></i>
+                                    <span>Client</span>
+                                </a>
+                            </c:if>
+
+                            <form method="post" action="/logout">
+                                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+
                                 <button type="submit" class="dropdown-item"
-                                    style="border:none; background:none; width:100%; text-align:left; cursor:pointer;">
-                                    <i class="fa-solid fa-right-from-bracket"></i> Logout
+                                    style="width: 100%; border: 0px none; background-color: white;">
+                                    <i class="fa-solid fa-right-from-bracket"></i>
+                                    <span>Logout</span>
                                 </button>
                             </form>
+
                         </div>
                     </div>
                 </header>
@@ -117,7 +129,14 @@
                                                 <td>${user.email}</td>
                                                 <td>${user.phoneNumber}</td>
                                                 <td>${user.role.name}</td>
-                                                <td>${user.status}</td>
+                                                <td class="status">
+                                                    <c:if test="${user.status == true}">
+                                                        Active
+                                                    </c:if>
+                                                    <c:if test="${user.status == false}">
+                                                        Banned
+                                                    </c:if>
+                                                </td>
                                                 <td class="actions">
                                                     <a href="/admin/user/view/${user.id}"><i
                                                             class="fa-regular fa-eye btn-view"></i></a>

@@ -21,22 +21,34 @@
                     </div>
                     <div class="container-info" id="userDropdownTrigger">
                         <i class="fa-regular fa-user"></i>
-                        <span class="user-name">${currentUser.fullName != null ? currentUser.fullName : 'Admin'}</span>
+                        <span class="user-name">
+                            <c:out value="${sessionScope.fullName}" />
+                        </span>
                         <i class="fa-solid fa-chevron-down mini-arrow"></i>
 
                         <div class="info-dropdown" id="infoDropdown">
-                            <a href="/admin/profile">
-                                <div class="dropdown-item"><i class="fa-solid fa-circle-info"></i> Information</div>
+
+                            <a href="#" class="dropdown-item">
+                                <i class="fa-solid fa-circle-info"></i>
+                                <span>Information</span>
                             </a>
-                            <a href="/">
-                                <div class="dropdown-item"><i class="fa-regular fa-user"></i> Client</div>
-                            </a>
-                            <form action="/logout" method="post" style="display: inline;">
+                            <c:if test="${sessionScope.role == 'ADMIN'}">
+                                <a href="/" class="dropdown-item">
+                                    <i class="fa-regular fa-user"></i>
+                                    <span>Client</span>
+                                </a>
+                            </c:if>
+
+                            <form method="post" action="/logout">
+                                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+
                                 <button type="submit" class="dropdown-item"
-                                    style="border:none; background:none; width:100%; text-align:left; cursor:pointer;">
-                                    <i class="fa-solid fa-right-from-bracket"></i> Logout
+                                    style="width: 100%; border: 0px none; background-color: white;">
+                                    <i class="fa-solid fa-right-from-bracket"></i>
+                                    <span>Logout</span>
                                 </button>
                             </form>
+
                         </div>
                     </div>
                 </header>
@@ -98,7 +110,7 @@
                                             <th>ID-Deck</th>
                                             <th>Title</th>
                                             <th>ID-User</th>
-                                            <th>User name</th>
+                                            <th>Email</th>
                                             <th>Status</th>
                                             <th>Action</th>
                                         </tr>
@@ -110,9 +122,16 @@
                                                 <td><strong>${deck.title}</strong></td>
 
                                                 <td>${deck.user.id}</td>
-                                                <td><strong>${deck.user.userName}</strong></td>
+                                                <td><strong>${deck.user.email}</strong></td>
 
-                                                <td class="status">${deck.status}</td>
+                                                <td class="status">
+                                                    <c:if test="${deck.status == true}">
+                                                        Active
+                                                    </c:if>
+                                                    <c:if test="${deck.status == false}">
+                                                        Banned
+                                                    </c:if>
+                                                </td>
                                                 <td class="actions">
                                                     <a href="/admin/deck/view/${deck.id}">
                                                         <i class="fa-regular fa-eye btn-view"></i>
@@ -130,7 +149,7 @@
                                                         <button type="submit"
                                                             style="background: none; border: none; padding: 0; cursor: pointer;">
                                                             <c:choose>
-                                                                <c:when test="${deck.status == 'ACTIVE'}">
+                                                                <c:when test="${deck.status == 'true'}">
                                                                     <i class="fa-solid fa-lock-open btn-unlock"></i>
                                                                 </c:when>
                                                                 <c:otherwise>

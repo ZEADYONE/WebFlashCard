@@ -11,6 +11,7 @@
                 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
                 <title>Update User - English Learning Platform</title>
                 <link rel="stylesheet" href="/css/admin/style_user.css">
+                <link rel="stylesheet" href="/css/admin/header-slide.css">
             </head>
 
             <body>
@@ -22,8 +23,35 @@
                         </div>
                         <div class="container-info" id="userDropdownTrigger">
                             <i class="fa-regular fa-user"></i>
-                            <span class="user-name">${newUser.fullName}</span>
+                            <span class="user-name">
+                                <c:out value="${sessionScope.fullName}" />
+                            </span>
                             <i class="fa-solid fa-chevron-down mini-arrow"></i>
+
+                            <div class="info-dropdown" id="infoDropdown">
+
+                                <a href="#" class="dropdown-item">
+                                    <i class="fa-solid fa-circle-info"></i>
+                                    <span>Information</span>
+                                </a>
+                                <c:if test="${sessionScope.role == 'ADMIN'}">
+                                    <a href="/" class="dropdown-item">
+                                        <i class="fa-regular fa-user"></i>
+                                        <span>Client</span>
+                                    </a>
+                                </c:if>
+
+                                <form method="post" action="/logout">
+                                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+
+                                    <button type="submit" class="dropdown-item"
+                                        style="width: 100%; border: 0px none; background-color: white;">
+                                        <i class="fa-solid fa-right-from-bracket"></i>
+                                        <span>Logout</span>
+                                    </button>
+                                </form>
+
+                            </div>
                         </div>
                     </header>
 
@@ -102,7 +130,7 @@
                         </div>
                     </main>
                 </div>
-                <script src="/js/admin/scrip.js"></script>
+                <script src="/js/admin/script.js"></script>
             </body>
 
             </html>

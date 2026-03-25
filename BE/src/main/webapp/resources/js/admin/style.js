@@ -11,37 +11,37 @@ document.querySelectorAll('.menu-item').forEach(item => {
 
 // BANNER
 
-const lockButtons = document.querySelectorAll(".btn-lock, .btn-unlock");
+// const lockButtons = document.querySelectorAll(".btn-lock, .btn-unlock");
 
-lockButtons.forEach(function (btn) {
+// lockButtons.forEach(function (btn) {
 
-    btn.addEventListener("click", function () {
+//     btn.addEventListener("click", function () {
 
-        const icon = this;
+//         const icon = this;
 
-        const row = icon.closest("tr");
+//         const row = icon.closest("tr");
 
-        const statusCell = row.querySelector(".status");
+//         const statusCell = row.querySelector(".status");
 
-        if (icon.classList.contains("btn-lock")) {
+//         if (icon.classList.contains("btn-lock")) {
 
-            icon.classList.remove("fa-lock", "btn-lock");
-            icon.classList.add("fa-lock-open", "btn-unlock");
+//             icon.classList.remove("fa-lock", "btn-lock");
+//             icon.classList.add("fa-lock-open", "btn-unlock");
 
-            statusCell.textContent = "Active";
+//             statusCell.textContent = "Active";
 
-        } else {
+//         } else {
 
-            icon.classList.remove("fa-lock-open", "btn-unlock");
-            icon.classList.add("fa-lock", "btn-lock");
+//             icon.classList.remove("fa-lock-open", "btn-unlock");
+//             icon.classList.add("fa-lock", "btn-lock");
 
-            statusCell.textContent = "Banned";
+//             statusCell.textContent = "Banned";
 
-        }
+//         }
 
-    });
+//     });
 
-});
+// });
 
 const filterBtn = document.getElementById('filterBtn');
 const filterMenu = document.getElementById('filterMenu');

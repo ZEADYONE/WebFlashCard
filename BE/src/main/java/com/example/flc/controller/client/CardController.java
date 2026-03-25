@@ -1,4 +1,4 @@
-package com.example.flc.controller;
+package com.example.flc.controller.client;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

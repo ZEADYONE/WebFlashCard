@@ -1,4 +1,4 @@
-package com.example.flc.controller;
+package com.example.flc.controller.client;
 
 import com.example.flc.repository.DeckRepository;
 import com.example.flc.repository.UserRepository;
