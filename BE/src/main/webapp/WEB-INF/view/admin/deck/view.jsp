@@ -87,13 +87,13 @@
                         </div>
 
                         <div class="all-btn">
-                            <form method="get" action="">
+                            <!-- <form method="get" action="">
                                 <div class="search-box">
                                     <i class="fa-solid fa-magnifying-glass"></i>
                                     <input type="text" name="keyword" value="${keyword}"
                                         placeholder="Search flashcard...">
                                 </div>
-                            </form>
+                            </form> -->
 
                             <a href="<c:url value='/admin/deck'/>">
                                 <button type="button" class="btn btn-gray">

@@ -146,23 +146,37 @@
 
                         </section>
                         <c:if test="${totalPages > 1}">
+                            <c:url value="/client/course" var="baseUrl">
+                                <c:if test="${not empty keyword}">
+                                    <c:param name="keyword" value="${keyword}" />
+                                </c:if>
+                                <c:forEach items="${selectedFilters}" var="f">
+                                    <c:param name="filters" value="${f}" />
+                                </c:forEach>
+                            </c:url>
+
                             <nav aria-label="Page navigation" style="margin-top: 20px;">
                                 <ul class="custom-pagination">
 
                                     <li class="page-item ${currentPage == 1 ? 'disabled' : ''}">
-                                        <a class="page-link" href="?page=${currentPage - 1}" aria-label="Previous">
+                                        <a class="page-link"
+                                            href="${baseUrl}${baseUrl.contains('?') ? '&' : '?'}page=${currentPage - 1}"
+                                            aria-label="Previous">
                                             <span aria-hidden="true">&laquo;</span>
                                         </a>
                                     </li>
 
                                     <c:forEach begin="1" end="${totalPages}" var="i">
                                         <li class="page-item ${currentPage == i ? 'active' : ''}">
-                                            <a class="page-link" href="?page=${i}">${i}</a>
+                                            <a class="page-link"
+                                                href="${baseUrl}${baseUrl.contains('?') ? '&' : '?'}page=${i}">${i}</a>
                                         </li>
                                     </c:forEach>
 
                                     <li class="page-item ${currentPage == totalPages ? 'disabled' : ''}">
-                                        <a class="page-link" href="?page=${currentPage + 1}" aria-label="Next">
+                                        <a class="page-link"
+                                            href="${baseUrl}${baseUrl.contains('?') ? '&' : '?'}page=${currentPage + 1}"
+                                            aria-label="Next">
                                             <span aria-hidden="true">&raquo;</span>
                                         </a>
                                     </li>

@@ -26,9 +26,10 @@ public interface DeckRepository extends JpaRepository<Deck, Long> {
 
         // COMMUNITY
         @Query("SELECT DISTINCT d FROM Deck d " +
-                        "WHERE d.status = true AND d.scope = 'Public'" +
-                        "AND (:keyword IS NULL OR d.title LIKE %:keyword%)")
-        Page<Deck> findPublicActiveDeck(@Param("keyword") String keywork, Pageable pageable);
+                        "WHERE d.status = true AND d.scope = 'Public' " +
+                        "AND (:keyword IS NULL OR LOWER(d.title) LIKE LOWER(CONCAT('%', :keyword, '%'))) " +
+                        "AND (d.user.role.name IS NULL OR d.user.role.name <> 'ADMIN')")
+        Page<Deck> findPublicActiveDeck(@Param("keyword") String keyword, Pageable pageable);
 
         // COURSE
         @Query("SELECT d FROM Deck d " +
@@ -53,7 +54,7 @@ public interface DeckRepository extends JpaRepository<Deck, Long> {
                         "WHERE (:keyword IS NULL OR d.title LIKE CONCAT('%', :keyword, '%')) " +
                         "AND d.status = true " +
                         "AND (" +
-                        "    'ALL' IN :filters OR ( " + // <--- SỬA DÒNG NÀY
+                        "    'ALL' IN :filters OR ( " +
                         "        ('Public' IN :filters AND d.scope = 'Public') OR " +
                         "        ('Private' IN :filters AND d.scope = 'Private') OR " +
                         "        ('Mine' IN :filters AND d.user_id = :userId) OR " +
@@ -61,27 +62,43 @@ public interface DeckRepository extends JpaRepository<Deck, Long> {
                         "        ('Other' IN :filters AND d.user_id != :userId AND r.name != 'ADMIN') " +
                         "    )" +
                         ") " +
-                        "AND (d.user_id = :userId OR ( d.user_id != :userId AND d.scope = 'Public' AND p.id IS NOT NULL)) "
-                        +
+                        "AND (" +
+                        "    d.user_id = :userId " + // Lấy bộ của chính mình
+                        "    OR (d.scope = 'Public' AND EXISTS (" + // Hoặc bộ Public mà mình đã học
+                        "        SELECT 1 FROM Progress p2 " +
+                        "        JOIN Card c2 ON p2.card_id = c2.id " +
+                        "        WHERE c2.deck_id = d.id AND p2.user_id = :userId" +
+                        "    ))" +
+                        ") " +
                         "GROUP BY d.id, d.title, d.image, d.des, d.scope, u.user_name, d.user_id", countQuery = "SELECT COUNT(DISTINCT d.id) FROM Deck d "
                                         +
                                         "JOIN User u ON d.user_id = u.id JOIN Role r ON u.role_id = r.id " +
                                         "WHERE (:keyword IS NULL OR d.title LIKE CONCAT('%', :keyword, '%')) " +
                                         "AND d.status = true " +
-                                        "AND ('ALL' IN :filters OR ( " + // <--- SỬA DÒNG NÀY TRONG COUNT QUERY NỮA
+                                        "AND ('ALL' IN :filters OR ( " +
                                         "    ('Public' IN :filters AND d.scope = 'Public') OR " +
                                         "    ('Private' IN :filters AND d.scope = 'Private') OR " +
                                         "    ('Mine' IN :filters AND d.user_id = :userId) OR " +
                                         "    ('Admin' IN :filters AND r.name = 'ADMIN') OR " +
                                         "    ('Other' IN :filters AND d.user_id != :userId AND r.name != 'ADMIN') " +
                                         ")) " +
-                                        "AND (d.user_id = :userId OR d.scope = 'Public')", nativeQuery = true)
+                                        "AND (d.user_id = :userId OR (d.scope = 'Public' AND EXISTS (" +
+                                        "    SELECT 1 FROM Progress p2 JOIN Card c2 ON p2.card_id = c2.id " +
+                                        "    WHERE c2.deck_id = d.id AND p2.user_id = :userId)))", nativeQuery = true)
         Page<Object[]> findAdvancedDecks(@Param("keyword") String keyword,
                         @Param("filters") List<String> filters,
                         @Param("userId") Long userId,
                         Pageable pageable);
-}
 
+        @Query("""
+                            SELECT COUNT(d)
+                            FROM Deck d
+                            JOIN d.user u
+                            JOIN u.role r
+                            WHERE r.name = :roleName
+                        """)
+        long countByUserRoleName(@Param("roleName") String roleName);
+}
 // @Query(value = "SELECT d.id, d.title, d.image, d.des, d.scope, u.user_name, "
 // +
 

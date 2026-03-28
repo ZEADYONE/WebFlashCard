@@ -136,8 +136,11 @@
                     <c:if test="${totalPages > 1}">
                         <nav aria-label="Page navigation" style="margin-top: 20px;">
                             <ul class="custom-pagination">
+
                                 <li class="page-item ${currentPage == 1 ? 'disabled' : ''}">
-                                    <button class="page-link page-node" data-page="${currentPage - 1}">&laquo;</button>
+                                    <a class="page-link" href="?page=${currentPage - 1}" aria-label="Previous">
+                                        <span aria-hidden="true">&laquo;</span>
+                                    </a>
                                 </li>
 
                                 <c:forEach begin="1" end="${totalPages}" var="i">
@@ -147,7 +150,9 @@
                                 </c:forEach>
 
                                 <li class="page-item ${currentPage == totalPages ? 'disabled' : ''}">
-                                    <button class="page-link page-node" data-page="${currentPage + 1}">&raquo;</button>
+                                    <a class="page-link" href="?page=${currentPage + 1}" aria-label="Next">
+                                        <span aria-hidden="true">&raquo;</span>
+                                    </a>
                                 </li>
                             </ul>
                         </nav>
