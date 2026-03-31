@@ -21,13 +21,6 @@
                     <p>Master English with Interactive Exercises</p>
                 </div>
 
-                <c:if test="${sessionScope.role != 'ADMIN'}">
-                    <div class="nav-links">
-                        <a href="/">HOME</a>
-                        <a href=" /client/library">FLASHCARD</a>
-                    </div>
-                </c:if>
-
                 <div class="container-info" id="userDropdownTrigger">
                     <i class="fa-regular fa-user"></i>
                     <span class="user-name">${sessionScope.fullName}</span>
@@ -42,9 +35,9 @@
                         </a>
 
                         <c:if test="${sessionScope.role == 'ADMIN'}">
-                            <a href="<c:url value='/admin'/>">
+                            <a href="<c:url value='/'/>">
                                 <div class="dropdown-item">
-                                    <i class="fa-regular fa-user"></i> Admin
+                                    <i class="fa-regular fa-user"></i>Client
                                 </div>
                             </a>
                         </c:if>

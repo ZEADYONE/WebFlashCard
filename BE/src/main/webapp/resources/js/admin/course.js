@@ -52,7 +52,7 @@ fixDeck.forEach(item => {
 createDeck.forEach(item => {
     item.addEventListener("click", function () {
 
-        deckIdInput.removeAttribute("name");
+        deckIdInput.name = "";
 
         popupTitle.value = "";
         popupDesc.value = "";

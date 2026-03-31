@@ -2,15 +2,19 @@
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
         <!DOCTYPE html>
+
         <html lang="vi">
 
         <head>
             <meta charset="UTF-8">
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <title>Add Card - English Learning Platform</title>
+            <title>Update Card</title>
+
 
             <link rel="stylesheet" href="/css/client/card.css">
             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+
         </head>
 
         <body>
@@ -20,14 +24,6 @@
                     <h1>English Learning Platform</h1>
                     <p>Master English with Interactive Exercises</p>
                 </div>
-
-                <c:if test="${sessionScope.role != 'ADMIN'}">
-                    <div class="nav-links">
-                        <a href="/">HOME</a>
-                        <a href=" /client/library">FLASHCARD</a>
-                    </div>
-                </c:if>
-
                 <div class="container-info" id="userDropdownTrigger">
                     <i class="fa-regular fa-user"></i>
                     <span class="user-name">${sessionScope.fullName}</span>
@@ -42,9 +38,9 @@
                         </a>
 
                         <c:if test="${sessionScope.role == 'ADMIN'}">
-                            <a href="<c:url value='/admin'/>">
+                            <a href="<c:url value='/'/>">
                                 <div class="dropdown-item">
-                                    <i class="fa-regular fa-user"></i> Admin
+                                    <i class="fa-regular fa-user"></i>Client
                                 </div>
                             </a>
                         </c:if>
@@ -63,52 +59,54 @@
             </header>
 
             <main class="container">
-                <h1 class="page-title">Add Card</h1>
+                <h1 class="page-title">Update Card</h1>
 
-                <!-- FORM -->
-                <form id="addCardForm" class="form-content" action="<c:url value='/client/card/create/${deckId}'/>"
-                    method="post" modelAttribute="card" enctype="multipart/form-data">
+
+                <form class="form-content" action="<c:url value='/admin/deck/card/update/${card.id}'/>" method="post"
+                    modelAttribute="card" enctype="multipart/form-data">
 
                     <!-- CSRF -->
                     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 
+                    <!-- hidden id -->
+                    <input type="hidden" name="id" value="${card.id}" />
                     <div class="form-row">
 
                         <div class="form-group">
                             <label>Word</label>
-                            <input type="text" name="word" placeholder="Word" required>
+                            <input type="text" name="word" value="${card.word}" required>
                         </div>
 
                         <div class="form-group">
                             <label>Transliteration</label>
-                            <input type="text" name="trans" placeholder="Transliteration">
+                            <input type="text" name="trans" value="${card.trans}">
                         </div>
 
                         <div class="form-group">
                             <label>Vietnamese</label>
-                            <input type="text" name="mean" placeholder="Vietnamese" required>
+                            <input type="text" name="mean" value="${card.mean}" required>
                         </div>
 
                     </div>
 
                     <div class="form-group full-width">
                         <label>Example</label>
-                        <textarea name="example" placeholder="Example"></textarea>
+                        <textarea name="example">${card.example}</textarea>
                     </div>
 
                     <div class="form-group full-width">
                         <label>Definition</label>
-                        <textarea name="definition" placeholder="Definition"></textarea>
+                        <textarea name="definition">${card.definition}</textarea>
                     </div>
 
                     <div class="bottom-section">
 
                         <!-- IMAGE -->
                         <div class="image-upload-wrapper">
-                            <label style="font-weight: bold;font-size: 1.1rem;">Image</label>
+                            <label style="font-weight: bold;">Image</label>
 
-                            <div class="image-box" onclick="document.getElementById('fileInput').click()">
-                                <i class="fa-solid fa-upload"></i>
+                            <div class="image-box" onclick="document.getElementById('fileInput').click()"
+                                style="background-image: url('/images/client/${card.image}'); background-size: cover;">
                             </div>
 
                             <input type="file" id="fileInput" name="images" hidden>
@@ -120,10 +118,16 @@
                             <div class="form-group">
                                 <label>Sound</label>
                                 <input type="file" name="sounds">
+
+                                <c:if test="${not empty card.sound}">
+                                    <audio controls>
+                                        <source src="/sound/client/${card.sound}" type="audio/mpeg">
+                                    </audio>
+                                </c:if>
                             </div>
 
                             <div class="button-group">
-                                <button type="submit" class="btn btn-add">Add</button>
+                                <button type="submit" class="btn btn-add">Update</button>
                                 <button type="button" class="btn btn-back" onclick="history.back()">Back</button>
                             </div>
 
@@ -132,6 +136,8 @@
                     </div>
 
                 </form>
+
+
             </main>
 
             <script src="/js/client/head-foot.js"></script>

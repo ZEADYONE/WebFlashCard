@@ -59,7 +59,7 @@
                 <main class="container-view">
                     <h2 class="page-title">View Deck</h2>
 
-                    <form class="edit-top" action="#" method="GET">
+                    <div class="edit-top">
                         <div class="form-group">
                             <div class="input-item">
                                 <label>Title</label>
@@ -87,13 +87,11 @@
                         </div>
 
                         <div class="all-btn">
-                            <!-- <form method="get" action="">
-                                <div class="search-box">
-                                    <i class="fa-solid fa-magnifying-glass"></i>
-                                    <input type="text" name="keyword" value="${keyword}"
-                                        placeholder="Search flashcard...">
-                                </div>
-                            </form> -->
+                            <form class="search-box" id="searchForm" action="/admin/deck/view/${deck.id}" method="get">
+                                <button type="submit" style="display: none;"></button>
+                                <i class="fa-solid fa-magnifying-glass" style="cursor: pointer;"></i>
+                                <input type="text" name="keyword" value="${keyword}" placeholder="Search flashcard...">
+                            </form>
 
                             <a href="<c:url value='/admin/deck'/>">
                                 <button type="button" class="btn btn-gray">
@@ -101,7 +99,10 @@
                                 </button>
                             </a>
                         </div>
-                    </form>
+                    </div>
+
+
+
 
                     <section class="flashcards-container">
                         <div class="cards-grid" id="cardsGrid">
@@ -124,7 +125,7 @@
                                         style="cursor: pointer;">
                                     </i>
 
-                                    <div class="card-action">
+                                    <!-- <div class="card-action">
                                         <a href="<c:url value='/client/card/update/${card.id}'/>">
                                             <i class="fas fa-wrench fix_deck"></i>
                                         </a>
@@ -137,7 +138,7 @@
                                                 <i class="fas fa-trash-alt trash"></i>
                                             </button>
                                         </form>
-                                    </div>
+                                    </div> -->
 
                                 </div>
                             </c:forEach>
@@ -156,7 +157,8 @@
 
                                     <c:forEach begin="1" end="${totalPages}" var="i">
                                         <li class="page-item ${currentPage == i ? 'active' : ''}">
-                                            <button class="page-link page-node" data-page="${i}">${i}</button>
+                                            <a class="page-link"
+                                                href="?page=${i}${not empty keyword ? '&keyword='.concat(keyword) : ''}">${i}</a>
                                         </li>
                                     </c:forEach>
 

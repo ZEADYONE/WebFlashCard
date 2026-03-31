@@ -83,10 +83,9 @@
                             </div>
 
                             <div class="toolbar">
-                                <form class="search-box" id="searchForm">
+                                <form class="search-box" id="searchForm" action="/admin/course" method="get">
                                     <i class="fas fa-search"></i>
-                                    <input type="text" name="keyword" value="${param.keyword}"
-                                        placeholder="Search library ...">
+                                    <input type="text" name="keyword" value="${keyword}" placeholder="Search course...">
                                 </form>
 
                                 <div class="filter-dropdown-container">
@@ -153,20 +152,24 @@
                             <c:if test="${totalPages > 1}">
                                 <nav aria-label="Page navigation" style="margin-top: 20px;">
                                     <ul class="custom-pagination">
+
                                         <li class="page-item ${currentPage == 1 ? 'disabled' : ''}">
-                                            <button class="page-link page-node"
-                                                data-page="${currentPage - 1}">&laquo;</button>
+                                            <a class="page-link" href="?page=${currentPage - 1}" aria-label="Previous">
+                                                <span aria-hidden="true">&laquo;</span>
+                                            </a>
                                         </li>
 
                                         <c:forEach begin="1" end="${totalPages}" var="i">
                                             <li class="page-item ${currentPage == i ? 'active' : ''}">
-                                                <button class="page-link page-node" data-page="${i}">${i}</button>
+                                                <a class="page-link"
+                                                    href="?page=${i}${not empty keyword ? '&keyword='.concat(keyword) : ''}">${i}</a>
                                             </li>
                                         </c:forEach>
 
                                         <li class="page-item ${currentPage == totalPages ? 'disabled' : ''}">
-                                            <button class="page-link page-node"
-                                                data-page="${currentPage + 1}">&raquo;</button>
+                                            <a class="page-link" href="?page=${currentPage + 1}" aria-label="Next">
+                                                <span aria-hidden="true">&raquo;</span>
+                                            </a>
                                         </li>
                                     </ul>
                                 </nav>
@@ -213,7 +216,7 @@
 
                 <script src="/js/admin/style.js"></script>
                 <script src="/js/admin/course.js"></script>
-                <script>
+                <!-- <script>
                     // Hàm dùng chung để chuyển hướng kèm theo tất cả params (search + filter + page)
                     function submitFilter(pageNumber) {
                         const searchInput = document.querySelector('input[name="keyword"]');
@@ -248,7 +251,7 @@
                         e.preventDefault();
                         submitFilter(1); // Filter mới thì về trang 1
                     });
-                </script>
+                </script> -->
             </body>
 
             </html>

@@ -24,12 +24,12 @@
                     <h1>English Learning Platform</h1>
                     <p>Master English with Interactive Exercises</p>
                 </div>
-
-                <div class="nav-links">
-                    <a href="/">HOME</a>
-                    <a href=" /client/library">FLASHCARD</a>
-                </div>
-
+                <c:if test="${sessionScope.role != 'ADMIN'}">
+                    <div class="nav-links">
+                        <a href="/">HOME</a>
+                        <a href=" /client/library">FLASHCARD</a>
+                    </div>
+                </c:if>
                 <div class="container-info" id="userDropdownTrigger">
                     <i class="fa-regular fa-user"></i>
                     <span class="user-name">${sessionScope.fullName}</span>

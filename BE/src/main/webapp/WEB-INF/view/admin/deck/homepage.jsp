@@ -82,10 +82,10 @@
                             <div class="table-wrapper">
                                 <div class="toolbar">
                                     <div class="search-filter-group">
-                                        <form action="/admin/decks/search" method="get" class="search-box">
+                                        <form action="/admin/deck" method="get" class="search-box">
                                             <i class="fa-solid fa-magnifying-glass"></i>
-                                            <input type="text" name="keyword" placeholder="Search Deck..."
-                                                value="${param.keyword}">
+                                            <input type="text" name="keyword" value="${keyword}"
+                                                placeholder="Search Deck...">
                                         </form>
 
                                         <div class="filter-dropdown-container">
@@ -180,7 +180,8 @@
 
                                             <c:forEach begin="1" end="${totalPages}" var="i">
                                                 <li class="page-item ${currentPage == i ? 'active' : ''}">
-                                                    <button class="page-link page-node" data-page="${i}">${i}</button>
+                                                    <a class="page-link"
+                                                        href="?page=${i}${not empty keyword ? '&keyword='.concat(keyword) : ''}">${i}</a>
                                                 </li>
                                             </c:forEach>
 
@@ -199,7 +200,7 @@
 
                 <script src="/js/admin/style.js"></script>
                 <script src="/js/admin/deck.js"></script>
-                <script>
+                <!-- <script>
                     document.querySelectorAll('.page-node').forEach(button => {
                         button.addEventListener('click', function (e) {
                             e.preventDefault();
@@ -232,7 +233,7 @@
                         params.set('page', 1); // Reset về trang 1 khi search mới
                         window.location.href = "/admin/deck?" + params.toString();
                     });
-                </script>
+                </script> -->
             </body>
 
             </html>

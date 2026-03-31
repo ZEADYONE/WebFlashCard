@@ -58,10 +58,8 @@
 
                 <main class="container-view">
                     <h2 class="page-title">Edit Deck</h2>
-                    <c:url var="updateUrl" value="/admin/deck/update/${deck.id}" />
-
-                    <form:form class="edit-top" action="${updateUrl}" method="post" modelAttribute="deck"
-                        enctype="multipart/form-data">
+                    <form:form class="edit-top" style="margin-bottom: 0px;" action="/admin/deck/update/${deck.id}"
+                        method="post" modelAttribute="deck" enctype="multipart/form-data">
 
                         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 
@@ -94,15 +92,7 @@
                         </div>
 
                         <div class="all-btn">
-                            <!-- <form method="get" action="">
-                                <div class="search-box">
-                                    <i class="fa-solid fa-magnifying-glass"></i>
-                                    <input type="text" name="keyword" value="${keyword}"
-                                        placeholder="Search flashcard...">
-                                </div>
-                            </form> -->
-
-                            <a href="<c:url value='/client/card/create/${deck.id}'/>">
+                            <a href="<c:url value='/admin/deck/card/create/${deck.id}'/>">
                                 <button type="button" class="btn btn-pink">
                                     <i class="fa-solid fa-wand-magic-sparkles"></i> Add card
                                 </button>
@@ -121,6 +111,14 @@
                             </div>
                         </div>
                     </form:form>
+
+                    <form class="search-box" style="margin-bottom: 10px;" id="searchForm"
+                        action="/admin/deck/update/${deck.id}" method="get">
+                        <button type="submit" style="border: none;">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </button>
+                        <input type="text" name="keyword" value="${keyword}" placeholder="Search flashcard...">
+                    </form>
 
                     <section class="flashcards-container">
                         <div class="cards-grid" id="cardsGrid">
@@ -142,11 +140,11 @@
                                     </i>
 
                                     <div class="card-action">
-                                        <a href="<c:url value='/client/card/update/${card.id}'/>">
+                                        <a href="<c:url value='/admin/deck/card/update/${card.id}'/>">
                                             <i class="fas fa-wrench fix_deck"></i>
                                         </a>
 
-                                        <form action="/client/card/delete/${card.id}" method="post"
+                                        <form action="/admin/deck/card/delete/${card.id}" method="post"
                                             style="display:inline;">
                                             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
                                             <button type="submit"
@@ -171,7 +169,8 @@
 
                                     <c:forEach begin="1" end="${totalPages}" var="i">
                                         <li class="page-item ${currentPage == i ? 'active' : ''}">
-                                            <button class="page-link page-node" data-page="${i}">${i}</button>
+                                            <a class="page-link"
+                                                href="?page=${i}${not empty keyword ? '&keyword='.concat(keyword) : ''}">${i}</a>
                                         </li>
                                     </c:forEach>
 

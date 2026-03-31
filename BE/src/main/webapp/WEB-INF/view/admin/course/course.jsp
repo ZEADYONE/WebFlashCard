@@ -145,7 +145,8 @@
 
                                 <c:forEach begin="1" end="${totalPages}" var="i">
                                     <li class="page-item ${currentPage == i ? 'active' : ''}">
-                                        <button class="page-link page-node" data-page="${i}">${i}</button>
+                                        <a class="page-link"
+                                            href="?page=${i}${not empty keyword ? '&keyword='.concat(keyword) : ''}">${i}</a>
                                     </li>
                                 </c:forEach>
 

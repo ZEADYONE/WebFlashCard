@@ -94,14 +94,7 @@ public class CourseController {
             Principal principal) {
 
         String pathImg = this.uploadService.handleSaveUploadImg(file, "client");
-
-        if (pathImg.isEmpty()) {
-            deck.setImage(this.deckService.getDeckById(deck.getId()).getImage());
-        } else {
-
-            deck.setImage(pathImg);
-        }
-
+        deck.setImage(pathImg);
         String username = principal.getName();
         User user = this.userService.getUserByEmail(username);
         deck.setUser(user);

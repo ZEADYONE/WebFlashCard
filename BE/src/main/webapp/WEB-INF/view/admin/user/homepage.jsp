@@ -82,10 +82,10 @@
                             <div class="table-wrapper">
                                 <div class="toolbar">
                                     <div class="search-filter-group">
-                                        <form action="/admin/users/search" method="get" class="search-box">
+                                        <form action="/admin/user" method="get" class="search-box">
                                             <i class="fa-solid fa-magnifying-glass"></i>
-                                            <input type="text" name="keyword" placeholder="Search..."
-                                                value="${param.keyword}">
+                                            <input type="text" name="keyword" value="${keyword}"
+                                                placeholder="Search User...">
                                         </form>
 
                                         <div class="filter-dropdown-container">
@@ -189,7 +189,8 @@
 
                                             <c:forEach begin="1" end="${totalPages}" var="i">
                                                 <li class="page-item ${currentPage == i ? 'active' : ''}">
-                                                    <button class="page-link page-node" data-page="${i}">${i}</button>
+                                                    <a class="page-link"
+                                                        href="?page=${i}${not empty keyword ? '&keyword='.concat(keyword) : ''}">${i}</a>
                                                 </li>
                                             </c:forEach>
 
@@ -198,7 +199,6 @@
                                                     <span aria-hidden="true">&raquo;</span>
                                                 </a>
                                             </li>
-
                                         </ul>
                                     </nav>
                                 </c:if>
@@ -208,7 +208,7 @@
                 </div>
                 <script src="/js/admin/style.js"></script>
                 <script src="/js/admin/user.js"></script>
-                <script>
+                <!-- <script>
                     document.querySelectorAll('.page-node').forEach(button => {
                         button.addEventListener('click', function (e) {
                             e.preventDefault();
@@ -241,7 +241,7 @@
                         params.set('page', 1); // Reset về trang 1 khi search mới
                         window.location.href = "/admin/user?" + params.toString();
                     });
-                </script>
+                </script> -->
             </body>
 
             </html>
