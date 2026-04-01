@@ -146,7 +146,6 @@ public class CardController {
         Deck deck = this.deckService.getDeckById(deckId);
         card.setDeck(deck);
 
-        // Bây giờ card.getId() sẽ in ra 0 hoặc null vì không bị binding nhầm nữa
         System.out.println(card.getId() + " ID CARD");
 
         String pathImg = this.uploadService.handleSaveUploadImg(img, "client");
@@ -209,7 +208,7 @@ public class CardController {
 
     // DELETE
 
-    @PostMapping("/admi/card/delete/{id}")
+    @PostMapping("/admin/card/delete/{id}")
     public String deleteCardAdmin(@PathVariable("id") long id) {
         Card card = this.cardService.getCard(id);
         long deckId = card.getDeck().getId();
