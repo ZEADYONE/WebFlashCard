@@ -121,9 +121,9 @@
                                         </div>
                                     </a>
 
-                                    <i class="fa-solid fa-volume-high audio-icon" onclick="playAudio('${card.sound}')"
-                                        style="cursor: pointer;">
-                                    </i>
+                                    <div class="audio-icon" data-word="${card.word}" style="cursor: pointer;">
+                                        <i class="fa-solid fa-volume-high"></i>
+                                    </div>
 
                                     <!-- <div class="card-action">
                                         <a href="<c:url value='/client/card/update/${card.id}'/>">

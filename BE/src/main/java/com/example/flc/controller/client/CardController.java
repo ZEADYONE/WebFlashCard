@@ -129,14 +129,14 @@ public class CardController {
 
     // CREATE
 
-    @GetMapping("/admin/course/card/create/{deckId}")
+    @GetMapping("/admin/card/create/{deckId}")
     public String getCreateCardPageAdmin(@PathVariable("deckId") long deckId, Model model) {
         model.addAttribute("deckId", deckId);
         model.addAttribute("card", new Card());
         return "admin/course/create";
     }
 
-    @PostMapping("/admin/course/card/create/{deckId}") // Đổi ở đây
+    @PostMapping("/admin/card/create/{deckId}") // Đổi ở đây
     public String createCardAdmin(
             @PathVariable("deckId") long deckId,
             @ModelAttribute("card") Card card,
@@ -162,14 +162,14 @@ public class CardController {
     }
 
     // UPDATE
-    @GetMapping("/admin/course/card/update/{id}")
+    @GetMapping("/admin/card/update/{id}")
     public String getUpdateCardPageAdmin(@PathVariable("id") long id, Model model) {
         Card card = this.cardService.getCard(id);
         model.addAttribute("card", card);
         return "admin/course/update";
     }
 
-    @PostMapping("/admin/course/card/update/{id}")
+    @PostMapping("/admin/card/update/{id}")
     public String updateCardAdmin(
             @ModelAttribute("card") Card card,
             @RequestParam("images") MultipartFile img,
@@ -199,7 +199,7 @@ public class CardController {
 
     // VIEW
 
-    @GetMapping("/admin/course/card/view/{id}")
+    @GetMapping("/admin/card/view/{id}")
     public String getViewCardPageAdmin(@PathVariable("id") long id, Model model) {
 
         Card card = this.cardService.getCard(id);
@@ -209,7 +209,7 @@ public class CardController {
 
     // DELETE
 
-    @PostMapping("/admin/course/card/delete/{id}")
+    @PostMapping("/admi/card/delete/{id}")
     public String deleteCardAdmin(@PathVariable("id") long id) {
         Card card = this.cardService.getCard(id);
         long deckId = card.getDeck().getId();

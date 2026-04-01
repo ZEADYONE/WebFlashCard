@@ -156,12 +156,12 @@ public class UserController {
 
         User oldUser = this.userService.getUserByEmail(principal.getName());
 
-        // chỉ update field cần thiết
         oldUser.setFullName(user.getFullName());
         oldUser.setPhoneNumber(user.getPhoneNumber());
         oldUser.setDateOfBirth(user.getDateOfBirth());
         oldUser.setLocation(user.getLocation());
         oldUser.setBio(user.getBio());
+        oldUser.setUserName(user.getUserName());
 
         this.userService.handelSaveUser(oldUser);
 

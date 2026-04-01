@@ -1,16 +1,27 @@
 
-function playAudio(soundFile) {
-    if (!soundFile || soundFile === "") {
-        alert("Chưa có file âm thanh cho từ này!");
-        return;
+// Control: Xử lý giọng đọc
+const VoiceControl = {
+    speak(text) {
+        if (!text) return;
+
+        // Dừng các câu đang đọc dở để ưu tiên từ mới nhất
+        window.speechSynthesis.cancel();
+
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.lang = 'en-US';
+        utterance.rate = 0.9; // Đọc chậm một chút để người học dễ nghe
+
+        window.speechSynthesis.speak(utterance);
     }
+};
 
-    // Đường dẫn phải khớp với thư mục bạn lưu trong UploadService
-    const audioPath = " /sound/client/" + soundFile;
+// Lắng nghe sự kiện (Boundary -> Control)
+document.addEventListener('click', (e) => {
+    // Kiểm tra xem user có click vào icon loa hoặc div bao quanh không
+    const btn = e.target.closest('.audio-icon');
 
-    const audio = new Audio(audioPath);
-    audio.play().catch(e => {
-        console.error("Lỗi phát âm thanh: ", e);
-        alert("Không thể phát file âm thanh. Hãy kiểm tra lại đường dẫn!");
-    });
-}
+    if (btn) {
+        const word = btn.getAttribute('data-word');
+        VoiceControl.speak(word);
+    }
+});

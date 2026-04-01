@@ -191,18 +191,26 @@
                 }
 
                 // ================= AUDIO =================
+                const VoiceControl = {
+                    speak(text) {
+                        if (!text) return;
+
+                        // Dừng các câu đang đọc dở để ưu tiên từ mới nhất
+                        window.speechSynthesis.cancel();
+
+                        const utterance = new SpeechSynthesisUtterance(text);
+                        utterance.lang = 'en-US';
+                        utterance.rate = 0.9; // Đọc chậm một chút để người học dễ nghe
+
+                        window.speechSynthesis.speak(utterance);
+                    }
+                };
+
                 function playAudio(event) {
                     event.stopPropagation();
 
                     const card = cards[currentIndex];
-
-                    if (!card.sound) {
-                        alert("Không có audio");
-                        return;
-                    }
-
-                    const audio = new Audio("/sound/client/" + card.sound);
-                    audio.play();
+                    VoiceControl.speak(card.word);
                 }
 
                 // ================= ANSWER =================

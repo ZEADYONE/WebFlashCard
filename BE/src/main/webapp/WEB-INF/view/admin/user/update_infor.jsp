@@ -87,7 +87,7 @@
                 <section class="info-card">
                     <h3><i class="fa-solid fa-user"></i> Personal Information</h3>
 
-                    <form action="<c:url value='/profile/edit'/>" method="post">
+                    <form action="<c:url value='/profile/edit'/>" method="post" modelAttribute="user">
                         <div>
                             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
                         </div>
@@ -97,7 +97,7 @@
                                 <label>UserName</label>
                                 <div class="input-wrapper">
                                     <i class="fa-solid fa-user"></i>
-                                    <input type="text" value="${user.userName}">
+                                    <input type="text" name="userName" value="${user.userName}">
                                 </div>
                             </div>
 

@@ -107,8 +107,7 @@
                     <div class="sound-and-actions">
 
                         <div class="form-group">
-                            <label>Sound</label>
-                            <input type="file" name="sounds" disabled>
+                            <input type="file" name="sounds" disabled hidden>
 
                             <c:if test="${not empty card.sound}">
                                 <audio controls>

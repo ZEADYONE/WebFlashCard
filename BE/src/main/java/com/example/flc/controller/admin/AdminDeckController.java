@@ -54,8 +54,8 @@ public class AdminDeckController {
         model.addAttribute("currentPage", page);
         model.addAttribute("totalPages", pageDeck.getTotalPages());
 
-        model.addAttribute("keyword", keyword);
-        model.addAttribute("selectedStatus", status);
+        // model.addAttribute("keyword", keyword);
+        // model.addAttribute("selectedStatus", status);
 
         return "admin/deck/homepage";
     }

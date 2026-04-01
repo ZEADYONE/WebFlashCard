@@ -21,33 +21,32 @@
                         <h1>English Learning Platform</h1>
                         <p>Master English with Interactive Exercises</p>
                     </div>
-
                     <div class="container-info" id="userDropdownTrigger">
                         <i class="fa-regular fa-user"></i>
-                        <span class="user-name">
-                            <c:out value="${not empty sessionScope.fullName ? sessionScope.fullName : 'Admin User'}" />
-                        </span>
+                        <span class="user-name">${sessionScope.fullName}</span>
                         <i class="fa-solid fa-chevron-down mini-arrow"></i>
 
                         <div class="info-dropdown" id="infoDropdown">
-                            <a href="${pageContext.request.contextPath}/profile" class="dropdown-item">
-                                <i class="fa-solid fa-circle-info"></i>
-                                <span>Information</span>
+
+                            <a href="<c:url value='/user/info'/>">
+                                <div class="dropdown-item">
+                                    <i class="fa-solid fa-circle-info"></i> Information
+                                </div>
                             </a>
 
                             <c:if test="${sessionScope.role == 'ADMIN'}">
-                                <a href="${pageContext.request.contextPath}/" class="dropdown-item">
-                                    <i class="fa-solid fa-house-user"></i>
-                                    <span>Client Homepage</span>
+                                <a href="<c:url value='/'/>">
+                                    <div class="dropdown-item">
+                                        <i class="fa-regular fa-user"></i>Client
+                                    </div>
                                 </a>
                             </c:if>
 
-                            <form method="post" action="${pageContext.request.contextPath}/logout" style="margin: 0;">
-                                <c:if test="${not empty _csrf}">
-                                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
-                                </c:if>
+                            <form method="post" action="<c:url value='/logout'/>">
+                                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+
                                 <button type="submit" class="dropdown-item"
-                                    style="width: 100%; border: none; background: white; cursor: pointer; text-align: left; padding: 10px 15px;">
+                                    style="width: 100%; border: none; background-color: white;">
                                     <i class="fa-solid fa-right-from-bracket"></i>
                                     <span>Logout</span>
                                 </button>
@@ -123,7 +122,7 @@
                     </main>
                 </div>
 
-                <script src="${pageContext.request.contextPath}/js/style.js"></script>
+                <script src="/js/client/head-foot.js"></script>
             </body>
 
             </html>

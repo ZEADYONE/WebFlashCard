@@ -126,9 +126,9 @@
                                     <i class="fa-solid fa-volume-high"></i>
                                 </div> -->
 
-                                <i class="fa-solid fa-volume-high audio-icon" onclick="playAudio('${card.sound}')"
-                                    style="cursor: pointer;">
-                                </i>
+                                <div class="audio-icon" data-word="${card.word}" style="cursor: pointer;">
+                                    <i class="fa-solid fa-volume-high"></i>
+                                </div>
 
                                 <!-- ACTION -->
                                 <c:if test="${currentUser == card.deck.user.id}">
