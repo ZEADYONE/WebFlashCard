@@ -41,7 +41,6 @@ public class GameResController {
         String username = principal.getName();
         User user = this.userService.getUserByEmail(username);
         result.setUser(user);
-        // Giả sử bạn tìm User và Deck từ database qua ID
         // result.setUser(userService.findById(dto.getUserId()));
         // result.setDeck(deckService.findById(dto.getDeckId()));
 

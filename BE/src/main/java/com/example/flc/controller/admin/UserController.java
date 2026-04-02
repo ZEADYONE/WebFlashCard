@@ -56,10 +56,9 @@ public class UserController {
         model.addAttribute("listUser", pageUser.getContent());
         model.addAttribute("roles", this.roleService.getAll());
 
-        // Gửi lại dữ liệu để giữ trạng thái trên UI
-        model.addAttribute("keyword", keyword);
-        model.addAttribute("selectedStatus", status);
-        model.addAttribute("selectedRoles", roleIds);
+        // model.addAttribute("keyword", keyword);
+        // model.addAttribute("selectedStatus", status);
+        // model.addAttribute("selectedRoles", roleIds);
 
         return "admin/user/homepage";
     }

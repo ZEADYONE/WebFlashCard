@@ -54,7 +54,7 @@ public class CourseController {
         model.addAttribute("totalPages", pageDeck.getTotalPages());
 
         model.addAttribute("keyword", keyword);
-        model.addAttribute("selectedScope", scope); // Đổi tên attribute để dễ phân biệt
+        model.addAttribute("selectedScope", scope);
         return "admin/course/homepage";
     }
 
