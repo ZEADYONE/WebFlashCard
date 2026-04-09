@@ -45,7 +45,7 @@ public interface DeckRepository extends JpaRepository<Deck, Long> {
         @Query(value = "SELECT d.id, d.title, d.image, d.des, d.scope, u.user_name, " +
                         "COUNT(DISTINCT c.id) AS totalCards, " +
                         "COUNT(DISTINCT CASE WHEN p.is_correct = 1 THEN c.id END) AS correctCards, " +
-                        "d.user_id " +
+                        "d.user_id, d.is_featured " +
                         "FROM Deck d " +
                         "JOIN User u ON d.user_id = u.id " +
                         "JOIN Role r ON u.role_id = r.id " +
@@ -70,7 +70,7 @@ public interface DeckRepository extends JpaRepository<Deck, Long> {
                         "        WHERE c2.deck_id = d.id AND p2.user_id = :userId" +
                         "    ))" +
                         ") " +
-                        "GROUP BY d.id, d.title, d.image, d.des, d.scope, u.user_name, d.user_id", countQuery = "SELECT COUNT(DISTINCT d.id) FROM Deck d "
+                        "GROUP BY d.id, d.title, d.image, d.des, d.scope, u.user_name, d.user_id, d.is_featured", countQuery = "SELECT COUNT(DISTINCT d.id) FROM Deck d "
                                         +
                                         "JOIN User u ON d.user_id = u.id JOIN Role r ON u.role_id = r.id " +
                                         "WHERE (:keyword IS NULL OR d.title LIKE CONCAT('%', :keyword, '%')) " +
@@ -98,28 +98,7 @@ public interface DeckRepository extends JpaRepository<Deck, Long> {
                             WHERE r.name = :roleName
                         """)
         long countByUserRoleName(@Param("roleName") String roleName);
+
+        @Query("SELECT COUNT(d) FROM Deck d WHERE d.isFeatured = true")
+        long countFeatured();
 }
-// @Query(value = "SELECT d.id, d.title, d.image, d.des, d.scope, u.user_name, "
-// +
-
-// "COUNT(c.id) AS totalCards, " +
-
-// "COUNT(CASE WHEN p.is_correct = 1 THEN 1 END) AS correctCards, " +
-
-// "d.user_id AS user_id " + // 👈 thêm alias cho dễ dùng
-
-// "FROM Deck d " +
-
-// "JOIN User u ON d.user_id = u.id " +
-
-// "LEFT JOIN Card c ON c.deck_id = d.id " +
-
-// "LEFT JOIN Progress p ON p.card_id = c.id AND p.user_id = :userId " +
-
-// "WHERE ((d.user_id = :userId) OR ( d.scope = 'Public' AND d.user_id !=
-// :userId)) AND d.status = true " +
-
-// "GROUP BY d.id, d.title, d.image, d.des, d.scope, u.user_name, d.user_id",
-// nativeQuery = true)
-
-// List<Object[]> findDeckProgressRaw(@Param("userId") Long userId)

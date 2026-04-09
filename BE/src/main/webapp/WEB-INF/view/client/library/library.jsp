@@ -188,10 +188,25 @@
                                         </a>
 
                                         <div class="card-footer">
-                                            <span>
-                                                <i class="far fa-user"></i>
-                                                ${deck.userName}
-                                            </span>
+                                            <div>
+                                                <span>
+                                                    <i class="far fa-user"></i>
+                                                    ${deck.userName}
+                                                </span>
+
+                                                <c:choose>
+                                                    <c:when test="${deck.isFeatured}">
+                                                        <i style="color: rgb(255, 212, 59);"
+                                                            class="fa-solid fa-star text-warning"
+                                                            style="font-size: 1.1rem;"></i>
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                        <i style="color: rgb(255, 212, 59);"
+                                                            class="fa-regular fa-star text-secondary"
+                                                            style="font-size: 1.1rem;"></i>
+                                                    </c:otherwise>
+                                                </c:choose>
+                                            </div>
                                             <c:if test="${currentUser == deck.userId}">
                                                 <div class="card-actions"
                                                     style="display: flex; align-items: center; gap: 15px;">

@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.flc.domain.Card;
 import com.example.flc.domain.Deck;
@@ -131,5 +132,11 @@ public class AdminDeckController {
         }
 
         return "redirect:/admin/deck/update/" + id;
+    }
+
+    @PostMapping("/deck/featured/{id}")
+    public String toggleFeatured(@PathVariable Long id) {
+        deckService.toggleFeatured(id);
+        return "redirect:/admin/deck";
     }
 }

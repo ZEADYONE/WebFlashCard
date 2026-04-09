@@ -29,6 +29,7 @@ public class DashBoardController {
         model.addAttribute("totalUsers", stats.get("totalUsers"));
         model.addAttribute("totalDecks", stats.get("totalDecks"));
         model.addAttribute("totalCourses", deckRepository.countByUserRoleName("ADMIN"));
+        model.addAttribute("totalFeatured", deckRepository.countFeatured());
 
         return "admin/dashboard/dashboard"; // Trả về file dashboard.jsp
     }

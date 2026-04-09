@@ -117,6 +117,17 @@
                                             pattern="#,###" />
                                     </span>
                                 </div>
+
+                                <div class="stat-card green">
+                                    <div class="stat-icon-wrapper">
+                                        <i class="fa-solid fa-graduation-cap"></i>
+                                    </div>
+                                    <span class="label">Total Featured</span>
+                                    <span class="number">
+                                        <fmt:formatNumber value="${not empty totalFeatured ? totalFeatured : 0}"
+                                            pattern="#,###" />
+                                    </span>
+                                </div>
                             </div>
                         </section>
                     </main>

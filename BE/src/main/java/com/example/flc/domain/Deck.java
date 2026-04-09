@@ -27,6 +27,8 @@ public class Deck {
     private String scope;
     private boolean status;
 
+    private boolean isFeatured = false;
+
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
@@ -110,6 +112,14 @@ public class Deck {
     public String toString() {
         return "Deck [id=" + id + ", quantity=" + quantity + ", image=" + image + ", title=" + title + ", des=" + des
                 + ", scope=" + scope + ", status=" + status + "]";
+    }
+
+    public boolean getIsFeatured() {
+        return isFeatured;
+    }
+
+    public void setIsFeatured(boolean isFeatured) {
+        this.isFeatured = isFeatured;
     }
 
 }

@@ -138,7 +138,21 @@
                                         </a>
 
                                         <div class="card-footer">
-                                            <span><i class="far fa-user"></i> Admin</span>
+                                            <div>
+                                                <span><i class="far fa-user"></i> Admin</span>
+                                                <c:choose>
+                                                    <c:when test="${deck.isFeatured}">
+                                                        <i style="color: rgb(255, 212, 59);"
+                                                            class="fa-solid fa-star text-warning"
+                                                            title="Bỏ nổi bật"></i>
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                        <i style="color: rgb(255, 212, 59);"
+                                                            class="fa-regular fa-star text-secondary"></i>
+                                                    </c:otherwise>
+                                                </c:choose>
+                                            </div>
+
                                             <div class="card-actions"
                                                 style="display: flex; align-items: center; gap: 15px;">
                                                 <i class="fas fa-wrench fix_deck" style="cursor: pointer;"

@@ -113,6 +113,7 @@
                                             <th>Title</th>
                                             <th>ID-User</th>
                                             <th>Email</th>
+                                            <th class="text-center">Featured</th>
                                             <th>Status</th>
                                             <th>Action</th>
                                         </tr>
@@ -122,36 +123,51 @@
                                             <tr>
                                                 <td>${deck.id}</td>
                                                 <td><strong>${deck.title}</strong></td>
-
                                                 <td>${deck.user.id}</td>
                                                 <td><strong>${deck.user.email}</strong></td>
 
-                                                <td class="status">
-                                                    <c:if test="${deck.status == true}">
-                                                        Active
-                                                    </c:if>
-                                                    <c:if test="${deck.status == false}">
-                                                        Banned
-                                                    </c:if>
-                                                </td>
-                                                <td class="actions">
-                                                    <a href="/admin/deck/view/${deck.id}">
-                                                        <i class="fa-regular fa-eye btn-view"></i>
-                                                    </a>
-                                                    <a href="/admin/deck/update/${deck.id}">
-                                                        <i class="fa-solid fa-wrench btn-edit"></i>
-                                                    </a>
-
-                                                    <form action="/admin/deck/status/${deck.id}" method="POST"
+                                                <td class="text-center">
+                                                    <form action="/admin/deck/featured/${deck.id}" method="POST"
                                                         style="display:inline;">
-                                                        <div style="display: none;">
-                                                            <input type="hidden" name="${_csrf.parameterName}"
-                                                                value="${_csrf.token}" />
-                                                        </div>
+                                                        <input type="hidden" name="${_csrf.parameterName}"
+                                                            value="${_csrf.token}" />
                                                         <button type="submit"
                                                             style="background: none; border: none; padding: 0; cursor: pointer;">
                                                             <c:choose>
-                                                                <c:when test="${deck.status == 'true'}">
+                                                                <c:when test="${deck.isFeatured}">
+                                                                    <i style="color: rgb(255, 212, 59);"
+                                                                        class="fa-solid fa-star text-warning"
+                                                                        style="font-size: 1.1rem;"></i>
+                                                                </c:when>
+                                                                <c:otherwise>
+                                                                    <i style="color: rgb(255, 212, 59);"
+                                                                        class="fa-regular fa-star text-secondary"
+                                                                        style="font-size: 1.1rem;"></i>
+                                                                </c:otherwise>
+                                                            </c:choose>
+                                                        </button>
+                                                    </form>
+                                                </td>
+                                                <td class="status">
+                                                    <span id="status-text-${deck.id}">
+                                                        ${deck.status ? 'Active' : 'Banned'}
+                                                    </span>
+                                                </td>
+
+                                                <td class="actions">
+                                                    <a href="/admin/deck/view/${deck.id}"><i
+                                                            class="fa-regular fa-eye btn-view"></i></a>
+                                                    <a href="/admin/deck/update/${deck.id}"><i
+                                                            class="fa-solid fa-wrench btn-edit"></i></a>
+
+                                                    <form action="/admin/deck/status/${deck.id}" method="POST"
+                                                        style="display:inline;">
+                                                        <input type="hidden" name="${_csrf.parameterName}"
+                                                            value="${_csrf.token}" />
+                                                        <button type="submit"
+                                                            style="background: none; border: none; padding: 0; cursor: pointer;">
+                                                            <c:choose>
+                                                                <c:when test="${deck.status}">
                                                                     <i class="fa-solid fa-lock-open btn-unlock"></i>
                                                                 </c:when>
                                                                 <c:otherwise>
@@ -200,40 +216,33 @@
 
                 <script src="/js/admin/style.js"></script>
                 <script src="/js/admin/deck.js"></script>
-                <!-- <script>
-                    document.querySelectorAll('.page-node').forEach(button => {
-                        button.addEventListener('click', function (e) {
-                            e.preventDefault();
-                            const page = this.getAttribute('data-page');
+                <script>
+                    function handleToggleFeatured(deckId) {
+                        const token = $("meta[name='_csrf']").attr("content");
+                        const header = $("meta[name='_csrf_header']").attr("content");
 
-                            // Lấy keyword từ ô search
-                            const keyword = document.querySelector('input[name="keyword"]').value;
-
-                            // Lấy dữ liệu từ form filter
-                            const filterForm = document.getElementById('filterMenu');
-                            const formData = new FormData(filterForm);
-                            const params = new URLSearchParams(formData);
-
-                            // Đưa thêm page và keyword vào URL
-                            params.set('page', page);
-                            if (keyword) params.set('keyword', keyword);
-
-                            // Chuyển hướng
-                            window.location.href = "/admin/deck?" + params.toString();
+                        $.ajax({
+                            url: "/admin/deck/toggle-featured/" + deckId,
+                            type: "POST",
+                            beforeSend: function (xhr) {
+                                if (header && token) xhr.setRequestHeader(header, token);
+                            },
+                            success: function (isFeatured) {
+                                const icon = $("#featured-icon-" + deckId);
+                                if (isFeatured) {
+                                    // Nếu là nổi bật: Sao vàng, hình đặc
+                                    icon.removeClass('fa-regular text-secondary').addClass('fa-solid text-warning');
+                                } else {
+                                    // Nếu không: Sao xám, chỉ có viền
+                                    icon.removeClass('fa-solid text-warning').addClass('fa-regular text-secondary');
+                                }
+                            },
+                            error: function () {
+                                console.error("Lỗi khi cập nhật trạng thái nổi bật");
+                            }
                         });
-                    });
-
-                    // Sửa lại form search để khi enter nó cũng giữ lại filter
-                    document.querySelector('.search-box').addEventListener('submit', function (e) {
-                        e.preventDefault();
-                        const keyword = this.querySelector('input').value;
-                        const filterForm = document.getElementById('filterMenu');
-                        const params = new URLSearchParams(new FormData(filterForm));
-                        params.set('keyword', keyword);
-                        params.set('page', 1); // Reset về trang 1 khi search mới
-                        window.location.href = "/admin/deck?" + params.toString();
-                    });
-                </script> -->
+                    }
+                </script>
             </body>
 
             </html>

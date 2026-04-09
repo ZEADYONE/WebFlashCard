@@ -13,6 +13,8 @@ import com.example.flc.domain.User;
 import com.example.flc.domain.DTO.DeckProgress;
 import com.example.flc.repository.DeckRepository;
 
+import jakarta.transaction.Transactional;
+
 @Service
 public class DeckService {
 
@@ -63,7 +65,9 @@ public class DeckService {
                 (String) row[5],
                 ((Number) row[6]).longValue(),
                 ((Number) row[7]).longValue(),
-                ((Number) row[8]).longValue()));
+                ((Number) row[8]).longValue(),
+                row[9] != null && (Boolean) row[9] // Cách ép kiểu an toàn cho Boolean
+        ));
     }
 
     public Page<Deck> getAllDeckWithFilter(String keyword, List<Boolean> status, Pageable pageable) {
@@ -81,5 +85,15 @@ public class DeckService {
         }
         handelSaveDeck(deck);
         return;
+    }
+
+    public void toggleFeatured(Long id) {
+        Deck deck = deckRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Không tìm thấy Deck"));
+
+        // Đảo ngược giá trị boolean
+        deck.setIsFeatured(!deck.getIsFeatured());
+
+        deckRepository.save(deck);
     }
 }

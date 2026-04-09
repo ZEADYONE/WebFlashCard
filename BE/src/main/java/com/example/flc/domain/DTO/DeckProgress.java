@@ -12,10 +12,11 @@ public class DeckProgress {
     private Long totalCards;
     private Long correctCards;
     private Long userId;
+    private boolean isFeatured;
 
     // Cập nhật Constructor để nhận thêm 3 trường mới
     public DeckProgress(Long id, String title, String image, String des, String scope, String userName, Long totalCards,
-            Long correctCards, Long userId) {
+            Long correctCards, Long userId, boolean isFeatured) {
         this.id = id;
         this.title = title;
         this.image = image;
@@ -25,6 +26,7 @@ public class DeckProgress {
         this.totalCards = totalCards;
         this.correctCards = correctCards;
         this.userId = userId;
+        this.isFeatured = isFeatured;
     }
 
     public double getProgressPercent() {
@@ -72,5 +74,13 @@ public class DeckProgress {
 
     public Long getCorrectCards() {
         return correctCards;
+    }
+
+    public boolean getIsFeatured() {
+        return isFeatured;
+    }
+
+    public void setIsFeatured(boolean isFeatured) {
+        this.isFeatured = isFeatured;
     }
 }
